@@ -57,6 +57,20 @@ public class DblLList<T> implements CisQueue<T> {
         count++;
     }
     
+    public T removeFirst() {
+        if (head == null) {
+            return null;
+        } else if (head == tail) {
+            T v = first();
+            head = tail = null;
+            return v; 
+        } 
+        ListNode<T> h = head;
+        head = head.nextNode();
+        head.setPrev(null);
+        return h.getValue();
+    }
+    
     /**
      * getter for the value of the tail node
      * @return value of the last node in the list
@@ -95,10 +109,15 @@ public class DblLList<T> implements CisQueue<T> {
      */
     public T pop() {
         if (tail == null) {
-            return tail.getValue();
+            return null;
         }
         ListNode<T> last = tail;
-        tail.prevNode().setNext(null);
+        if (count > 1) {
+            tail.prevNode().setNext(null);  
+        } else {
+            head = tail = null;
+        }
+
         count--;
         return last.getValue();        
     }
@@ -200,7 +219,7 @@ public class DblLList<T> implements CisQueue<T> {
     
     @Override
     public T deQ() {
-        return pop();
+        return removeFirst();
     }
 
     @Override
