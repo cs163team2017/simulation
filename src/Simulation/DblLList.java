@@ -300,7 +300,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
     /**
      * Private class to implement iteration methods enabling foreach
      * looping
-     * @author m
+     * @author Matthew Pische
      *
      */
     private class ListIterator implements Iterator<ListNode<T>> {
