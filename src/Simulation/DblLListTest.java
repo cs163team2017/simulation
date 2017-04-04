@@ -2,6 +2,8 @@ package Simulation;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class DblLListTest {
@@ -205,5 +207,21 @@ public class DblLListTest {
     public void DblLListRemoveAtIndexThrowsGivenInvalidInput3() {
         DblLList<String> list = new DblLList<String>();
         list.removeAtIndex(0);
+    }
+    
+    @Test
+    public void ForEachLoopingWorksGivenValidInput() {
+        DblLList<Integer> list = new DblLList<Integer>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        ArrayList<Integer> output = new ArrayList<Integer>();
+        for (ListNode<Integer> n : list) {
+            output.add(n.getValue());
+        }
+        assert(4 == output.size());
+        assert(2 == output.get(1));
+        assert(4 == output.get(3));
     }
 }

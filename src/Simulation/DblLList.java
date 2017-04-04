@@ -1,12 +1,14 @@
 package Simulation;
 
+import java.util.Iterator;
+
 /**
  * A simple generic double linked list implementation 
  * @author Matthew Pische
  *
  * @param <T> type of the values in the list's nodes
  */
-public class DblLList<T> implements CisQueue<T> {
+public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
     /** first node in the list */
     private ListNode<T> head;
     /** last node in the list */
@@ -286,5 +288,36 @@ public class DblLList<T> implements CisQueue<T> {
     @Override
     public void enQ(T value) {
         add(value);
+    }
+    
+    /**
+     * Implementing the methods necessary to enable foreach looping
+     */
+    public Iterator<ListNode<T>> iterator() {
+        return new ListIterator();
+    }
+    
+    /**
+     * Private class to implement iteration methods enabling foreach
+     * looping
+     * @author m
+     *
+     */
+    private class ListIterator implements Iterator<ListNode<T>> {
+        private int index = 0;
+        
+        /**
+         * check if there is at least one more element in the set
+         */
+        public boolean hasNext() {
+            return index < count;
+        }
+        
+        /**
+         * return the next element of the set, and increment counter
+         */
+        public ListNode<T> next() {
+            return getNodeAtIndex(index++);
+        }
     }
 }
