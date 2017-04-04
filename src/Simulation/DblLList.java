@@ -57,20 +57,6 @@ public class DblLList<T> implements CisQueue<T> {
         count++;
     }
     
-    public T removeFirst() {
-        if (head == null) {
-            return null;
-        } else if (head == tail) {
-            T v = first();
-            head = tail = null;
-            return v; 
-        } 
-        ListNode<T> h = head;
-        head = head.nextNode();
-        head.setPrev(null);
-        return h.getValue();
-    }
-    
     /**
      * getter for the value of the tail node
      * @return value of the last node in the list
@@ -148,6 +134,15 @@ public class DblLList<T> implements CisQueue<T> {
     }
     
     /**
+     * Gets the value of the node at the given index
+     * @param index location of the node to interrogate
+     * @return value of the desired node
+     */
+    public T getAtIndex(int index) {
+        return getNodeAtIndex(index).getValue();
+    }
+    
+    /**
      * Updates the value of the node at the given position 
      * @param value
      * @param index
@@ -182,6 +177,46 @@ public class DblLList<T> implements CisQueue<T> {
     }
     
     /**
+     * Removes the first node, and returns its value
+     * @return value of the first, now removed, node
+     */
+    public T removeFirst() {
+        if (head == null) {
+            return null;
+        } else if (head == tail) {
+            T v = first();
+            head = tail = null;
+            count--;
+            return v; 
+        } 
+        ListNode<T> h = head;
+        head = head.nextNode();
+        head.setPrev(null);
+        count--;
+        return h.getValue();
+    }
+    
+    /**
+     * Removes the last node in the list and returns its value
+     * @return value of the, now removed, final node
+     */
+    public T removeLast() {
+        if (tail == null) {
+            return null;
+        } else if (head == tail) {
+            T v = last();
+            head = tail = null;
+            count--;
+            return v;
+        }
+        ListNode<T> t = tail;
+        tail = tail.prevNode();
+        tail.setNext(null);
+        count--;
+        return t.getValue();
+    }
+    
+    /**
      * Removes and returns the node at the given location in the list
      * @param index
      * @return
@@ -189,15 +224,18 @@ public class DblLList<T> implements CisQueue<T> {
      */
     private ListNode<T> removeNodeAtIndex(int index) 
             throws IndexOutOfBoundsException {
-        if (index > count - 1) {
+        if ((index > count - 1) || (index < 0)) {
             throw new IndexOutOfBoundsException();
         }
         ListNode<T> curr = getNodeAtIndex(index);
-        ListNode<T> prev = curr.prevNode();
-        ListNode<T> next = curr.nextNode();
-        
-        next.setPrev(prev);
-        prev.setNext(next);
+        if (count > 1) {
+            ListNode<T> prev = curr.prevNode();
+            ListNode<T> next = curr.nextNode();
+            
+            next.setPrev(prev);
+            prev.setNext(next);
+        }
+
         count--;
         return curr;
     }
