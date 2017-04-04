@@ -71,7 +71,7 @@ public class DblLList<T> implements CisQueue<T> {
      * @param value to insert in a new node at the tail
      */
     public void add(T value) {
-        if (head == null) {
+        if (tail == null) {
             head = tail = new ListNode<T>(value);
         } else {
             ListNode<T> n = new ListNode<T>(value, null, tail);
@@ -82,41 +82,14 @@ public class DblLList<T> implements CisQueue<T> {
     }
     
     /**
-     * wraps adding a new tail value
-     * @param value value to add to the new tail node
-     */
-    public void push(T value) {
-        add(value);
-    }
-    
-    /**
-     * Removes and returns the value from the last node of the list
-     * @return value of the last node, now removed 
-     */
-    public T pop() {
-        if (tail == null) {
-            return null;
-        }
-        ListNode<T> last = tail;
-        if (count > 1) {
-            tail.prevNode().setNext(null);  
-        } else {
-            head = tail = null;
-        }
-
-        count--;
-        return last.getValue();        
-    }
-    
-    /**
      * Gets the node, not just the value, from the element of the list
      * at the given position. Returns null if index is out of bounds
      * @param index Nth element of the list to retrieve 
      * @return the node at the given position
      */
     private ListNode<T> getNodeAtIndex(int index) {
-        if (index > count - 1) {
-            return null;
+        if (index >= count || index < 0) {
+            throw new IndexOutOfBoundsException();
         }
         ListNode<T> n;
         if (index > (count / 2)) {
@@ -147,9 +120,8 @@ public class DblLList<T> implements CisQueue<T> {
      * @param value
      * @param index
      */
-    public void setAtIndex(T value, int index) 
-            throws IndexOutOfBoundsException {
-        if (index > count - 1) {
+    public void setAtIndex(T value, int index) {
+        if (index >= count || index < 0) {
             throw new IndexOutOfBoundsException();
         }
         getNodeAtIndex(index).setValue(value);
@@ -162,9 +134,8 @@ public class DblLList<T> implements CisQueue<T> {
      * @param index location to place the new node
      * @throws IndexOutOfBoundsException if the index exceeds list length
      */
-    public void insertAtIndex(T value, int index) 
-            throws IndexOutOfBoundsException {
-        if (index > count - 1) {
+    public void insertAtIndex(T value, int index) {
+        if (index >= count || index < 0) {
             throw new IndexOutOfBoundsException();
         }
         ListNode<T> curr = getNodeAtIndex(index);
@@ -181,19 +152,23 @@ public class DblLList<T> implements CisQueue<T> {
      * @return value of the first, now removed, node
      */
     public T removeFirst() {
+        return removeFirstNode().getValue();
+    }
+    
+    private ListNode<T> removeFirstNode() {
         if (head == null) {
             return null;
-        } else if (head == tail) {
-            T v = first();
+        }
+        ListNode<T> h = head;
+        if (head == tail) {
             head = tail = null;
             count--;
-            return v; 
+            return h; 
         } 
-        ListNode<T> h = head;
         head = head.nextNode();
         head.setPrev(null);
         count--;
-        return h.getValue();
+        return h;
     }
     
     /**
@@ -201,30 +176,32 @@ public class DblLList<T> implements CisQueue<T> {
      * @return value of the, now removed, final node
      */
     public T removeLast() {
+        return removeLastNode().getValue();
+    }
+    
+    public ListNode<T> removeLastNode() {
         if (tail == null) {
             return null;
-        } else if (head == tail) {
-            T v = last();
-            head = tail = null;
-            count--;
-            return v;
         }
         ListNode<T> t = tail;
+        if (head == tail) {
+            head = tail = null;
+            count--;
+            return t;
+        }
         tail = tail.prevNode();
         tail.setNext(null);
         count--;
-        return t.getValue();
+        return t;
     }
     
     /**
      * Removes and returns the node at the given location in the list
      * @param index
-     * @return
-     * @throws IndexOutOfBoundsException
+     * @return node at the given index
      */
-    private ListNode<T> removeNodeAtIndex(int index) 
-            throws IndexOutOfBoundsException {
-        if ((index > count - 1) || (index < 0)) {
+    private ListNode<T> removeNodeAtIndex(int index) {
+        if (index >= count || index < 0) {
             throw new IndexOutOfBoundsException();
         }
         ListNode<T> curr = getNodeAtIndex(index);
@@ -248,6 +225,23 @@ public class DblLList<T> implements CisQueue<T> {
      */
     public T removeAtIndex(int index) {
         return removeNodeAtIndex(index).getValue();
+    }
+    
+    /**
+     * wraps adding a new tail value, alias for add()
+     * @param value value to add to the new tail node
+     */
+    public void push(T value) {
+        add(value);
+    }
+    
+    /**
+     * Removes and returns the value from the last node of the list,
+     * alias for removeLast()
+     * @return value of the last node, now removed 
+     */
+    public T pop() {
+        return removeLast();       
     }
     
     @Override
