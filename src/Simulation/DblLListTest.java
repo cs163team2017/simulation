@@ -72,5 +72,17 @@ public class DblLListTest {
         assert(5 == v);
         assert(0 == list.size());
     }
+    
+    @Test
+    public void DblLListThowsExceptionsGivenInvalidInput() {
+        DblLList<String> list = new DblLList<String>();
+        // TODO 2: Finish this test
+        // all throw index out of bounds:
+        // getNodeAtIndex(), 
+        // setAtIndex(), 
+        // insertAtIndex(), 
+        // removeNodeAtIndex(), 
+        // getNodeAtIndex(), 
+    }
 
 }
