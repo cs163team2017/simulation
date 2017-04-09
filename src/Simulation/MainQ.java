@@ -7,6 +7,12 @@ public class MainQ implements CisQueue<Person>,
     PersonList q;
     /** total number of people that have passed through the queue */
     private int completed;
+    /** number of people lost */
+    private int lost;
+    /** maximum queue length ever achieved in this run */
+    private int maxQLength;
+    /** Threshold to trigger serving the next person */
+    private 
 
     public MainQ() {
        q = new PersonList();
@@ -22,48 +28,51 @@ public class MainQ implements CisQueue<Person>,
             }
             q.deQ();
             completed++;
+            
         }
+        
+    }
+    
+    public addCashiers() {
         
     }
 
     @Override
     public int getLeft() {
-        // TODO Auto-generated method stub
-        return 0;
+        return q.size();
     }
 
     @Override
     public int getMaxQlength() {
-        // TODO Auto-generated method stub
-        return 0;
+        return maxQLength;
     }
 
     @Override
     public int getThroughPut() {
-        // TODO Auto-generated method stub
-        return 0;
+        return completed;
     }
 
     @Override
     public int getLost() {
-        // TODO Auto-generated method stub
-        return 0;
+        return lost;
     }
 
     @Override
     public Person peek() {
-        // TODO Auto-generated method stub
-        return null;
+        return q.peek();
     }
 
     @Override
     public Person deQ() {
-        
+        return q.deQ();
     }
 
     @Override
     public void enQ(Person value) {
         q.add(value);
+        if (q.size() > maxQLength) {
+            maxQLength = q.size();
+        }
     }
     
 }
