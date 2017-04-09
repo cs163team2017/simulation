@@ -8,19 +8,19 @@ public class Eateries implements ClockListener,
                                  Iterable<Eatery>, 
                                  QueuePerformance {
     
-    private DblLList<Eatery> EateryList;
+    private DblLList<Eatery> eateryList;
     Random r;
     
     public Eateries(Random r) {
         this.r = r;
-        EateryList = new DblLList<Eatery>();
+        eateryList = new DblLList<Eatery>();
         
     }
     
     public Eateries(Random r, int n) {
-        this.r = r;
+        this(r);
         for (int i = 0; i < n; i++) {
-            EateryList.add(new Eatery());
+            eateryList.add(new Eatery());
         }
     }
     
@@ -28,7 +28,7 @@ public class Eateries implements ClockListener,
      * add one eatery
      */
     public void add() {
-        EateryList.add(new Eatery());
+        eateryList.add(new Eatery());
     }
     
     /**
@@ -37,7 +37,7 @@ public class Eateries implements ClockListener,
      */
     public void add(int n) {
         for (int i = 0; i < n; i++) {
-            EateryList.add(new Eatery());
+            eateryList.add(new Eatery());
         }
     }
     
@@ -54,7 +54,7 @@ public class Eateries implements ClockListener,
      * @return returns the number of customers lost from its queue
      */
     public int remove() {
-        Eatery e = EateryList.pop();
+        Eatery e = eateryList.pop();
         return e.getLeft();
     }
     
@@ -64,7 +64,7 @@ public class Eateries implements ClockListener,
      * @return the removed Eatery
      */
     public Eatery remove(int i) {
-        return EateryList.removeAtIndex(i);
+        return eateryList.removeAtIndex(i);
     }
 
     /**
@@ -72,13 +72,13 @@ public class Eateries implements ClockListener,
      * @return
      */
     public Eatery random() {
-        return EateryList.getAtIndex(r.nextInt(EateryList.size()));
+        return eateryList.getAtIndex(r.nextInt(eateryList.size()));
     }
 
     @Override
     public void event(int tick) {
-        for (ListNode<Eatery> n : EateryList) {
-            n.getValue().event(tick);
+        for (Eatery e : this) {
+            e.event(tick);
         }
     }
 
@@ -92,12 +92,12 @@ public class Eateries implements ClockListener,
         private int index = 0;
         @Override
         public boolean hasNext() {
-            return index < EateryList.size();
+            return index < eateryList.size();
         }
 
         @Override
         public Eatery next() {
-            return EateryList.getAtIndex(index);
+            return eateryList.getAtIndex(index++);
         }
     }
     
@@ -106,7 +106,7 @@ public class Eateries implements ClockListener,
      * @return
      */
     public ArrayList<Eatery> toArrayList() {
-        return EateryList.toArrayList();
+        return eateryList.toArrayList();
     }
 
     @Override

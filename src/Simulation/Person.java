@@ -11,9 +11,11 @@ public class Person {
 	private int tickTime;
 	private Eatery Destination;
 	
-	// max time person stays in line
-	protected double boothTime;
+	// time person stays at eatery counter
+	protected double eateryTime;
+	// max time person will remain in system
 	protected double leaveTime;
+	// time person stays at cashier counter
 	protected double cashierTime;
 	/** the list node that currently holds this person */
 	protected ListNode<Person> holdingNode;
@@ -23,8 +25,12 @@ public class Person {
 	    holdingNode = null;
 	}
 		
-	public double getBoothTime() {
-		return boothTime;
+	/**
+	 * the time the person will remain at the eatery counter
+	 * @return
+	 */
+	public double getEateryTime() {
+		return eateryTime;
 	}
 	
 	public Eatery getDestination() {
@@ -44,7 +50,7 @@ public class Person {
 	}
 
 	public void setEateryTime(double time) {
-		this.boothTime = time;
+		this.eateryTime = time;
 	}
 	
 	public void setLeaveTime(double time) {
@@ -53,6 +59,22 @@ public class Person {
 	
 	public void setCashierTime(double time) {
 	    cashierTime = time;
+	}
+	
+	/**
+	 *  the maximum time the person will remain in the system 
+	 * @return
+	 */
+	public double getLeaveTime() {
+	    return leaveTime;
+	}
+	
+	/**
+	 * how long the person will remain at the cashier counter
+	 * @return
+	 */
+	public double getCashierTime() {
+	    return cashierTime;
 	}
 	
 	public void setNode(ListNode<Person> n) {
