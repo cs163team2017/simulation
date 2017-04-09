@@ -25,7 +25,15 @@ public class SimMainStage extends Application {
 	private int pAtEatery;
 	private int pAtCheckout;
 	
-	SimSettings settings;
+	private int inflow;
+	private int cashierTime;
+	private int avgEateryTime;
+	private int quitTime;
+	private int numEaterys;
+	private int numCheckouts;
+	private int runtime;
+	
+	private SimSettings settings;
 	
 	
 	

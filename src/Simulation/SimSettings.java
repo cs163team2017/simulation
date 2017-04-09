@@ -1,8 +1,8 @@
 package Simulation;
 
-//import javafx.application.Application;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -27,7 +27,8 @@ public class SimSettings {
 	private Label numCheckoutsLbl;
 	private Label runtimeLbl;
 	
-	private HBox[] row;
+	private VBox col1;
+	private VBox col2;
 	
 	private int inflow;
 	private int cashierTime;
@@ -49,7 +50,9 @@ public class SimSettings {
 		numEaterys = 2;
 		numCheckouts = 1;
 		
-		row = new HBox[8];
+		col1 = new VBox(25);
+		col2 = new VBox(25);
+
 	}
 
 	
@@ -60,20 +63,19 @@ public class SimSettings {
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Simulation Settings");
 		window.setMinHeight(300);
-		window.setMaxWidth(500);
+		window.setMinWidth(500);
 		
 		titleLabels();
 		titleButtons();
-		makeRows();
+		fillTextFields();
+		makeCol1();
+		makeCol2();
 		
-		VBox vertical = new VBox(25);
-		for(int i = 0; i < 7; i++)
-			vertical.getChildren().add(row[i]);
+		HBox horizontal = new HBox(100);
+		horizontal.setAlignment(Pos.CENTER);
+		horizontal.getChildren().addAll(col1, col2);
 		
-		vertical.getChildren().add(saveBtn);
-		vertical.getChildren().add(exitBtn);
-		
-		Scene settingScene = new Scene(vertical);
+		Scene settingScene = new Scene(horizontal);
 		window.setScene(settingScene);
 		window.showAndWait();
 	}
@@ -93,15 +95,28 @@ public class SimSettings {
 		exitBtn = new Button("Exit");
 	}
 	
-	private void makeRows(){
-		row[0].getChildren().addAll(inflowLbl, inflowTF);
-		row[1].getChildren().addAll(cashierTimeLbl, cashierTimeTF);
-		row[2].getChildren().addAll(avgEateryTimeLbl, avgEateryTimeTF);
-		row[3].getChildren().addAll(quitTimeLbl, quitTimeTF);
-		row[4].getChildren().addAll(numEaterysLbl, numEaterysTF);
-		row[5].getChildren().addAll(numCheckoutsLbl, numCheckoutsTF);
-		row[6].getChildren().addAll(runtimeLbl, runtimeTF);
+	private void fillTextFields(){
+		inflowTF = new TextField();
+		cashierTimeTF = new TextField();
+		avgEateryTimeTF = new TextField();
+		quitTimeTF = new TextField();
+		numEaterysTF = new TextField();
+		numCheckoutsTF = new TextField();
+		runtimeTF = new TextField();
+	}
+	
+	private void makeCol1(){
+		col1.setAlignment(Pos.BASELINE_RIGHT);
+		col1.getChildren().addAll(inflowLbl, cashierTimeLbl, 
+				avgEateryTimeLbl, quitTimeLbl, numEaterysLbl, 
+				numCheckoutsLbl, runtimeLbl, saveBtn);
 		
+	}
+	
+	private void makeCol2(){
+		col2.getChildren().addAll(inflowTF, cashierTimeTF, 
+				avgEateryTimeTF, quitTimeTF, numEaterysTF, 
+				numCheckoutsTF, runtimeTF, exitBtn);
 	}
 
 
