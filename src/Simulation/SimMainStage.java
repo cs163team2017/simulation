@@ -1,6 +1,11 @@
 package Simulation;
 
+
+
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -24,6 +29,7 @@ public class SimMainStage extends Application {
 	private int pAtMainQ;
 	private int pAtEatery;
 	private int pAtCheckout;
+	
 	
 	private int inflow;
 	private int cashierTime;
@@ -49,13 +55,21 @@ public class SimMainStage extends Application {
 		BorderPane  mainPn = new BorderPane();
 		mainPn.setTop(createButtonPn());
 		mainPn.setBottom(createStatsPn());
+		mainPn.setCenter(createSimPn(numEaterys, numCheckouts));
 		
 		settings = new SimSettings();
 		listen();
 	
+		
+		
 		Scene mainScene = new Scene(mainPn, 800, 600);
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
+		
+		primaryStage.setOnCloseRequest(e -> {
+	        Platform.exit();
+	        System.exit(0);
+	    });
 	}
 	
 	
@@ -64,7 +78,8 @@ public class SimMainStage extends Application {
 	 * @return HBox Pane
 	 ******************************************************************/
 	private HBox createButtonPn(){
-		HBox buttonPn = new HBox();
+		HBox buttonPn = new HBox(50);
+		buttonPn.setAlignment(Pos.TOP_CENTER);
 		startBtn = new Button("Start");
 		stopBtn = new Button("Stop");
 		stepBtn = new Button("Step");
@@ -80,19 +95,54 @@ public class SimMainStage extends Application {
 	 * @return
 	 ******************************************************************/
 	private HBox createStatsPn(){
-		HBox statsPn = new HBox();
-		mainQLbl = new Label("In Q: ");
-		eaterLbl = new Label("At Eatery: ");
-		checkoutLbl = new Label("At checkout: ");
-		inMainQLbl = new Label("" + pAtMainQ);
-		inEaterLbl = new Label("" + pAtEatery);
-		inCheckoutLbl = new Label("" + pAtCheckout);
-		
-		statsPn.getChildren().addAll(mainQLbl, inMainQLbl, eaterLbl, 
-				inEaterLbl, checkoutLbl, inCheckoutLbl);
-		
-		
+		HBox statsPn = new HBox(25);
 		return statsPn;
+	}
+	
+	private HBox createSimPn(int eaterys, int checkouts){
+		HBox simPn = new HBox(25);
+		
+		VBox leftPn = new VBox(25);
+		HBox centerPn = new HBox(25);
+		VBox rightPn = new VBox(25);
+		
+		//for (int i = 0; i < eaterys; i++)
+			leftPn.getChildren().add(makeEateryRow(2));
+		
+		//for (int i = 0; i < checkouts; i++)
+			rightPn.getChildren().add(makeCheckoutRow(2));
+		
+		centerPn.getChildren().addAll(makeMainQRow(1));
+		
+		simPn.setAlignment(Pos.CENTER);
+		simPn.getChildren().addAll(leftPn, centerPn, rightPn); 
+		
+		return simPn;
+	}
+	
+	private HBox makeEateryRow(int n){
+		HBox row = new HBox(25);
+		inEaterLbl = new Label("" + pAtEatery);
+		eaterLbl = new Label("Num people at Eatery " + n + " :");
+		row.getChildren().addAll(eaterLbl, inEaterLbl);
+		
+		return row;
+	}
+	
+	private HBox makeCheckoutRow(int n){
+		HBox row = new HBox(25);
+		checkoutLbl = new Label("Num people at Checkout " + n + " :");
+		inCheckoutLbl = new Label("" + pAtCheckout);
+		row.getChildren().addAll(checkoutLbl, inCheckoutLbl);
+		return row;
+	}
+	
+	private HBox makeMainQRow (int n){
+		HBox row = new HBox(25);
+		mainQLbl = new Label("Num people at MainQ " + n + " :");
+		inMainQLbl = new Label("" + pAtMainQ);
+		row.getChildren().addAll(mainQLbl, inMainQLbl);
+		return row;
 	}
 	
 	/******************************************************************
@@ -115,11 +165,16 @@ public class SimMainStage extends Application {
 		
 		settingBtn.setOnAction(e -> {
 			settings.display();
+			//copy settings of simulation over
+			inflow = settings.getInflow();
+			cashierTime = settings.getCashierTime();
+			avgEateryTime = settings.getAvgEateryTime();
+			quitTime = settings.getQuitTime();
+			numEaterys = settings.getNumEaterys();
+			numCheckouts = settings.getNumCheckouts();
+			runtime = settings.getRuntime();
 		});
 		
 	}
-
-
-
 
 }

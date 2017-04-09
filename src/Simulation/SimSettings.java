@@ -2,6 +2,7 @@ package Simulation;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -30,6 +31,8 @@ public class SimSettings {
 	private VBox col1;
 	private VBox col2;
 	
+	private Stage window;
+	
 	private int inflow;
 	private int cashierTime;
 	private int avgEateryTime;
@@ -42,13 +45,13 @@ public class SimSettings {
 	public SimSettings(){
 		
 		//defaulted for debugging
-		inflow = 20;
-		cashierTime = 10;
-		runtime = 1000;
-		avgEateryTime = 60;
-		quitTime = 900;
-		numEaterys = 2;
-		numCheckouts = 1;
+		inflow = 0;
+		cashierTime = 0;
+		runtime = 0;
+		avgEateryTime = 0;
+		quitTime = 0;
+		numEaterys = 0;
+		numCheckouts = 0;
 		
 		col1 = new VBox(25);
 		col2 = new VBox(25);
@@ -57,7 +60,7 @@ public class SimSettings {
 
 	
 	public void display(){
-		Stage window = new Stage();
+		window = new Stage();
 		
 		//Only Focus this window
 		window.initModality(Modality.APPLICATION_MODAL);
@@ -75,9 +78,11 @@ public class SimSettings {
 		horizontal.setAlignment(Pos.CENTER);
 		horizontal.getChildren().addAll(col1, col2);
 		
+		listen();
 		Scene settingScene = new Scene(horizontal);
 		window.setScene(settingScene);
 		window.showAndWait();
+		
 	}
 	
 	private void titleLabels(){
@@ -96,15 +101,16 @@ public class SimSettings {
 	}
 	
 	private void fillTextFields(){
-		inflowTF = new TextField();
-		cashierTimeTF = new TextField();
-		avgEateryTimeTF = new TextField();
-		quitTimeTF = new TextField();
-		numEaterysTF = new TextField();
-		numCheckoutsTF = new TextField();
-		runtimeTF = new TextField();
+		inflowTF = new TextField("20");
+		cashierTimeTF = new TextField("10");
+		avgEateryTimeTF = new TextField("60");
+		quitTimeTF = new TextField("900");
+		numEaterysTF = new TextField("2");
+		numCheckoutsTF = new TextField("1");
+		runtimeTF = new TextField("10000");
 	}
 	
+
 	private void makeCol1(){
 		col1.setAlignment(Pos.BASELINE_RIGHT);
 		col1.getChildren().addAll(inflowLbl, cashierTimeLbl, 
@@ -117,6 +123,24 @@ public class SimSettings {
 		col2.getChildren().addAll(inflowTF, cashierTimeTF, 
 				avgEateryTimeTF, quitTimeTF, numEaterysTF, 
 				numCheckoutsTF, runtimeTF, exitBtn);
+	}
+	
+	private void listen(){
+		saveBtn.setOnAction(e -> {
+			setInflow(Integer.parseInt(inflowTF.getText()));
+			setCashierTime(Integer.parseInt(cashierTimeTF.getText()));
+			setAvgEateryTime(Integer.parseInt(avgEateryTimeTF.getText()));
+			setQuitTime(Integer.parseInt(quitTimeTF.getText()));
+			setNumEaterys(Integer.parseInt(numEaterysTF.getText()));
+			setNumCheckouts(Integer.parseInt(numCheckoutsTF.getText()));
+			setRuntime(Integer.parseInt(runtimeTF.getText()));
+			System.out.println("Saved");//REMOVE
+		});
+		
+		exitBtn.setOnAction(e -> {
+			System.out.println("Closing with status 0");//REMOVE
+			window.close();
+		});
 	}
 
 
