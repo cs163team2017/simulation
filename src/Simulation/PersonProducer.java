@@ -7,24 +7,25 @@ import java.util.Random;
 
 /**
  * @author Roger Ferguson
+ * @author Matthew Pische
  */
 public class PersonProducer implements ClockListener {
 	
 	private int nextPerson = 0;
-	private Eatery eatery;
+	private Eateries eateries;
 	private int numOfTicksNextPerson;
 	private int averageEateryTime;
 	
-	private Random r = new Random();
+	private Random r;
 	
-	public PersonProducer(Eatery eatery, 
+	public PersonProducer(Random r, Eateries eateries, 
 			int numOfTicksNextPerson, 
 			int averageEateryTime) {
 		
-		this.eatery = eatery;
+	        this.r = r;
+		this.eateries = eateries;
 		this.numOfTicksNextPerson = numOfTicksNextPerson;
 		this.averageEateryTime = averageEateryTime;
-		//r.setSeed(13);    // This will cause the same random numbers
 	}
 	
 	public void event(int tick) {
@@ -32,12 +33,10 @@ public class PersonProducer implements ClockListener {
 			nextPerson = tick + numOfTicksNextPerson;
 			
 			Person person = new Person();
-			
-			int rNumber = (int)(Math.random() * 100);
 
 			person.setEateryTime(averageEateryTime*0.5*r.nextGaussian() + averageEateryTime +.5);
 			person.setTickTime(tick);
-			eatery.add(person);
+			eateries.add(person);
 			
 		//	person.setDestination(theLocationAfterTheEatery);  // You can save off where the person should go.
 		}

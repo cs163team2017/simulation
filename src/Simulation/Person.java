@@ -5,6 +5,7 @@ package Simulation;
 
 /**
  * @author   Roger Ferguson
+ * @author Matthew Pische
  */
 public class Person {
 	private int tickTime;
