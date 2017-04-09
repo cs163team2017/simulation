@@ -18,8 +18,8 @@ public static void main (String[] args) {
     // causing the entire sim to be deterministic
     Random rand = new Random();
     Clock clk = new Clock();
-    MainQ main = new MainQ();
-    Eateries eateries = new Eateries(rand);
+    MainQ mainQ = new MainQ();
+    Eateries eateries = new Eateries(rand, mainQ);
     Cashiers cashiers = new Cashiers(rand);
     eateries.add();
     int numTicks2Person = 20; 
@@ -30,11 +30,12 @@ public static void main (String[] args) {
                                     rand, 
                                     eateries, 
                                     numTicks2Person, 
-                                    aveEateryTime);	
+                                    aveEateryTime,
+                                    aveCashierTime);	
     clk.add(producer);
     clk.add(eateries);
     clk.add(cashiers);
-    	
+    clk.add(mainQ);
     clk.run(10000);
     	
     System.out.println("Eateries total throughput is: " + 

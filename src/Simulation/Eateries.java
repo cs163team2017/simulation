@@ -10,34 +10,46 @@ public class Eateries implements ClockListener,
     
     private DblLList<Eatery> eateryList;
     Random r;
+    MainQ mainQ;
     
-    public Eateries(Random r) {
+    public Eateries(Random r, MainQ q) {
         this.r = r;
+        mainQ = q;
         eateryList = new DblLList<Eatery>();
         
     }
     
-    public Eateries(Random r, int n) {
-        this(r);
+    public Eateries(Random r, MainQ q, int n) {
+        this(r, q);
         for (int i = 0; i < n; i++) {
-            eateryList.add(new Eatery());
+            Eatery e = new Eatery();
+            e.setMainQueue(mainQ);
+            eateryList.add(e);
         }
+    }
+    
+    public void setMainQueue(MainQ q) {
+        mainQ = q;
     }
     
     /** 
      * add one eatery
      */
     public void add() {
-        eateryList.add(new Eatery());
+        Eatery e = new Eatery();
+        e.setMainQueue(mainQ);
+        eateryList.add(e);
     }
-    
+   
     /**
      * Add multple eateries 
      * @param n number of eateries to add
      */
     public void add(int n) {
         for (int i = 0; i < n; i++) {
-            eateryList.add(new Eatery());
+            Eatery e = new Eatery();
+            e.setMainQueue(mainQ);
+            eateryList.add(e);
         }
     }
     
@@ -46,7 +58,7 @@ public class Eateries implements ClockListener,
      */
     public void add(Person p) {
         Eatery e = this.random();
-        e.add(p);
+        e.enQ(p);
     }
     
     /**

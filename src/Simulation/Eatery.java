@@ -8,24 +8,28 @@ package Simulation;
  */
 public class Eatery implements CisQueue<Person>, ClockListener, QueuePerformance {
     /** internal holder for all people in the eatery's queue */
-    private PersonList Q = new PersonList();
+    private PersonList Q;
     /** Threshold to trigger serving the next person */
-    private int ticksToNextPerson = 0;
+    private int ticksToNextPerson;
     /** peak number of people waiting for service */
-    private int maxQlength = 0;
+    private int maxQlength;
     /** total number of people that have passed through the queue */
-    private int completed = 0;
+    private int completed;
     /** number of people who leave the queue due to low speed */
-    private int lost = 0;
+    private int lost;
+    /** the main queue for the simulation */
+    MainQ mainQ;
+    
+    public Eatery() {
+        Q = new PersonList();
+        ticksToNextPerson = 0;
+        maxQlength = 0;
+        completed = 0;
+        lost = 0;
+    }
     	
-    /**
-     * Add a person to this eatery's queue
-     * @param person person to add
-     */
-    public void add(Person person)
-    {
-
-
+    public void setMainQueue(MainQ q) {
+        mainQ = q;
     }
     	
     @Override

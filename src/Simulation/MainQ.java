@@ -12,7 +12,7 @@ public class MainQ implements CisQueue<Person>,
     /** maximum queue length ever achieved in this run */
     private int maxQLength;
     /** Threshold to trigger serving the next person */
-    private 
+    private Cashiers cashiers;
 
     public MainQ() {
        q = new PersonList();
@@ -26,15 +26,16 @@ public class MainQ implements CisQueue<Person>,
             if (0 >= q.size()) {
                 return;
             }
-            q.deQ();
-            completed++;
+            Person p = q.deQ();
             
+            completed++;
+            cashiers.random().enQ(p);
         }
         
     }
     
-    public addCashiers() {
-        
+    public void setCashiers(Cashiers c) {
+        cashiers = c;
     }
 
     @Override
