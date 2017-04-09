@@ -14,8 +14,14 @@ public class Person {
 	protected double boothTime;
 	protected double leaveTime;
 	protected double cashierTime;
+	/** the list node that currently holds this person */
+	protected ListNode<Person> holdingNode;
 	
-	
+	public Person() {
+	    super();
+	    holdingNode = null;
+	}
+		
 	public double getBoothTime() {
 		return boothTime;
 	}
@@ -46,5 +52,13 @@ public class Person {
 	
 	public void setCashierTime(double time) {
 	    cashierTime = time;
+	}
+	
+	public void setNode(ListNode<Person> n) {
+	    holdingNode = n;
+	}
+	
+	public ListNode<Person> getNode() {
+	    return holdingNode;
 	}
 }

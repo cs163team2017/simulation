@@ -3,17 +3,27 @@
  */
 package Simulation;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * @author Roger Ferguson
  *
  */
 public class Sim {
 	
+        private static Eatery randEatery(ArrayList<Eatery> a) {
+            Random r = new Random();
+            return a.get(r.nextInt(a.size()));
+        }
+    
 	public static void main (String[] args) {
 			
 			Clock clk = new Clock();
-			Eatery booth = new Eatery();
-
+			Eatery e = new Eatery();
+			ArrayList<Eatery> booths = new ArrayList<Eatery>();
+			booths.add(e);
+			Eatery booth = randEatery(booths);
 			// 		int numOfTicksNextPerson = 20 
 			//      int averageBoothTime = 20
 			
