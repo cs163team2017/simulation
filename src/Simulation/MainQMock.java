@@ -1,6 +1,10 @@
 package Simulation;
 
+import java.util.ArrayList;
+
 public class MainQMock implements IMainQ {
+    public int enQCalled = 0;
+    public ArrayList<Person> list = new ArrayList<Person>();
 
     @Override
     public void event(int tick) {
@@ -52,8 +56,8 @@ public class MainQMock implements IMainQ {
 
     @Override
     public void enQ(Person value) {
-        // TODO Auto-generated method stub
-        
+        enQCalled++;
+        list.add(value);
     }
 
 }

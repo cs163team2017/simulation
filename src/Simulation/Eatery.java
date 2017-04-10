@@ -66,6 +66,7 @@ public class Eatery implements CisQueue<Person>,
 
                 ticksToNextPerson = tick + 
                                     (int)(person.getEateryTime() + 1);
+                mainQ.enQ(person);
                 completed++;
             }								
         }	
@@ -108,8 +109,7 @@ public class Eatery implements CisQueue<Person>,
         Q.add(value);
         if (Q.size() > maxQlength) {
             maxQlength = Q.size();
-        }
-        
+        }   
     }
 
     @Override
