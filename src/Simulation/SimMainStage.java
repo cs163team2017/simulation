@@ -4,7 +4,6 @@ package Simulation;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -36,16 +35,7 @@ public class SimMainStage extends Application {
 	private Label quitTimeLbl;
 	private Label currStepLbl;
 	
-	private int inflow;
-	private int cashierTime;
-	private int avgEateryTime;
-	private int quitTime;
-	private int numEaterys = 3;
-	private int numCheckouts = 2;
-	private int runtime;
-	
 	private SimSettings settings;
-	
 	
 	public static void main (String[] args){
 		launch(args);
@@ -59,7 +49,7 @@ public class SimMainStage extends Application {
 		BorderPane  mainPn = new BorderPane();
 		mainPn.setTop(createButtonPn());
 		mainPn.setBottom(createStatsPn());
-		mainPn.setCenter(createSimPn(numEaterys, numCheckouts));
+		mainPn.setCenter(createSimPn(Stats.numEaterys, Stats.numCheckouts));
 		
 		settings = new SimSettings();
 		listen();
@@ -98,11 +88,11 @@ public class SimMainStage extends Application {
 		HBox statsPn = new HBox(25);
 		statsPn.setAlignment(Pos.BOTTOM_CENTER);
 		
-		inflowLbl = new Label("Seconds between customers: " + inflow);
-		cashierTimeLbl = new Label("Cashier Time: " + cashierTime);
-		avgEateryTimeLbl = new Label("Avg Time at Eatery: " + avgEateryTime);
-		quitTimeLbl = new Label("Time before someone leaves: " + quitTime);
-		currStepLbl = new Label("Current time: " + "xxxxx/" + runtime);
+		inflowLbl = new Label("Seconds between customers: " + Stats.inflow);
+		cashierTimeLbl = new Label("Cashier Time: " + Stats.cashierTime);
+		avgEateryTimeLbl = new Label("Avg Time at Eatery: " + Stats.avgEateryTime);
+		quitTimeLbl = new Label("Time before someone leaves: " + Stats.quitTime);
+		currStepLbl = new Label("Current time: " + "xxxxx/" + Stats.runtime);
 		
 		statsPn.getChildren().addAll(inflowLbl, cashierTimeLbl, avgEateryTimeLbl,
 				quitTimeLbl, currStepLbl);
@@ -184,14 +174,6 @@ public class SimMainStage extends Application {
 		
 		settingBtn.setOnAction(e -> {
 			settings.display();
-			//copy settings of simulation over
-			inflow = settings.getInflow();
-			cashierTime = settings.getCashierTime();
-			avgEateryTime = settings.getAvgEateryTime();
-			quitTime = settings.getQuitTime();
-			numEaterys = settings.getNumEaterys();
-			numCheckouts = settings.getNumCheckouts();
-			runtime = settings.getRuntime();
 		});
 		
 	}
