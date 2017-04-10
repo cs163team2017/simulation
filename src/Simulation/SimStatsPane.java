@@ -33,7 +33,6 @@ public class SimStatsPane extends HBox{
 		
 		getChildren().addAll(inflowLbl, cashierTimeLbl, avgEateryTimeLbl,
 				quitTimeLbl, currStepLbl);
-		
 	}
 
 }
