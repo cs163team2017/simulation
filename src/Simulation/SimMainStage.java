@@ -19,28 +19,32 @@ public class SimMainStage extends Application {
 	private Button stepBtn;
 	private Button settingBtn; //REMOVE shouldn't be a button
 	
-	private Label mainQLbl;
-	private Label eaterLbl; //array for future?
-	private Label checkoutLbl;
-	private Label inMainQLbl;
-	private Label inEaterLbl; //array for future?
-	private Label inCheckoutLbl;
+	private Label[] mainQLbl;
+	private Label[] eaterLbl; 
+	private Label[] checkoutLbl;
+	private Label[] inMainQLbl;
+	private Label[] inEaterLbl; 
+	private Label[] inCheckoutLbl;
 	
 	private int pAtMainQ;
 	private int pAtEatery;
 	private int pAtCheckout;
 	
+	private Label inflowLbl;
+	private Label cashierTimeLbl;
+	private Label avgEateryTimeLbl;
+	private Label quitTimeLbl;
+	private Label currStepLbl;
 	
 	private int inflow;
 	private int cashierTime;
 	private int avgEateryTime;
 	private int quitTime;
-	private int numEaterys;
-	private int numCheckouts;
+	private int numEaterys = 3;
+	private int numCheckouts = 2;
 	private int runtime;
 	
 	private SimSettings settings;
-	
 	
 	
 	public static void main (String[] args){
@@ -60,8 +64,6 @@ public class SimMainStage extends Application {
 		settings = new SimSettings();
 		listen();
 	
-		
-		
 		Scene mainScene = new Scene(mainPn, 800, 600);
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
@@ -71,7 +73,6 @@ public class SimMainStage extends Application {
 	        System.exit(0);
 	    });
 	}
-	
 	
 	/******************************************************************
 	 * Creates a bottom Pane
@@ -84,8 +85,7 @@ public class SimMainStage extends Application {
 		stopBtn = new Button("Stop");
 		stepBtn = new Button("Step");
 		settingBtn = new Button("Settings");
-		buttonPn.getChildren().addAll(startBtn, stopBtn, stepBtn, settingBtn);
-		
+		buttonPn.getChildren().addAll(startBtn, stopBtn, stepBtn, settingBtn);	
 		
 		return buttonPn;
 	}
@@ -96,52 +96,71 @@ public class SimMainStage extends Application {
 	 ******************************************************************/
 	private HBox createStatsPn(){
 		HBox statsPn = new HBox(25);
+		statsPn.setAlignment(Pos.BOTTOM_CENTER);
+		
+		inflowLbl = new Label("Seconds between customers: " + inflow);
+		cashierTimeLbl = new Label("Cashier Time: " + cashierTime);
+		avgEateryTimeLbl = new Label("Avg Time at Eatery: " + avgEateryTime);
+		quitTimeLbl = new Label("Time before someone leaves: " + quitTime);
+		currStepLbl = new Label("Current time: " + "xxxxx/" + runtime);
+		
+		statsPn.getChildren().addAll(inflowLbl, cashierTimeLbl, avgEateryTimeLbl,
+				quitTimeLbl, currStepLbl);
+		
 		return statsPn;
 	}
 	
 	private HBox createSimPn(int eaterys, int checkouts){
+		mainQLbl = new Label[1];
+		eaterLbl = new Label[eaterys]; 
+		checkoutLbl = new Label[checkouts];
+		inMainQLbl = new Label[1];
+		inEaterLbl = new Label[eaterys]; 
+		inCheckoutLbl = new Label[checkouts];
+		
 		HBox simPn = new HBox(25);
 		
 		VBox leftPn = new VBox(25);
 		HBox centerPn = new HBox(25);
 		VBox rightPn = new VBox(25);
 		
-		//for (int i = 0; i < eaterys; i++)
-			leftPn.getChildren().add(makeEateryRow(2));
+		for (int i = 0; i < eaterys; i++)
+			leftPn.getChildren().add(makeEateryRow(i));
 		
-		//for (int i = 0; i < checkouts; i++)
-			rightPn.getChildren().add(makeCheckoutRow(2));
+		for (int i = 0; i < checkouts; i++)
+			rightPn.getChildren().add(makeCheckoutRow(i));
 		
-		centerPn.getChildren().addAll(makeMainQRow(1));
+		centerPn.getChildren().addAll(makeMainQRow(0));
 		
 		simPn.setAlignment(Pos.CENTER);
 		simPn.getChildren().addAll(leftPn, centerPn, rightPn); 
 		
 		return simPn;
 	}
-	
+
 	private HBox makeEateryRow(int n){
 		HBox row = new HBox(25);
-		inEaterLbl = new Label("" + pAtEatery);
-		eaterLbl = new Label("Num people at Eatery " + n + " :");
-		row.getChildren().addAll(eaterLbl, inEaterLbl);
+
+		eaterLbl[n] = new Label("Num people at Eatery " + (n+1) + " :");
+		inEaterLbl[n] = new Label("" + pAtEatery);
+		row.getChildren().addAll(eaterLbl[n], inEaterLbl[n]);
 		
 		return row;
 	}
 	
 	private HBox makeCheckoutRow(int n){
 		HBox row = new HBox(25);
-		checkoutLbl = new Label("Num people at Checkout " + n + " :");
-		inCheckoutLbl = new Label("" + pAtCheckout);
-		row.getChildren().addAll(checkoutLbl, inCheckoutLbl);
+		checkoutLbl[n] = new Label("Num people at Checkout " + (n+1) + " :");
+		inCheckoutLbl[n] = new Label("" + pAtCheckout);
+		row.getChildren().addAll(checkoutLbl[n], inCheckoutLbl[n]);
 		return row;
 	}
 	
 	private HBox makeMainQRow (int n){
 		HBox row = new HBox(25);
-		mainQLbl = new Label("Num people at MainQ " + n + " :");
-		inMainQLbl = new Label("" + pAtMainQ);
-		row.getChildren().addAll(mainQLbl, inMainQLbl);
+		mainQLbl[n] = new Label("Num people at MainQ:");
+		inMainQLbl[n] = new Label("" + pAtMainQ);
+		row.getChildren().addAll(mainQLbl[n], inMainQLbl[n]);
 		return row;
 	}
 	
