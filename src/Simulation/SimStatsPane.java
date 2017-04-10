@@ -4,6 +4,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+/***************************************************************************
+ * Pane Class that holds all the stats for the GUI
+ * @author Richard Critchlow
+ * @version April 2017
+ ***************************************************************************/
 public class SimStatsPane extends HBox{
 	
 	private Label inflowLbl;
@@ -12,6 +17,9 @@ public class SimStatsPane extends HBox{
 	private Label quitTimeLbl;
 	private Label currStepLbl;
 	
+	/***********************************************************************
+	 * Constructor that builds the pane to hold the stats
+	 ***********************************************************************/
 	public SimStatsPane(){
 		
 		setSpacing(10);
@@ -25,7 +33,6 @@ public class SimStatsPane extends HBox{
 		
 		getChildren().addAll(inflowLbl, cashierTimeLbl, avgEateryTimeLbl,
 				quitTimeLbl, currStepLbl);
-		
 	}
 
 }
