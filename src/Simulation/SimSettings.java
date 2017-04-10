@@ -39,7 +39,6 @@ public class SimSettings {
 		col2 = new VBox(25);
 
 	}
-
 	
 	public void display(){
 		window = new Stage();
