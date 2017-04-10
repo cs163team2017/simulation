@@ -6,20 +6,25 @@ import java.util.Random;
 
 public class Eateries implements ClockListener, 
                                  Iterable<Eatery>, 
-                                 QueuePerformance {
+                                 QueuePerformance, IEateries {
     
     private DblLList<Eatery> eateryList;
     Random r;
-    MainQ mainQ;
+    IMainQ mainQ;
     
-    public Eateries(Random r, MainQ q) {
+    public Eateries(Random r, IMainQ q) {
         this.r = r;
         mainQ = q;
         eateryList = new DblLList<Eatery>();
-        
     }
     
-    public Eateries(Random r, MainQ q, int n) {
+    /**
+     * 
+     * @param r random instance
+     * @param q mainQueue 
+     * @param n number of eateries to instantiate
+     */
+    public Eateries(Random r, IMainQ q, int n) {
         this(r, q);
         for (int i = 0; i < n; i++) {
             Eatery e = new Eatery();
@@ -28,23 +33,28 @@ public class Eateries implements ClockListener,
         }
     }
     
-    public void setMainQueue(MainQ q) {
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#setMainQueue(Simulation.IMainQ)
+     */
+    @Override
+    public void setMainQueue(IMainQ q) {
         mainQ = q;
     }
     
-    /** 
-     * add one eatery
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#add()
      */
+    @Override
     public void add() {
         Eatery e = new Eatery();
         e.setMainQueue(mainQ);
         eateryList.add(e);
     }
    
-    /**
-     * Add multple eateries 
-     * @param n number of eateries to add
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#add(int)
      */
+    @Override
     public void add(int n) {
         for (int i = 0; i < n; i++) {
             Eatery e = new Eatery();
@@ -53,40 +63,43 @@ public class Eateries implements ClockListener,
         }
     }
     
-    /** 
-     * Add a person to a random eatery
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#add(Simulation.Person)
      */
+    @Override
     public void add(Person p) {
         Eatery e = this.random();
         e.enQ(p);
     }
     
-    /**
-     * removes the last eatery 
-     * @return returns the number of customers lost from its queue
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#remove()
      */
+    @Override
     public int remove() {
         Eatery e = eateryList.pop();
         return e.getLeft();
     }
     
-    /** removes the eatery at the given index
-     * 
-     * @param i index of the eatery to remove
-     * @return the removed Eatery
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#remove(int)
      */
+    @Override
     public Eatery remove(int i) {
         return eateryList.removeAtIndex(i);
     }
 
-    /**
-     * get a random eatery from the set of eateries 
-     * @return
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#random()
      */
+    @Override
     public Eatery random() {
         return eateryList.getAtIndex(r.nextInt(eateryList.size()));
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#event(int)
+     */
     @Override
     public void event(int tick) {
         for (Eatery e : this) {
@@ -94,6 +107,9 @@ public class Eateries implements ClockListener,
         }
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#iterator()
+     */
     @Override
     public Iterator<Eatery> iterator() {
         return new EateryIterator();
@@ -113,14 +129,17 @@ public class Eateries implements ClockListener,
         }
     }
     
-    /**
-     * create an ArrayList of the held Eateries
-     * @return
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#toArrayList()
      */
+    @Override
     public ArrayList<Eatery> toArrayList() {
         return eateryList.toArrayList();
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#getLeft()
+     */
     @Override
     public int getLeft() {
         int totalPeopleRemaining = 0;
@@ -130,6 +149,9 @@ public class Eateries implements ClockListener,
         return totalPeopleRemaining;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#getMaxQlength()
+     */
     @Override
     public int getMaxQlength() {
         int maxQ = 0;
@@ -141,6 +163,9 @@ public class Eateries implements ClockListener,
         return maxQ;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#getThroughPut()
+     */
     @Override
     public int getThroughPut() {
         int totalThroughPut = 0;
@@ -150,6 +175,9 @@ public class Eateries implements ClockListener,
         return totalThroughPut;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#getLost()
+     */
     @Override
     public int getLost() {
         int lost = 0;

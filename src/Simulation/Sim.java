@@ -36,6 +36,7 @@ public static void main (String[] args) {
     clk.add(eateries);
     clk.add(cashiers);
     clk.add(mainQ);
+    
     clk.run(10000);
     	
     System.out.println("Eateries total throughput is: " + 

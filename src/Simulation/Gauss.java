@@ -12,4 +12,8 @@ public class Gauss {
     public static double get(Random r, int ave) {
         return ave * 0.5 * r.nextGaussian() + ave + 0.5;
     }
+    
+    public static double get(Double d, int ave) {
+        return ave * 0.5 * d + ave + 0.5;
+    }
 }

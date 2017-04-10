@@ -8,8 +8,8 @@ package Simulation;
  * @author Matthew Pische
  */
 public class Person {
-	private int tickTime;
-	private Eatery Destination;
+//	private int tickTime;
+//	private Eatery Destination;
 	
 	// time person stays at eatery counter
 	protected double eateryTime;
@@ -21,8 +21,8 @@ public class Person {
 	protected ListNode<Person> holdingNode;
 	
 	public Person() {
-	    super();
-	    holdingNode = null;
+//	    super();
+//	    holdingNode = null;
 	}
 		
 	/**
@@ -33,21 +33,21 @@ public class Person {
 		return eateryTime;
 	}
 	
-	public Eatery getDestination() {
-		return Destination;
-	}
-
-	public void setDestination(Eatery destination) {
-		Destination = destination;
-	}
+//	public Eatery getDestination() {
+//		return Destination;
+//	}
+//
+//	public void setDestination(Eatery destination) {
+//		Destination = destination;
+//	}
 	
-	public int getTickTime() {
-		return tickTime;
-	}
-
-	public void setTickTime(int tickTime) {
-		this.tickTime = tickTime;
-	}
+//	public int getTickTime() {
+//		return tickTime;
+//	}
+//
+//	public void setTickTime(int tickTime) {
+//		this.tickTime = tickTime;
+//	}
 
 	public void setEateryTime(double time) {
 		this.eateryTime = time;
@@ -77,11 +77,11 @@ public class Person {
 	    return cashierTime;
 	}
 	
-	public void setNode(ListNode<Person> n) {
-	    holdingNode = n;
-	}
-	
-	public ListNode<Person> getNode() {
-	    return holdingNode;
-	}
+//	public void setNode(ListNode<Person> n) {
+//	    holdingNode = n;
+//	}
+//	
+//	public ListNode<Person> getNode() {
+//	    return holdingNode;
+//	}
 }

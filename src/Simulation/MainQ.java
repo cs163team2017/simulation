@@ -1,8 +1,12 @@
 package Simulation;
 
+import java.util.Iterator;
+
 public class MainQ implements CisQueue<Person>, 
                               ClockListener,
-                              QueuePerformance {
+                              QueuePerformance, 
+                              IMainQ,
+                              Iterable<Person> {
     /** holder of people */
     PersonList q;
     /** total number of people that have passed through the queue */
@@ -19,6 +23,9 @@ public class MainQ implements CisQueue<Person>,
        completed = 0;
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.IMainQ#event(int)
+     */
     @Override
     public void event(int tick) {
         if (q.size() > 0) {
@@ -34,40 +41,65 @@ public class MainQ implements CisQueue<Person>,
         
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.IMainQ#setCashiers(Simulation.Cashiers)
+     */
+    @Override
     public void setCashiers(Cashiers c) {
         cashiers = c;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IMainQ#getLeft()
+     */
     @Override
     public int getLeft() {
         return q.size();
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IMainQ#getMaxQlength()
+     */
     @Override
     public int getMaxQlength() {
         return maxQLength;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IMainQ#getThroughPut()
+     */
     @Override
     public int getThroughPut() {
         return completed;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IMainQ#getLost()
+     */
     @Override
     public int getLost() {
         return lost;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IMainQ#peek()
+     */
     @Override
     public Person peek() {
         return q.peek();
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IMainQ#deQ()
+     */
     @Override
     public Person deQ() {
         return q.deQ();
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IMainQ#enQ(Simulation.Person)
+     */
     @Override
     public void enQ(Person value) {
         q.add(value);
@@ -75,5 +107,24 @@ public class MainQ implements CisQueue<Person>,
             maxQLength = q.size();
         }
     }
+
+    @Override
+    public Iterator<Person> iterator() {
+        // TODO Auto-generated method stub
+        return new MainQIterator();
+    }
     
+    private class MainQIterator implements Iterator<Person> {
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return index < q.size();
+        }
+
+        @Override
+        public Person next() {
+            return q.getAtIndex(index++);
+        }   
+    }
 }

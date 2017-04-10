@@ -1,8 +1,11 @@
 package Simulation;
 
+import java.util.Iterator;
+
 public class Cashier implements CisQueue<Person>, 
                                 ClockListener,
-                                QueuePerformance {
+                                QueuePerformance,
+                                Iterable<Person> {
     /** internal holder for all people in the cashier's queue */
     private PersonList q;
     /** number of customers that leave before completion */
@@ -77,4 +80,23 @@ public class Cashier implements CisQueue<Person>,
         return lost;
     }
 
+    @Override
+    public Iterator<Person> iterator() {
+        // TODO Auto-generated method stub
+        return new CashierIterator();
+    }
+    
+    private class CashierIterator implements Iterator<Person> {
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return index < q.size();
+        }
+
+        @Override
+        public Person next() {
+            return q.getAtIndex(index++);
+        }
+    }
 }

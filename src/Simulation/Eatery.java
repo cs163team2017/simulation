@@ -2,11 +2,17 @@
  * 
  */
 package Simulation;
+
+import java.util.Iterator;
+
 /**
  * @author   Roger Ferguson
  * @author   Matthew Pische
  */
-public class Eatery implements CisQueue<Person>, ClockListener, QueuePerformance {
+public class Eatery implements CisQueue<Person>, 
+                               ClockListener, 
+                               QueuePerformance,
+                               Iterable<Person> {
     /** internal holder for all people in the eatery's queue */
     private PersonList Q;
     /** Threshold to trigger serving the next person */
@@ -18,7 +24,7 @@ public class Eatery implements CisQueue<Person>, ClockListener, QueuePerformance
     /** number of people who leave the queue due to low speed */
     private int lost;
     /** the main queue for the simulation */
-    MainQ mainQ;
+    IMainQ mainQ;
     
     public Eatery() {
         Q = new PersonList();
@@ -28,7 +34,7 @@ public class Eatery implements CisQueue<Person>, ClockListener, QueuePerformance
         lost = 0;
     }
     	
-    public void setMainQueue(MainQ q) {
+    public void setMainQueue(IMainQ q) {
         mainQ = q;
     }
     	
@@ -104,5 +110,24 @@ public class Eatery implements CisQueue<Person>, ClockListener, QueuePerformance
             maxQlength = Q.size();
         }
         
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new EateryIterator();
+    }
+    
+    private class EateryIterator implements Iterator<Person> {
+        private int index = 0;
+        
+        @Override
+        public boolean hasNext() {
+            return index < Q.size();
+        }
+
+        @Override
+        public Person next() {
+            return Q.getAtIndex(index++);
+        } 
     }
 }

@@ -12,7 +12,7 @@ import java.util.Random;
 public class PersonProducer implements ClockListener {
     	
     private double ticksToNextPerson = 0;
-    private Eateries eateries;
+    private IEateries eateries;
     private int aveNumOfTicksToNextPerson;
     private int numOfTicksToNextPerson;
     private int averageEateryTime;
@@ -22,7 +22,7 @@ public class PersonProducer implements ClockListener {
     private Random r;
     	
     public PersonProducer(Random r, 
-                          Eateries eateries, 
+                          IEateries eateries, 
                           int aveNumOfTicksToNextPerson, 
                           int averageEateryTime, 
                           int aveCashierTime) {
@@ -44,10 +44,11 @@ public class PersonProducer implements ClockListener {
             // set how long the person will remain 
             // at the counter of the eatery 
             // when he reaches it
+            person.setCashierTime(Gauss.get(r, aveCashierTime));
             person.setEateryTime(Gauss.get(r, averageEateryTime));
             person.setLeaveTime(Gauss.get(r, aveMaxTime));
-            person.setCashierTime(Gauss.get(r, aveCashierTime));
-            person.setTickTime(tick);
+
+          //  person.setTickTime(tick);
             // enqueue the person to a random eatery's queue 
             eateries.add(person);
             
