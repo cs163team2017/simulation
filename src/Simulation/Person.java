@@ -21,7 +21,6 @@ public class Person {
 	protected ListNode<Person> holdingNode;
 	
 	public Person() {
-	    super();
 	    holdingNode = null;
 	}
 		
