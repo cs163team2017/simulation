@@ -4,8 +4,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
+/***************************************************************************
+ * Class that holds all the buttons for the GUI
+ * @author Richard Critchlow
+ * @version April 2017
+ ***************************************************************************/
 public class SimButtonPane extends HBox {
-	//Declaring Variables
+
 	private Button startBtn;
 	private Button stopBtn;
 	private Button stepBtn;
@@ -13,6 +18,9 @@ public class SimButtonPane extends HBox {
 	
 	private SimSettings settings;
 	
+	/***********************************************************************
+	 * Constructor that builds the Pane
+	 ***********************************************************************/
 	public SimButtonPane(){
 		
 		setSpacing(25);
@@ -27,10 +35,9 @@ public class SimButtonPane extends HBox {
 		getChildren().addAll(startBtn, stopBtn, stepBtn, settingBtn);	
 		listen();
 	}
-
 	
 	/******************************************************************
-	 * "Action Listener" for the GUI
+	 * "Event Handler" for the GUI
 	 ******************************************************************/
 	private void listen(){
 		

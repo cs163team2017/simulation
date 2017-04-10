@@ -1,5 +1,10 @@
 package Simulation;
 
+/***************************************************************************
+ * Class that holds plethora of stats
+ * @author Richard Critchlow
+ * @version April 2017
+ ***************************************************************************/
 public class Stats {
 	public static int inflow;
 	public static int cashierTime;
