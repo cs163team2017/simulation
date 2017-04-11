@@ -1,5 +1,7 @@
-package Simulation;
+package Simulation.Tests;
 import org.junit.Test;
+
+import Simulation.Person;
 
 public class PersonTests {
     @Test

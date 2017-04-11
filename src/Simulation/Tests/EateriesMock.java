@@ -1,7 +1,12 @@
-package Simulation;
+package Simulation.Tests;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import Simulation.Eatery;
+import Simulation.IEateries;
+import Simulation.IMainQ;
+import Simulation.Person;
 
 public class EateriesMock implements IEateries {
     public ArrayList<Person> people;

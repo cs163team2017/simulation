@@ -1,6 +1,10 @@
-package Simulation;
+package Simulation.Tests;
 
 import java.util.ArrayList;
+
+import Simulation.Cashiers;
+import Simulation.IMainQ;
+import Simulation.Person;
 
 public class MainQMock implements IMainQ {
     public int enQCalled = 0;

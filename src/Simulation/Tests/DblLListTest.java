@@ -1,8 +1,12 @@
-package Simulation;
+package Simulation.Tests;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
+
+import Simulation.CisQueue;
+import Simulation.DblLList;
+import Simulation.ListNode;
 
 public class DblLListTest {
 

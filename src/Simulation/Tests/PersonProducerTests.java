@@ -1,4 +1,4 @@
-package Simulation;
+package Simulation.Tests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -6,6 +6,11 @@ import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Simulation.Gauss;
+import Simulation.IMainQ;
+import Simulation.Person;
+import Simulation.PersonProducer;
 
 public class PersonProducerTests {
     private Random r;
@@ -32,13 +37,6 @@ public class PersonProducerTests {
         gaussians.add(0.4452322425599013);
         gaussians.add(-0.9558118873968129);
     }
-    /*
-     * order: 
-     * ticks
-     * setCash
-     * setEat
-     * setLeave
-     */
     
     @Test
     public void LetsSeeTheFirst12ResultsFromRandomSeed1() {
@@ -63,6 +61,14 @@ public class PersonProducerTests {
     
     @Test
     public void PersonProducerMakesMultiplePeopleGivenTicks() {
+        /*
+         * order: 
+         * ticks
+         * setCash
+         * setEat
+         * setLeave
+         */
+        
         // make the producer under test
         PersonProducer pp = new PersonProducer(r, eateries, 1, 20, 20);
         // get how many ticks are needed to spawn a second person
