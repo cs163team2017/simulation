@@ -9,14 +9,30 @@ public class PersonList extends DblLList<Person> {
         // so the next cell after the one removed is never checked
         // put it in a where, reverse it length => 0, then 
         // remove at index on the cell to eliminate should work
-        int index = 0;
-        for (ListNode<Person> p : this) {
-            if (tick >= p.getValue().leaveTime) {
-                this.removeAtIndex(index);
+        ListNode<Person> curr = head;
+        while (curr != null) {
+            if (curr.getValue().leaveTime >= tick) {
+                ListNode<Person> next = curr.nextNode();
+                ListNode<Person> prev = curr.prevNode();
+                if (prev != null) {
+                    prev.setNext(next);
+                }
+                if (next != null) {
+                    next.setPrev(prev);
+                }
                 numLeft++;
             }
-            index++;
+            curr = curr.nextNode();
         }
+        
+//        int index = 0;
+//        for (ListNode<Person> p : this) {
+//            if (tick >= p.getValue().leaveTime) {
+//                this.removeAtIndex(index);
+//                numLeft++;
+//            }
+//            index++;
+//        }
         return numLeft;
     }    
 }

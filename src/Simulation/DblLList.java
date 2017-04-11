@@ -11,11 +11,11 @@ import java.util.Iterator;
  */
 public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
     /** first node in the list */
-    private ListNode<T> head;
+    protected ListNode<T> head;
     /** last node in the list */
-    private ListNode<T> tail;
+    protected ListNode<T> tail;
     /** number of nodes in the list */
-    private int count;
+    protected int count;
         
     /**
      * initializes an empty linked list, with null values for 
@@ -126,7 +126,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      * @param index Nth element of the list to retrieve 
      * @return the node at the given position
      */
-    private ListNode<T> getNodeAtIndex(int index) {
+    protected ListNode<T> getNodeAtIndex(int index) {
         if (index >= count || index < 0) {
             throw new IndexOutOfBoundsException();
         }
@@ -207,7 +207,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         return n.getValue();
     }
     
-    private ListNode<T> removeFirstNode() {
+    protected ListNode<T> removeFirstNode() {
         if (head == null) {
             return null;
         }
@@ -260,7 +260,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      * @param index location of the target node
      * @return node at the given index
      */
-    private ListNode<T> removeNodeAtIndex(int index) {
+    protected ListNode<T> removeNodeAtIndex(int index) {
         if (index >= count || index < 0) {
             throw new IndexOutOfBoundsException();
         }
@@ -336,7 +336,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      * @author Matthew Pische
      *
      */
-    private class ListIterator implements Iterator<ListNode<T>> {
+    protected class ListIterator implements Iterator<ListNode<T>> {
         private int index = 0;
         
         /**
