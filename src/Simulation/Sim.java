@@ -32,10 +32,11 @@ public static void main (String[] args) {
                                     numTicks2Person, 
                                     aveEateryTime,
                                     aveCashierTime);	
+    mainQ.setCashiers(cashiers);
     clk.add(producer);
     clk.add(eateries);
-    clk.add(cashiers);
     clk.add(mainQ);
+    clk.add(cashiers);
     
     clk.run(10000);
     	

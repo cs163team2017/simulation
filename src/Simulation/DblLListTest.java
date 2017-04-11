@@ -42,6 +42,7 @@ public class DblLListTest {
         assert(q.deQ() == 2);
         assert(q.peek() == 3);
         q.enQ(5);
+        assert(2 == ((DblLList<Integer>)q).size());
         assert(q.deQ() == 3);
         assert(q.peek() == 5);
     }
@@ -221,5 +222,18 @@ public class DblLListTest {
         assert(4 == output.size());
         assert(2 == output.get(1));
         assert(4 == output.get(3));
+    }
+    
+    @Test
+    public void QueueMethodsUpdateSizeGivenValidInput() {
+        DblLList<String> l = new DblLList<String>();
+        l.enQ("a");
+        l.enQ("b");
+        l.enQ("c");
+        l.enQ("d");
+        assert(4 == l.size());
+        String a = l.deQ();
+        assert("a".equals(a));
+        assert(3 == l.size());
     }
 }

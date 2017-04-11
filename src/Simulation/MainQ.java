@@ -36,7 +36,7 @@ public class MainQ implements CisQueue<Person>,
             Person p = q.deQ();
             
             completed++;
-            cashiers.random().enQ(p);
+            cashiers.add(p);
         }
         
     }
