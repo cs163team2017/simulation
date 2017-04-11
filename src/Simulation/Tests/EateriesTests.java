@@ -100,5 +100,26 @@ public class EateriesTests {
         assert(1 == e2.enQCalled);
         assert(3 == e1.enQCalled);
         assert(1 == e3.l.size());
+        
+    }
+    
+    @Test
+    public void EateriesGetThroughputGivesTotalFromSubEateryObjs() {
+        Eateries e = new Eateries(r, mQ);
+        e2.thruPut = 3;
+        e.add(e1);
+        e.add(e2);
+        e.add(e3);
+        assert(5 == e.getThroughPut());
+    }
+    
+    @Test
+    public void EateriesMaxQLengthGivesTotalFromSubEateryObjs() {
+        Eateries e = new Eateries(r, mQ);
+        e3.maxLength = 16;
+        e.add(e1);
+        e.add(e2);
+        e.add(e3);
+        assert(16 == e.getMaxQlength());
     }
 }

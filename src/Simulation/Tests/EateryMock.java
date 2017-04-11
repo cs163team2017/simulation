@@ -12,6 +12,8 @@ public class EateryMock implements IEatery {
     public int eventCalled = 0;
     public int enQCalled = 0;
     public int lost = 0;
+    public int thruPut = 1;
+    public int maxLength = 2;
 
     @Override
     public Person peek() {
@@ -50,14 +52,14 @@ public class EateryMock implements IEatery {
 
     @Override
     public int getMaxQlength() {
-        // TODO Auto-generated method stub
-        return 0;
+
+        return maxLength;
     }
 
     @Override
     public int getThroughPut() {
-        // TODO Auto-generated method stub
-        return 0;
+
+        return thruPut;
     }
 
     @Override

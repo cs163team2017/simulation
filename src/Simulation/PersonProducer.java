@@ -46,9 +46,10 @@ public class PersonProducer implements ClockListener {
             // set how long the person will remain 
             // at the counter of the eatery 
             // when he reaches it
+            person.setCreationTime(tick);
             person.setCashierTime(Gauss.get(r, aveCashierTime));
             person.setEateryTime(Gauss.get(r, averageEateryTime));
-            person.setLeaveTime(tick + Gauss.get(r, aveLeaveTime));
+            person.setLeaveTime(Gauss.get(r, aveLeaveTime));
 
           //  person.setTickTime(tick);
             // enqueue the person to a random eatery's queue 

@@ -11,12 +11,14 @@ public class Person {
 //	private int tickTime;
 //	private Eatery Destination;
 	
-	// time person stays at eatery counter
+	/** time person stays at eatery counter */
 	protected double eateryTime;
-	// max time person will remain in system
+	/** max time person will remain in system */
 	protected double leaveTime;
-	// time person stays at cashier counter
+	/** time person stays at cashier counter */
 	protected double cashierTime;
+	/** the tick the person was instantiated */
+	protected int creationTime;
 	/** the list node that currently holds this person */
 	protected ListNode<Person> holdingNode;
 	
@@ -61,12 +63,16 @@ public class Person {
 	    cashierTime = time;
 	}
 	
+	public void setCreationTime(double time) {
+	    creationTime = (int)time;
+	}
+	
 	/**
 	 *  the maximum time the person will remain in the system 
 	 * @return
 	 */
 	public double getLeaveTime() {
-	    return leaveTime;
+	    return leaveTime + creationTime;
 	}
 	
 	/**
@@ -75,6 +81,10 @@ public class Person {
 	 */
 	public double getCashierTime() {
 	    return cashierTime;
+	}
+	
+	public int getCreationTime() {
+	    return creationTime;
 	}
 	
 //	public void setNode(ListNode<Person> n) {

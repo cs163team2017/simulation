@@ -47,7 +47,9 @@ public class PersonProducerTests {
     
     @Test
     public void PersonProducerWorksGivenValidInput() {
-        PersonProducer pp = new PersonProducer(r, eateries, 1, 20, 20);
+        PersonProducer pp = new PersonProducer(r, 
+                                               eateries, 
+                                               1, 20, 20, 40);
         
         pp.event(1);
         
@@ -70,12 +72,13 @@ public class PersonProducerTests {
          */
         
         // make the producer under test
-        PersonProducer pp = new PersonProducer(r, eateries, 1, 20, 20);
+        PersonProducer pp = new PersonProducer(r, eateries, 
+                                               1, 20, 20, 40);
         // get how many ticks are needed to spawn a second person
         int neededTicks = (int) Gauss.get(gaussians.get(4), 20);
         pp.event(1);
         pp.event(neededTicks);
-        // cheeck that the internal method was called expected times
+        // check that the internal method was called expected times
         assert(2 == eateries.addPersonCalled);
         Person p = eateries.people.get(1);
         // create duplicate values to those made internally by producer

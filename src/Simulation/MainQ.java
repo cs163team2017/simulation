@@ -21,7 +21,7 @@ public class MainQ implements CisQueue<Person>,
     public MainQ() {
        q = new PersonList();
        completed = 0;
-    }
+    } 
     
     /* (non-Javadoc)
      * @see Simulation.IMainQ#event(int)

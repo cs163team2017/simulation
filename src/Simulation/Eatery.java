@@ -74,7 +74,7 @@ public class Eatery implements IEatery {
                 mainQ.enQ(person);
                 completed++;
             }								
-        }	
+        }
     }
     	
     	

@@ -29,7 +29,7 @@ public class Cashier implements CisQueue<Person>,
                 return;
             }
             // TODO 1: this logic is not correct, check if person at 
-            // head dumped out due to delay
+            // head dumped out due to delay 
             if (tick >= ticksToNextPerson) {
                 Person p = q.deQ();
                 ticksToNextPerson = tick + 
