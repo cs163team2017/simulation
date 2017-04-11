@@ -3,7 +3,9 @@ package Simulation;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public interface IEateries {
+public interface IEateries extends ClockListener, 
+                                   Iterable<IEatery>, 
+                                   QueuePerformance  {
 
     void setMainQueue(IMainQ q);
 
@@ -34,23 +36,23 @@ public interface IEateries {
      * @param i index of the eatery to remove
      * @return the removed Eatery
      */
-    Eatery remove(int i);
+    IEatery remove(int i);
 
     /**
      * get a random eatery from the set of eateries 
      * @return
      */
-    Eatery random();
+    IEatery random();
 
     void event(int tick);
 
-    Iterator<Eatery> iterator();
+    Iterator<IEatery> iterator();
 
     /**
      * create an ArrayList of the held Eateries
      * @return
      */
-    ArrayList<Eatery> toArrayList();
+    ArrayList<IEatery> toArrayList();
 
     int getLeft();
 
@@ -59,5 +61,7 @@ public interface IEateries {
     int getThroughPut();
 
     int getLost();
+
+    void add(IEatery e);
 
 }

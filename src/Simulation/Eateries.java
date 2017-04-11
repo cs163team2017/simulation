@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Eateries implements ClockListener, 
-                                 Iterable<Eatery>, 
-                                 QueuePerformance, IEateries {
+public class Eateries implements IEateries {
     
-    private DblLList<Eatery> eateryList;
+    private DblLList<IEatery> eateryList;
     Random r;
     IMainQ mainQ;
     
     public Eateries(Random r, IMainQ q) {
         this.r = r;
         mainQ = q;
-        eateryList = new DblLList<Eatery>();
+        eateryList = new DblLList<IEatery>();
     }
     
     /**
@@ -27,7 +25,7 @@ public class Eateries implements ClockListener,
     public Eateries(Random r, IMainQ q, int n) {
         this(r, q);
         for (int i = 0; i < n; i++) {
-            Eatery e = new Eatery();
+            IEatery e = new Eatery();
             e.setMainQueue(mainQ);
             eateryList.add(e);
         }
@@ -46,7 +44,13 @@ public class Eateries implements ClockListener,
      */
     @Override
     public void add() {
-        Eatery e = new Eatery();
+        IEatery e = new Eatery();
+        e.setMainQueue(mainQ);
+        eateryList.add(e);
+    }
+    
+    @Override
+    public void add(IEatery e) {
         e.setMainQueue(mainQ);
         eateryList.add(e);
     }
@@ -57,7 +61,7 @@ public class Eateries implements ClockListener,
     @Override
     public void add(int n) {
         for (int i = 0; i < n; i++) {
-            Eatery e = new Eatery();
+            IEatery e = new Eatery();
             e.setMainQueue(mainQ);
             eateryList.add(e);
         }
@@ -68,7 +72,7 @@ public class Eateries implements ClockListener,
      */
     @Override
     public void add(Person p) {
-        Eatery e = this.random();
+        IEatery e = this.random();
         e.enQ(p);
     }
     
@@ -77,7 +81,7 @@ public class Eateries implements ClockListener,
      */
     @Override
     public int remove() {
-        Eatery e = eateryList.pop();
+        IEatery e = eateryList.pop();
         return e.getLeft();
     }
     
@@ -85,7 +89,7 @@ public class Eateries implements ClockListener,
      * @see Simulation.IEateries#remove(int)
      */
     @Override
-    public Eatery remove(int i) {
+    public IEatery remove(int i) {
         return eateryList.removeAtIndex(i);
     }
 
@@ -93,7 +97,13 @@ public class Eateries implements ClockListener,
      * @see Simulation.IEateries#random()
      */
     @Override
-    public Eatery random() {
+    public IEatery random() {
+        if (eateryList.size() == 0) {
+            return null;
+        }
+        if (eateryList.size() == 1) {
+            return eateryList.first();
+        }
         return eateryList.getAtIndex(r.nextInt(eateryList.size()));
     }
 
@@ -102,7 +112,7 @@ public class Eateries implements ClockListener,
      */
     @Override
     public void event(int tick) {
-        for (Eatery e : this) {
+        for (IEatery e : this) {
             e.event(tick);
         }
     }
@@ -111,11 +121,11 @@ public class Eateries implements ClockListener,
      * @see Simulation.IEateries#iterator()
      */
     @Override
-    public Iterator<Eatery> iterator() {
+    public Iterator<IEatery> iterator() {
         return new EateryIterator();
     }
     
-    private class EateryIterator implements Iterator<Eatery> {
+    private class EateryIterator implements Iterator<IEatery> {
 
         private int index = 0;
         @Override
@@ -124,7 +134,7 @@ public class Eateries implements ClockListener,
         }
 
         @Override
-        public Eatery next() {
+        public IEatery next() {
             return eateryList.getAtIndex(index++);
         }
     }
@@ -133,7 +143,7 @@ public class Eateries implements ClockListener,
      * @see Simulation.IEateries#toArrayList()
      */
     @Override
-    public ArrayList<Eatery> toArrayList() {
+    public ArrayList<IEatery> toArrayList() {
         return eateryList.toArrayList();
     }
 
@@ -143,7 +153,7 @@ public class Eateries implements ClockListener,
     @Override
     public int getLeft() {
         int totalPeopleRemaining = 0;
-        for(Eatery e : this) {
+        for(IEatery e : this) {
             totalPeopleRemaining += e.getLeft();
         }
         return totalPeopleRemaining;
@@ -155,7 +165,7 @@ public class Eateries implements ClockListener,
     @Override
     public int getMaxQlength() {
         int maxQ = 0;
-        for (Eatery e : this) {
+        for (IEatery e : this) {
             if (e.getMaxQlength() > maxQ) {
                 maxQ = e.getMaxQlength();
             }
@@ -169,7 +179,7 @@ public class Eateries implements ClockListener,
     @Override
     public int getThroughPut() {
         int totalThroughPut = 0;
-        for (Eatery e : this) {
+        for (IEatery e : this) {
             totalThroughPut += e.getThroughPut();
         }
         return totalThroughPut;
@@ -181,7 +191,7 @@ public class Eateries implements ClockListener,
     @Override
     public int getLost() {
         int lost = 0;
-        for (Eatery e : this) {
+        for (IEatery e : this) {
             lost += e.getLost();
         }
         return lost;

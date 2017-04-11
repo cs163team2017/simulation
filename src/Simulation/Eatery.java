@@ -9,10 +9,8 @@ import java.util.Iterator;
  * @author   Roger Ferguson
  * @author   Matthew Pische
  */
-public class Eatery implements CisQueue<Person>, 
-                               ClockListener, 
-                               QueuePerformance,
-                               Iterable<Person> {
+public class Eatery implements IEatery {
+    
     /** internal holder for all people in the eatery's queue */
     private PersonList Q;
     /** Threshold to trigger serving the next person */
@@ -34,10 +32,17 @@ public class Eatery implements CisQueue<Person>,
         lost = 0;
     }
     	
+    /* (non-Javadoc)
+     * @see Simulation.IEatery#setMainQueue(Simulation.IMainQ)
+     */
+    @Override
     public void setMainQueue(IMainQ q) {
         mainQ = q;
     }
     	
+    /* (non-Javadoc)
+     * @see Simulation.IEatery#event(int)
+     */
     @Override
     public void event (int tick){
         
@@ -73,37 +78,58 @@ public class Eatery implements CisQueue<Person>,
     }
     	
     	
+    /* (non-Javadoc)
+     * @see Simulation.IEatery#getLeft()
+     */
     @Override
     public int getLeft() {
     	return Q.size();
     }
     	
+    /* (non-Javadoc)
+     * @see Simulation.IEatery#getMaxQlength()
+     */
     @Override
     public int getMaxQlength() {
     	return maxQlength;
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.IEatery#getThroughPut()
+     */
     @Override
     public int getThroughPut() {
     	return completed;
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.IEatery#getLost()
+     */
     @Override
     public int getLost() {
         return lost;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IEatery#peek()
+     */
     @Override
     public Person peek() {
         return Q.peek();
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IEatery#deQ()
+     */
     @Override
     public Person deQ() {
         lost++;
         return Q.deQ();
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IEatery#enQ(Simulation.Person)
+     */
     @Override
     public void enQ(Person value) {
         Q.add(value);
@@ -112,6 +138,9 @@ public class Eatery implements CisQueue<Person>,
         }   
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.IEatery#iterator()
+     */
     @Override
     public Iterator<Person> iterator() {
         return new EateryIterator();

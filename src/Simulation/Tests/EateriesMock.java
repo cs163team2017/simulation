@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import Simulation.Eatery;
 import Simulation.IEateries;
+import Simulation.IEatery;
 import Simulation.IMainQ;
 import Simulation.Person;
 
@@ -48,13 +49,13 @@ public class EateriesMock implements IEateries {
     }
 
     @Override
-    public Eatery remove(int i) {
+    public IEatery remove(int i) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Eatery random() {
+    public IEatery random() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -66,13 +67,13 @@ public class EateriesMock implements IEateries {
     }
 
     @Override
-    public Iterator<Eatery> iterator() {
+    public Iterator<IEatery> iterator() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ArrayList<Eatery> toArrayList() {
+    public ArrayList<IEatery> toArrayList() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -99,6 +100,12 @@ public class EateriesMock implements IEateries {
     public int getLost() {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public void add(IEatery e) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
