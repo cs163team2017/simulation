@@ -16,7 +16,7 @@ public class MainQ implements CisQueue<Person>,
     /** maximum queue length ever achieved in this run */
     private int maxQLength;
     /** Threshold to trigger serving the next person */
-    private Cashiers cashiers;
+    private ICashiers cashiers;
 
     public MainQ() {
        q = new PersonList();
@@ -45,7 +45,7 @@ public class MainQ implements CisQueue<Person>,
      * @see Simulation.IMainQ#setCashiers(Simulation.Cashiers)
      */
     @Override
-    public void setCashiers(Cashiers c) {
+    public void setCashiers(ICashiers c) {
         cashiers = c;
     }
 

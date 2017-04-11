@@ -25,13 +25,15 @@ public static void main (String[] args) {
     int numTicks2Person = 20; 
     int aveEateryTime = 20;
     int aveCashierTime = 20;
+    int aveLeaveTime = 40;
     	
     PersonProducer producer = new PersonProducer(
                                     rand, 
                                     eateries, 
                                     numTicks2Person, 
+                                    aveCashierTime,
                                     aveEateryTime,
-                                    aveCashierTime);	
+                                    aveLeaveTime);	
     mainQ.setCashiers(cashiers);
     clk.add(producer);
     clk.add(eateries);
@@ -39,7 +41,8 @@ public static void main (String[] args) {
     clk.add(cashiers);
     
     clk.run(10000);
-    	
+    
+    System.out.println("___EATERIES___\n");
     System.out.println("Eateries total throughput is: " + 
                         eateries.getThroughPut() + 
                         " people.");
@@ -48,6 +51,18 @@ public static void main (String[] args) {
     System.out.println ("Eateries Maximum people Queued: " + 
                         eateries.getMaxQlength() + 
                         ".");
+    System.out.println("Eateries people lost: " + 
+                        eateries.getLost() + ".\n");
+    System.out.println("___MAIN QUEUE___\n");
+    System.out.println("MainQ throughput is: "  + 
+                        mainQ.getThroughPut() + ".");
+    System.out.println("MainQ people still Queued: " + 
+                        mainQ.getLeft() + ".");
+    System.out.println("MainQ maximum queue size: " + 
+                        mainQ.getMaxQlength() + ".");
+    System.out.println("MainQ people lost: " + 
+                        mainQ.getLost() + ".\n");
+    System.out.println("___CASHIERS___\n");
     System.out.println("Cashiers total throughput is: " +
                        cashiers.getThroughPut() +
                        " people.");
@@ -57,5 +72,7 @@ public static void main (String[] args) {
     System.out.println("Cashiers maximum people queued: " +
                        cashiers.getMaxQlength() + 
                        ".");
+    System.out.println("Cashiers people lost: " + 
+                       cashiers.getLost() + ".");
     }
 }

@@ -2,7 +2,7 @@ package Simulation.Tests;
 
 import java.util.ArrayList;
 
-import Simulation.Cashiers;
+import Simulation.ICashiers;
 import Simulation.IMainQ;
 import Simulation.Person;
 
@@ -17,7 +17,7 @@ public class MainQMock implements IMainQ {
     }
 
     @Override
-    public void setCashiers(Cashiers c) {
+    public void setCashiers(ICashiers c) {
         // TODO Auto-generated method stub
         
     }

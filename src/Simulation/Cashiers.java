@@ -3,9 +3,7 @@ package Simulation;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Cashiers implements ClockListener, 
-                                 Iterable<Cashier>, 
-                                 QueuePerformance {
+public class Cashiers implements ClockListener, ICashiers {
 
     DblLList<Cashier> cashiersList;
     Random r;
@@ -24,19 +22,26 @@ public class Cashiers implements ClockListener,
         }
     }
     
-    /**
-     * get a random cashier from the set 
-     * @return
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#random()
      */
+    @Override
     public Cashier random() {
         return cashiersList.getAtIndex(r.nextInt(cashiersList.size()));
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#add(Simulation.Person)
+     */
+    @Override
     public void add(Person p) {
         Cashier c = random();
         c.enQ(p);
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#getLeft()
+     */
     @Override
     public int getLeft() {
         int left = 0;
@@ -46,6 +51,9 @@ public class Cashiers implements ClockListener,
         return left;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#getMaxQlength()
+     */
     @Override
     public int getMaxQlength() {
         int max = 0;
@@ -57,6 +65,9 @@ public class Cashiers implements ClockListener,
         return max;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#getThroughPut()
+     */
     @Override
     public int getThroughPut() {
         int t = 0;
@@ -66,6 +77,9 @@ public class Cashiers implements ClockListener,
         return t;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#getLost()
+     */
     @Override
     public int getLost() {
         int lost = 0;
@@ -75,6 +89,9 @@ public class Cashiers implements ClockListener,
         return lost;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#iterator()
+     */
     @Override
     public Iterator<Cashier> iterator() {
         return new CashierIterator();
@@ -96,6 +113,9 @@ public class Cashiers implements ClockListener,
         
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#event(int)
+     */
     @Override
     public void event(int tick) {
         for (Cashier c : this) {

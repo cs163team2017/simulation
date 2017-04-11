@@ -10,7 +10,7 @@ public interface IMainQ {
     /* (non-Javadoc)
      * @see Simulation.IMainQ#setCashiers(Simulation.Cashiers)
      */
-    void setCashiers(Cashiers c);
+    void setCashiers(ICashiers c);
 
     /* (non-Javadoc)
      * @see Simulation.IMainQ#getLeft()
