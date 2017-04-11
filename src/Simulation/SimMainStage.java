@@ -1,42 +1,51 @@
 package Simulation;
 
 import javafx.application.Application;
-import javafx.event.Event;
-import javafx.event.EventHandler;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 
+/***************************************************************************
+ * The Main Stage that holds the GUI
+ * @author Richard Critchlow
+ * @version April 2017
+ ***************************************************************************/
 public class SimMainStage extends Application {
 
-	//Variables
-	Button btn1;
-	
+	/***********************************************************************
+	 * The Main Method
+	 * @param args The command line
+	 ***********************************************************************/
 	public static void main (String[] args){
 		launch(args);
 	}
 
+	/***********************************************************************
+	 * The necessary method to run a javafx GUI
+	 * Puts the GUI together
+	 ***********************************************************************/
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		//Initializing Variables
 		primaryStage.setTitle("Food Court");
 		
-		btn1 = new Button("Test Btn");
+		BorderPane  mainPn = new BorderPane();
+		SimButtonPane buttonPn = new SimButtonPane();
+		SimStatsPane statsPn = new SimStatsPane();
+		SimAnimationPane animePn = new SimAnimationPane();
 		
-		btn1.setOnAction(e -> {
-			System.out.println("clicked");
-		});
+		mainPn.setTop(buttonPn);
+		mainPn.setBottom(statsPn);
+		mainPn.setCenter(animePn);
 		
-		
-		StackPane layout = new StackPane();
-		layout.getChildren().add(btn1);
-		
-		Scene scene1 = new Scene(layout, 400, 400);
-		primaryStage.setScene(scene1);
+		Scene mainScene = new Scene(mainPn, 800, 600);
+		primaryStage.setScene(mainScene);
 		primaryStage.show();
+		
+		primaryStage.setOnCloseRequest(e -> {
+	        Platform.exit();
+	        System.exit(0);
+	    });
 	}
-
-
-
-
 }
