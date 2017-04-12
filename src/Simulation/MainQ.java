@@ -29,14 +29,15 @@ public class MainQ implements CisQueue<Person>,
     @Override
     public void event(int tick) {
         if (q.size() > 0) {
-            q.checkLeavers(tick);
+            lost += q.checkLeavers(tick);
             if (0 >= q.size()) {
                 return;
             }
-            Person p = q.deQ();
-            
-            completed++;
-            cashiers.add(p);
+            if (cashiers.haveEmpty()) {
+                Person p = q.deQ();
+                cashiers.add(p, tick);
+                completed++;
+            }
         }
         
     }

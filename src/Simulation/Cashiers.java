@@ -7,12 +7,15 @@ public class Cashiers implements ClockListener, ICashiers {
 
     DblLList<Cashier> cashiersList;
     Random r;
+    Cashier firstEmpty;
+    int maxLength;
     
     public Cashiers(Random r) {
         this.r = r;
         cashiersList = new DblLList<Cashier>();
         cashiersList.add(new Cashier());
         cashiersList.add(new Cashier());
+        firstEmpty = cashiersList.first();
     }
     
     public Cashiers(Random r, int n) {
@@ -34,9 +37,12 @@ public class Cashiers implements ClockListener, ICashiers {
      * @see Simulation.ICashiers#add(Simulation.Person)
      */
     @Override
-    public void add(Person p) {
-        Cashier c = random();
-        c.enQ(p);
+    public void add(Person p, int tick) {
+        if (firstEmpty == null) {
+            throw new RuntimeException("No empty cashier available");
+        }
+        firstEmpty.enQ(p, tick);
+        haveEmpty();
     }
     
     /* (non-Javadoc)
@@ -122,6 +128,18 @@ public class Cashiers implements ClockListener, ICashiers {
             c.event(tick);
         }
         
+    }
+    
+    @Override
+    public boolean haveEmpty() {
+        for (Cashier c : this) {
+            if (c.isEmpty()) {
+                firstEmpty = c;
+                return true;
+            }
+        }
+        firstEmpty = null;
+        return false;
     }
 
 }

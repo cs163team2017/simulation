@@ -22,10 +22,11 @@ public static void main (String[] args) {
     Eateries eateries = new Eateries(rand, mainQ);
     Cashiers cashiers = new Cashiers(rand);
     eateries.add();
+    eateries.add();
     int numTicks2Person = 20; 
     int aveEateryTime = 20;
-    int aveCashierTime = 20;
-    int aveLeaveTime = 40;
+    int aveCashierTime = 60;
+    int aveLeaveTime = 100;
     	
     PersonProducer producer = new PersonProducer(
                                     rand, 

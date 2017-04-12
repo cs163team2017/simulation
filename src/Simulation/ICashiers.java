@@ -12,7 +12,7 @@ public interface ICashiers extends ClockListener,
      */
     Cashier random();
 
-    void add(Person p);
+    void add(Person p, int tick);
 
     int getLeft();
 
@@ -26,4 +26,5 @@ public interface ICashiers extends ClockListener,
 
     void event(int tick);
 
+    boolean haveEmpty();
 }

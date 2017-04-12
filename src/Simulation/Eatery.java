@@ -23,6 +23,8 @@ public class Eatery implements IEatery {
     private int lost;
     /** the main queue for the simulation */
     IMainQ mainQ;
+    Person atDesk;
+    int serviceStartTick;
     
     public Eatery() {
         Q = new PersonList();
@@ -30,6 +32,8 @@ public class Eatery implements IEatery {
         maxQlength = 0;
         completed = 0;
         lost = 0;
+        serviceStartTick = 0;
+        atDesk = null;
     }
     	
     /* (non-Javadoc)
@@ -61,17 +65,27 @@ public class Eatery implements IEatery {
         // need to check if the one at the counter is leaving,
         // if so, reset ticks to next to the _next_ person in the queue
         if (s >= 1) {
+
+
             // remove all people who won't wait anymore
             lost += Q.checkLeavers(tick);
             if (0 >= Q.size()) {
                 return;
             }
-            if (tick >= ticksToNextPerson) {
-                Person person = Q.deQ();
+            
+            if (atDesk == null || atDesk != Q.peek()) {
+                atDesk = Q.peek();
+                atDesk.setEateryTime(atDesk.getEateryTime() + tick);
+            }
 
-                ticksToNextPerson = tick + 
-                                    (int)(person.getEateryTime() + 1);
+            if (tick >= atDesk.getEateryTime()) {
+                Person person = Q.deQ();
                 mainQ.enQ(person);
+                atDesk = Q.peek();
+                if (atDesk != null) {
+                    atDesk.setEateryTime(atDesk.getEateryTime() + tick);
+                }
+
                 completed++;
             }								
         }
@@ -136,6 +150,7 @@ public class Eatery implements IEatery {
         if (Q.size() > maxQlength) {
             maxQlength = Q.size();
         }   
+
     }
 
     /* (non-Javadoc)
