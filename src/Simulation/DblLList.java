@@ -1,5 +1,6 @@
 package Simulation;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -10,11 +11,11 @@ import java.util.Iterator;
  */
 public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
     /** first node in the list */
-    private ListNode<T> head;
+    protected ListNode<T> head;
     /** last node in the list */
-    private ListNode<T> tail;
+    protected ListNode<T> tail;
     /** number of nodes in the list */
-    private int count;
+    protected int count;
         
     /**
      * initializes an empty linked list, with null values for 
@@ -43,6 +44,38 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
             return null;
         return head.getValue();
     }
+    
+    /** 
+     * evaluates if a node is the head node
+     * @param n the node to evaluate
+     * @return head
+     */
+    public boolean isFirstNode(ListNode<T> n) {
+        if (n == head) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * evaluates if a given node is the tail node
+     * @param n the node to evaluate
+     * @return
+     */
+    public boolean isLastNode(ListNode<T> n) {
+        if (n == tail) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * fetch the tail node
+     * @return tail
+     */
+    public ListNode<T> lastNode() {
+        return tail;
+    }
 
     /**
      * adds a new node, holding the passed in value, to the head of 
@@ -51,12 +84,12 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      */
     public void addFirst(T value) {
         if (head == null) {
-            tail = head = new ListNode<T>(value);
+            tail = head = new ListNode<T>(this, value);
             count++;
             return;
         }
         ListNode<T> old = head;
-        head = new ListNode<T>(value, old);
+        head = new ListNode<T>(this, value, old);
         old.setPrev(head);
         count++;
     }
@@ -78,9 +111,9 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      */
     public void add(T value) {
         if (tail == null) {
-            head = tail = new ListNode<T>(value);
+            head = tail = new ListNode<T>(this, value);
         } else {
-            ListNode<T> n = new ListNode<T>(value, null, tail);
+            ListNode<T> n = new ListNode<T>(this, value, null, tail);
             tail.setNext(n); 
             tail = n;
         }
@@ -93,7 +126,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      * @param index Nth element of the list to retrieve 
      * @return the node at the given position
      */
-    private ListNode<T> getNodeAtIndex(int index) {
+    protected ListNode<T> getNodeAtIndex(int index) {
         if (index >= count || index < 0) {
             throw new IndexOutOfBoundsException();
         }
@@ -128,7 +161,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      */
     public void setAtIndex(T value, int index) {
         if (index == 0 && head == null) {
-            head = tail = new ListNode<T>(value);
+            head = tail = new ListNode<T>(this, value);
             count++;
             return;
         }
@@ -147,7 +180,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      */
     public void insertAtIndex(T value, int index) {
         if (index == 0 && head == null) {
-            head = tail = new ListNode<T>(value);
+            head = tail = new ListNode<T>(this, value);
             count++;
             return;
         }
@@ -156,7 +189,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         }
         ListNode<T> curr = getNodeAtIndex(index);
         ListNode<T> prev = curr.prevNode();
-        ListNode<T> n = new ListNode<T>(value, curr, prev);
+        ListNode<T> n = new ListNode<T>(this, value, curr, prev);
         if (prev != null)
             prev.setNext(n);
         curr.setPrev(n);
@@ -174,7 +207,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         return n.getValue();
     }
     
-    private ListNode<T> removeFirstNode() {
+    protected ListNode<T> removeFirstNode() {
         if (head == null) {
             return null;
         }
@@ -227,7 +260,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      * @param index location of the target node
      * @return node at the given index
      */
-    private ListNode<T> removeNodeAtIndex(int index) {
+    protected ListNode<T> removeNodeAtIndex(int index) {
         if (index >= count || index < 0) {
             throw new IndexOutOfBoundsException();
         }
@@ -303,7 +336,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      * @author Matthew Pische
      *
      */
-    private class ListIterator implements Iterator<ListNode<T>> {
+    protected class ListIterator implements Iterator<ListNode<T>> {
         private int index = 0;
         
         /**
@@ -319,5 +352,17 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         public ListNode<T> next() {
             return getNodeAtIndex(index++);
         }
+    }
+    
+    /** 
+     * Builds an ArrayList of this lists values 
+     * @return An ArrayList of this list's values
+     */
+    public ArrayList<T> toArrayList() {
+        ArrayList<T> a = new ArrayList<T>(count);
+        for (ListNode<T> curr : this) {
+            a.add(curr.getValue());
+        }
+        return a;
     }
 }
