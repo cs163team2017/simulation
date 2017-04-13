@@ -59,8 +59,8 @@ public class Controller {
 	  
 	    for (int i = 0; i < Stats.numEaterys; i++)
 	    	eateries.add();
-//	    for (int i = 0; i < Stats.numCheckouts; i++)
-//	    	cashiers.add();
+	    for (int i = 0; i < Stats.numCheckouts; i++)
+	    	cashiers.add(new Cashier());
 	    
 	    mainQ.setCashiers(cashiers);
 	    clk.add(producer);

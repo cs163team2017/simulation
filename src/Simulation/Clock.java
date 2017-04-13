@@ -38,13 +38,13 @@ public class Clock {
 			if (myListeners[j] instanceof MainQ){		
 					Stats.pplAtMainQ = ((MainQ) myListeners[j]).getLeft();
 			}
-//			if (myListeners[j] instanceof Cashiers){		
-//				int i = 0;
-//				for (ICashier C: (ICashiers) myListeners[j]){
-//					Stats.pplAtCheckout[i] = C.getLeft();
-//					i++;
-//				}
-//			}
+			if (myListeners[j] instanceof Cashiers){		
+				int i = 0;
+				for (ICashier C: (ICashiers) myListeners[j]){
+					Stats.pplAtCheckout[i] = C.getLeft();
+					i++;
+				}
+			}
 		}
 		Stats.currTime = currTick;
 	}
