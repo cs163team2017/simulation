@@ -11,6 +11,7 @@ public class Clock {
 	private ClockListener[] myListeners;
 	private int numListeners;
 	private int MAX = 100;
+	private int currTick = 0;
 
 	public Clock() {
 		numListeners = 0;
@@ -22,6 +23,12 @@ public class Clock {
 			for (int j = 0; j < numListeners; j++)
 				myListeners[j].event(currentTime);
 		}
+	}
+	
+	public void tock(){
+		for (int j = 0; j < numListeners; j++)
+			myListeners[j].event(currTick++);
+		Stats.currTime = currTick;
 	}
 
 	public void add(ClockListener cl) {

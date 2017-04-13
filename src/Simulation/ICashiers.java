@@ -10,7 +10,7 @@ public interface ICashiers extends ClockListener,
      * get a random cashier from the set 
      * @return
      */
-    Cashier random();
+ //   Cashier random();  //FIXME Im no longer needed
 
     void add(Person p, int tick);
 

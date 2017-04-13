@@ -6,32 +6,30 @@ import java.util.Random;
 public class Cashiers implements ClockListener, ICashiers {
 
     DblLList<Cashier> cashiersList;
-    Random r;
     Cashier firstEmpty;
     int maxLength;
     
-    public Cashiers(Random r) {
-        this.r = r;
+    public Cashiers() {
         cashiersList = new DblLList<Cashier>();
         cashiersList.add(new Cashier());
-        cashiersList.add(new Cashier());
+        cashiersList.add(new Cashier()); //TODO delete me im a shortcut
         firstEmpty = cashiersList.first();
     }
     
-    public Cashiers(Random r, int n) {
-        this(r);
-        for (int i = 0; i < n; i++) {
-            cashiersList.add(new Cashier());
-        }
-    }
+//    public Cashiers(Random r, int n) { //FIXME I dont think im important
+//        this(r);
+//        for (int i = 0; i < n; i++) {
+//            cashiersList.add(new Cashier());
+//        }
+//    }
     
     /* (non-Javadoc)
      * @see Simulation.ICashiers#random()
      */
-    @Override
-    public Cashier random() {
-        return cashiersList.getAtIndex(r.nextInt(cashiersList.size()));
-    }
+//    @Override //FIXME I dont think im important either
+//    public Cashier random() {
+//        return cashiersList.getAtIndex(r.nextInt(cashiersList.size()));
+//    }
     
     /* (non-Javadoc)
      * @see Simulation.ICashiers#add(Simulation.Person)

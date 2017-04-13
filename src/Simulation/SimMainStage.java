@@ -1,5 +1,6 @@
 package Simulation;
 
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -42,6 +43,9 @@ public class SimMainStage extends Application {
 		Scene mainScene = new Scene(mainPn, 800, 600);
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
+		
+		Controller c = new Controller(statsPn);
+		c.startSim();
 		
 		primaryStage.setOnCloseRequest(e -> {
 	        Platform.exit();
