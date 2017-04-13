@@ -6,12 +6,6 @@ public interface ICashiers extends ClockListener,
                                    Iterable<ICashier>, 
                                    QueuePerformance {
 
-    /**
-     * get a random cashier from the set 
-     * @return
-     */
-    ICashier random();
-
     void add(Person p, int tick);
     
     void add(ICashier c);

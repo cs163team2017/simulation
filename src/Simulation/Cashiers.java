@@ -5,22 +5,14 @@ import java.util.Random;
 
 public class Cashiers implements ClockListener, ICashiers {
 
+
     DblLList<ICashier> cashiersList;
-    Random r;
     ICashier firstEmpty;
     int maxLength;
     
-    public Cashiers(Random r) {
-        this.r = r;
+    public Cashiers() {
         cashiersList = new DblLList<ICashier>();
         firstEmpty = null;
-    }
-    
-    public Cashiers(Random r, int n) {
-        this(r);
-        for (int i = 0; i < n; i++) {
-            cashiersList.add(new Cashier());
-        }
     }
     
     public void add(ICashier c) {
@@ -28,14 +20,6 @@ public class Cashiers implements ClockListener, ICashiers {
             firstEmpty = c;
         }
         cashiersList.add(c);
-    }
-    
-    /* (non-Javadoc)
-     * @see Simulation.ICashiers#random()
-     */
-    @Override
-    public ICashier random() {
-        return cashiersList.getAtIndex(r.nextInt(cashiersList.size()));
     }
     
     /* (non-Javadoc)

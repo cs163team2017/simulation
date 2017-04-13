@@ -15,13 +15,6 @@ public class SimAnimationPane extends HBox {
 	private Label[] mainQLbl;
 	private Label[] eaterLbl; 
 	private Label[] checkoutLbl;
-	private Label[] inMainQLbl;
-	private Label[] inEaterLbl; 
-	private Label[] inCheckoutLbl;
-	
-	private int pAtMainQ;
-	private int pAtEatery;
-	private int pAtCheckout;
 
 	/***********************************************************************
 	 * Constructor that adds all the pieces to the Pane
@@ -30,13 +23,10 @@ public class SimAnimationPane extends HBox {
 		mainQLbl = new Label[1];
 		eaterLbl = new Label[Stats.numEaterys]; 
 		checkoutLbl = new Label[Stats.numCheckouts];
-		inMainQLbl = new Label[1];
-		inEaterLbl = new Label[Stats.numEaterys]; 
-		inCheckoutLbl = new Label[Stats.numCheckouts];
 		
 		setSpacing(25);
 		VBox leftPn = new VBox(25);
-		HBox centerPn = new HBox(25);
+		VBox centerPn = new VBox(25);
 		VBox rightPn = new VBox(25);
 		
 		for (int i = 0; i < Stats.numEaterys; i++)
@@ -45,11 +35,24 @@ public class SimAnimationPane extends HBox {
 		for (int i = 0; i < Stats.numCheckouts; i++)
 			rightPn.getChildren().add(makeCheckoutRow(i));
 		
-		centerPn.getChildren().addAll(makeMainQRow(0));
+		centerPn.getChildren().add(makeMainQRow(0));
 		
 		setAlignment(Pos.CENTER);
+		leftPn.setAlignment(Pos.CENTER);
+		centerPn.setAlignment(Pos.CENTER);
+		rightPn.setAlignment(Pos.CENTER);
 		getChildren().addAll(leftPn, centerPn, rightPn); 
+		repaint();
+	}
+	
+	public void repaint(){
+		for (int i = 0; i < Stats.numEaterys; i++)
+			eaterLbl[i].setText("Num people at eatery " + (i+1) + " : " + Stats.pplAtEatery[i]);
 		
+		for (int i = 0; i < Stats.numCheckouts; i++)
+			checkoutLbl[i].setText("Num people at checkout " + (i+1) + " : " + Stats.pplAtCheckout[i]);
+		
+		mainQLbl[0].setText("Num people at MainQ: " +  Stats.pplAtMainQ);
 	}
 
 	/***********************************************************************
@@ -61,8 +64,7 @@ public class SimAnimationPane extends HBox {
 		HBox row = new HBox(25);
 
 		eaterLbl[n] = new Label("Num people at Eatery " + (n+1) + " :");
-		inEaterLbl[n] = new Label("" + pAtEatery);
-		row.getChildren().addAll(eaterLbl[n], inEaterLbl[n]);
+		row.getChildren().add(eaterLbl[n]);
 		
 		return row;
 	}
@@ -74,9 +76,8 @@ public class SimAnimationPane extends HBox {
 	 ***********************************************************************/
 	private HBox makeCheckoutRow(int n){
 		HBox row = new HBox(25);
-		checkoutLbl[n] = new Label("Num people at Checkout " + (n+1) + " :");
-		inCheckoutLbl[n] = new Label("" + pAtCheckout);
-		row.getChildren().addAll(checkoutLbl[n], inCheckoutLbl[n]);
+		checkoutLbl[n] = new Label();
+		row.getChildren().add(checkoutLbl[n]);
 		return row;
 	}
 	
@@ -87,9 +88,8 @@ public class SimAnimationPane extends HBox {
 	 ***********************************************************************/
 	private HBox makeMainQRow (int n){
 		HBox row = new HBox(25);
-		mainQLbl[n] = new Label("Num people at MainQ:");
-		inMainQLbl[n] = new Label("" + pAtMainQ);
-		row.getChildren().addAll(mainQLbl[n], inMainQLbl[n]);
+		mainQLbl[n] = new Label();
+		row.getChildren().add(mainQLbl[n]);
 		return row;
 	}
 }

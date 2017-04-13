@@ -10,14 +10,12 @@ import Simulation.Person;
 
 public class CashiersTests {
     public CashierMock cm;
-    public Random rand;
     
     public Person p1,p2,p3,p4,p5;
     
     @Before
     public void setUp() {
         cm = new CashierMock();
-        rand = new Random(1);
         
         p1 = new Person();
         p1.setEateryTime(1);
@@ -41,7 +39,7 @@ public class CashiersTests {
     
     @Test
     public void CashiersWorksGivenValidInput() {
-        Cashiers c = new Cashiers(rand);
+        Cashiers c = new Cashiers();
         
         c.add(cm);
         c.add(p1, 1);

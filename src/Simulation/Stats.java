@@ -6,16 +6,15 @@ package Simulation;
  * @version April 2017
  ***************************************************************************/
 public class Stats {
-	public static int inflow;
-	public static int cashierTime;
-	public static int avgEateryTime;
-	
+	public static int inflow = 20;
+	public static int cashierTime = 60;
+	public static int avgEateryTime = 20;
 	public static int numEaterys = 3; //FIXME remove later RC3
 	public static int numCheckouts = 2; //FIXME remove later RC3
-	
-	public static int currTime;
-	public static int runtime;
-	
-	public static int quitTime;
-
+	public static int currTime = 0;
+	public static int runtime = 10000;
+	public static int quitTime = 100;
+    public static int pplAtMainQ;
+    public static int[] pplAtEatery = new int [numEaterys];
+    public static int[] pplAtCheckout = new int[numCheckouts];
 }

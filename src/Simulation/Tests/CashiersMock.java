@@ -25,12 +25,6 @@ public class CashiersMock implements ICashiers {
     }
 
     @Override
-    public ICashier random() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public void add(Person p, int tick) {
         l.add(p);
         addCalled++;
