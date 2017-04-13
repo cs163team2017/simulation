@@ -31,13 +31,13 @@ public class SimStatsPane extends HBox{
 		quitTimeLbl = new Label();
 		currStepLbl = new Label();
 		
-		paintStats();
+		repaint();
 		
 		getChildren().addAll(inflowLbl, cashierTimeLbl, avgEateryTimeLbl,
 				quitTimeLbl, currStepLbl);
 	}
 	
-	public void paintStats(){
+	public void repaint(){
 		inflowLbl.setText("Seconds between customers: " + Stats.inflow);
 		cashierTimeLbl.setText("Cashier Time: " + Stats.cashierTime);
 		avgEateryTimeLbl.setText("Avg Time at Eatery: " + Stats.avgEateryTime);
@@ -45,74 +45,6 @@ public class SimStatsPane extends HBox{
 		currStepLbl.setText("Current time: " + Stats.currTime + "/" + Stats.runtime);
 	}
 
-	/**
-	 * @return the inflowLbl
-	 */
-	public Label getInflowLbl() {
-		return inflowLbl;
-	}
 
-	/**
-	 * @param inflowLbl the inflowLbl to set
-	 */
-	public void setInflowLbl(Label inflowLbl) {
-		this.inflowLbl = inflowLbl;
-	}
-
-	/**
-	 * @return the cashierTimeLbl
-	 */
-	public Label getCashierTimeLbl() {
-		return cashierTimeLbl;
-	}
-
-	/**
-	 * @param cashierTimeLbl the cashierTimeLbl to set
-	 */
-	public void setCashierTimeLbl(Label cashierTimeLbl) {
-		this.cashierTimeLbl = cashierTimeLbl;
-	}
-
-	/**
-	 * @return the avgEateryTimeLbl
-	 */
-	public Label getAvgEateryTimeLbl() {
-		return avgEateryTimeLbl;
-	}
-
-	/**
-	 * @param avgEateryTimeLbl the avgEateryTimeLbl to set
-	 */
-	public void setAvgEateryTimeLbl(Label avgEateryTimeLbl) {
-		this.avgEateryTimeLbl = avgEateryTimeLbl;
-	}
-
-	/**
-	 * @return the quitTimeLbl
-	 */
-	public Label getQuitTimeLbl() {
-		return quitTimeLbl;
-	}
-
-	/**
-	 * @param quitTimeLbl the quitTimeLbl to set
-	 */
-	public void setQuitTimeLbl(Label quitTimeLbl) {
-		this.quitTimeLbl = quitTimeLbl;
-	}
-
-	/**
-	 * @return the currStepLbl
-	 */
-	public Label getCurrStepLbl() {
-		return currStepLbl;
-	}
-
-	/**
-	 * @param currStepLbl the currStepLbl to set
-	 */
-	public void setCurrStepLbl(Label currStepLbl) {
-		this.currStepLbl = currStepLbl;
-	}
 
 }

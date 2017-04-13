@@ -18,6 +18,7 @@ public class Controller {
 	 * Timeline is the javaFX version of a swingtimer
 	 * Used to control the clock
 	 **********************************************************************/
+	private SimAnimationPane animePn;
 	private SimStatsPane statsPn;
 	private Timeline timer;
 	private Clock clk;
@@ -32,7 +33,8 @@ public class Controller {
 	private int aveCashierTime;
 	private int aveLeaveTime;
 	
-	public Controller(SimStatsPane statsPn){
+	public Controller(SimAnimationPane animePn, SimStatsPane statsPn){
+		this.animePn = animePn;
 		this.statsPn = statsPn;
 		numTicks2Person = Stats.inflow; 
 	    aveEateryTime = Stats.avgEateryTime;
@@ -67,7 +69,8 @@ public class Controller {
 	    clk.add(cashiers);
 	    for (int i = 0; i < Stats.runtime; i++){
 	    	clk.tock();
-	    	statsPn.paintStats();
+	    	statsPn.repaint();
+	    	animePn.repaint();
 	    }
 	}
 	

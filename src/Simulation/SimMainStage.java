@@ -44,7 +44,7 @@ public class SimMainStage extends Application {
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
 		
-		Controller c = new Controller(statsPn);
+		Controller c = new Controller(animePn, statsPn);
 		c.startSim();
 		
 		primaryStage.setOnCloseRequest(e -> {

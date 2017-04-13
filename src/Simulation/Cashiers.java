@@ -11,8 +11,8 @@ public class Cashiers implements ClockListener, ICashiers {
     
     public Cashiers() {
         cashiersList = new DblLList<Cashier>();
-        cashiersList.add(new Cashier());
         cashiersList.add(new Cashier()); //TODO delete me im a shortcut
+        cashiersList.add(new Cashier());
         firstEmpty = cashiersList.first();
     }
     
