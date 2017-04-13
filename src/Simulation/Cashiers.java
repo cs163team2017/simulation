@@ -5,17 +5,15 @@ import java.util.Random;
 
 public class Cashiers implements ClockListener, ICashiers {
 
-    DblLList<Cashier> cashiersList;
+    DblLList<ICashier> cashiersList;
     Random r;
-    Cashier firstEmpty;
+    ICashier firstEmpty;
     int maxLength;
     
     public Cashiers(Random r) {
         this.r = r;
-        cashiersList = new DblLList<Cashier>();
-        cashiersList.add(new Cashier());
-        cashiersList.add(new Cashier());
-        firstEmpty = cashiersList.first();
+        cashiersList = new DblLList<ICashier>();
+        firstEmpty = null;
     }
     
     public Cashiers(Random r, int n) {
@@ -25,11 +23,18 @@ public class Cashiers implements ClockListener, ICashiers {
         }
     }
     
+    public void add(ICashier c) {
+        if (firstEmpty == null) {
+            firstEmpty = c;
+        }
+        cashiersList.add(c);
+    }
+    
     /* (non-Javadoc)
      * @see Simulation.ICashiers#random()
      */
     @Override
-    public Cashier random() {
+    public ICashier random() {
         return cashiersList.getAtIndex(r.nextInt(cashiersList.size()));
     }
     
@@ -51,7 +56,7 @@ public class Cashiers implements ClockListener, ICashiers {
     @Override
     public int getLeft() {
         int left = 0;
-        for (ListNode<Cashier> c : cashiersList) {
+        for (ListNode<ICashier> c : cashiersList) {
             left += c.getValue().getLeft();
         }
         return left;
@@ -63,7 +68,7 @@ public class Cashiers implements ClockListener, ICashiers {
     @Override
     public int getMaxQlength() {
         int max = 0;
-        for (Cashier c : this) {
+        for (ICashier c : this) {
             if (c.getMaxQlength() > max) {
                 max = c.getMaxQlength();
             }
@@ -77,7 +82,7 @@ public class Cashiers implements ClockListener, ICashiers {
     @Override
     public int getThroughPut() {
         int t = 0;
-        for (Cashier c : this) {
+        for (ICashier c : this) {
             t += c.getThroughPut();
         }
         return t;
@@ -89,7 +94,7 @@ public class Cashiers implements ClockListener, ICashiers {
     @Override
     public int getLost() {
         int lost = 0;
-        for (Cashier c : this) {
+        for (ICashier c : this) {
             lost += c.getLost();
         }
         return lost;
@@ -99,11 +104,11 @@ public class Cashiers implements ClockListener, ICashiers {
      * @see Simulation.ICashiers#iterator()
      */
     @Override
-    public Iterator<Cashier> iterator() {
+    public Iterator<ICashier> iterator() {
         return new CashierIterator();
     }
     
-    private class CashierIterator implements Iterator<Cashier> {
+    private class CashierIterator implements Iterator<ICashier> {
         
         private int index = 0;
         
@@ -113,7 +118,7 @@ public class Cashiers implements ClockListener, ICashiers {
         }
 
         @Override
-        public Cashier next() {
+        public ICashier next() {
             return cashiersList.getAtIndex(index++);
         }
         
@@ -124,7 +129,7 @@ public class Cashiers implements ClockListener, ICashiers {
      */
     @Override
     public void event(int tick) {
-        for (Cashier c : this) {
+        for (ICashier c : this) {
             c.event(tick);
         }
         
@@ -132,7 +137,7 @@ public class Cashiers implements ClockListener, ICashiers {
     
     @Override
     public boolean haveEmpty() {
-        for (Cashier c : this) {
+        for (ICashier c : this) {
             if (c.isEmpty()) {
                 firstEmpty = c;
                 return true;

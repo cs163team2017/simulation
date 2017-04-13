@@ -3,16 +3,18 @@ package Simulation;
 import java.util.Iterator;
 
 public interface ICashiers extends ClockListener, 
-                                   Iterable<Cashier>, 
+                                   Iterable<ICashier>, 
                                    QueuePerformance {
 
     /**
      * get a random cashier from the set 
      * @return
      */
-    Cashier random();
+    ICashier random();
 
     void add(Person p, int tick);
+    
+    void add(ICashier c);
 
     int getLeft();
 
@@ -22,7 +24,7 @@ public interface ICashiers extends ClockListener,
 
     int getLost();
 
-    Iterator<Cashier> iterator();
+    Iterator<ICashier> iterator();
 
     void event(int tick);
 

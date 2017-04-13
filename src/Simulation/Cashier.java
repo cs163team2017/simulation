@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 public class Cashier implements // CisQueue<Person>, 
                                 ClockListener,
-                                QueuePerformance
-                                // Iterable<Person> 
+                                QueuePerformance,
+                                ICashier
                                 {
     /** internal holder for all people in the cashier's queue */
   //  private PersonList q;
@@ -28,6 +28,9 @@ public class Cashier implements // CisQueue<Person>,
         serviceStartTick = 0;
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.ICashier#event(int)
+     */
     @Override
     public void event(int tick) {
 //        if (q.size() > 0) {
@@ -60,6 +63,10 @@ public class Cashier implements // CisQueue<Person>,
     }
 
 
+    /* (non-Javadoc)
+     * @see Simulation.ICashier#isEmpty()
+     */
+    @Override
     public boolean isEmpty() {
         return p == null ? true : false;
     }
@@ -71,6 +78,10 @@ public class Cashier implements // CisQueue<Person>,
 //    }
 
     //@Override
+    /* (non-Javadoc)
+     * @see Simulation.ICashier#enQ(Simulation.Person, int)
+     */
+    @Override
     public void enQ(Person value, int tick) {
 //        q.add(value);
 //        if (q.size() > maxQLength) {
@@ -84,21 +95,33 @@ public class Cashier implements // CisQueue<Person>,
         serviceStartTick = tick;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.ICashier#getLeft()
+     */
     @Override
     public int getLeft() {
         return p != null ? 1 : 0;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.ICashier#getMaxQlength()
+     */
     @Override
     public int getMaxQlength() {
         return maxQLength;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.ICashier#getThroughPut()
+     */
     @Override
     public int getThroughPut() {
         return completed;
     }
 
+    /* (non-Javadoc)
+     * @see Simulation.ICashier#getLost()
+     */
     @Override
     public int getLost() {
         return lost;
