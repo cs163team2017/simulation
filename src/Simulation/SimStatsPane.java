@@ -25,14 +25,26 @@ public class SimStatsPane extends HBox{
 		setSpacing(10);
 		setAlignment(Pos.BOTTOM_CENTER);
 		
-		inflowLbl = new Label("Seconds between customers: " + Stats.inflow);
-		cashierTimeLbl = new Label("Cashier Time: " + Stats.cashierTime);
-		avgEateryTimeLbl = new Label("Avg Time at Eatery: " + Stats.avgEateryTime);
-		quitTimeLbl = new Label("Time before someone leaves: " + Stats.quitTime);
-		currStepLbl = new Label("Current time: " + Stats.currTime + "/" + Stats.runtime);
+		inflowLbl = new Label();
+		cashierTimeLbl = new Label();
+		avgEateryTimeLbl = new Label();
+		quitTimeLbl = new Label();
+		currStepLbl = new Label();
+		
+		repaint();
 		
 		getChildren().addAll(inflowLbl, cashierTimeLbl, avgEateryTimeLbl,
 				quitTimeLbl, currStepLbl);
 	}
+	
+	public void repaint(){
+		inflowLbl.setText("Seconds between customers: " + Stats.inflow);
+		cashierTimeLbl.setText("Cashier Time: " + Stats.cashierTime);
+		avgEateryTimeLbl.setText("Avg Time at Eatery: " + Stats.avgEateryTime);
+		quitTimeLbl.setText("Time before someone leaves: " + Stats.quitTime);
+		currStepLbl.setText("Current time: " + Stats.currTime + "/" + Stats.runtime);
+	}
+
+
 
 }

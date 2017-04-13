@@ -20,7 +20,7 @@ public static void main (String[] args) {
     Clock clk = new Clock();
     MainQ mainQ = new MainQ();
     Eateries eateries = new Eateries(rand, mainQ);
-    Cashiers cashiers = new Cashiers(rand);
+    Cashiers cashiers = new Cashiers();
     eateries.add();
     eateries.add();
     int numTicks2Person = 20; 
