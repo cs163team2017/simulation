@@ -9,10 +9,12 @@ public class Eateries implements IEateries {
     private DblLList<IEatery> eateryList;
     Random r;
     IMainQ mainQ;
+    int maxLength;
     
     public Eateries(Random r, IMainQ q) {
         this.r = r;
         mainQ = q;
+        maxLength = 0;
         eateryList = new DblLList<IEatery>();
     }
     
@@ -112,8 +114,13 @@ public class Eateries implements IEateries {
      */
     @Override
     public void event(int tick) {
+        int currMax = 0;
         for (IEatery e : this) {
             e.event(tick);
+            currMax += e.getLeft();
+        }
+        if (currMax > maxLength) {
+            maxLength = currMax;
         }
     }
 
@@ -164,6 +171,10 @@ public class Eateries implements IEateries {
      */
     @Override
     public int getMaxQlength() {
+        return maxLength;
+    }
+    
+    public int getMaxSubQLength() {
         int maxQ = 0;
         for (IEatery e : this) {
             if (e.getMaxQlength() > maxQ) {

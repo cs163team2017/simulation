@@ -114,12 +114,28 @@ public class EateriesTests {
     }
     
     @Test
-    public void EateriesMaxQLengthGivesTotalFromSubEateryObjs() {
+    public void EateriesMaxSubQLengthGivesTotalFromSubEateryObjs() {
         Eateries e = new Eateries(r, mQ);
         e3.maxLength = 16;
         e.add(e1);
         e.add(e2);
         e.add(e3);
-        assert(16 == e.getMaxQlength());
+        assert(16 == e.getMaxSubQLength());
+    }
+    
+    @Test
+    public void EateriesMaxQLengthGivesTotalFromSubEateryObjs() {
+        Eateries e = new Eateries(r, mQ);
+        e1.enQ(p1);
+        e1.enQ(p2);
+        e1.enQ(p3);
+        e3.enQ(p4);
+        e3.enQ(p5);
+        e.add(e1);
+        e.add(e2);
+        e.add(e3);
+        assert(0 == e.getMaxQlength());
+        e.event(1);
+        assert(5 == e.getMaxQlength());
     }
 }

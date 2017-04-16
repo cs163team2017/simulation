@@ -13,6 +13,7 @@ public class Cashiers implements ClockListener, ICashiers {
     public Cashiers() {
         cashiersList = new DblLList<ICashier>();
         firstEmpty = null;
+        maxLength = 0;
     }
     
     public void add(ICashier c) {
@@ -51,13 +52,8 @@ public class Cashiers implements ClockListener, ICashiers {
      */
     @Override
     public int getMaxQlength() {
-        int max = 0;
-        for (ICashier c : this) {
-            if (c.getMaxQlength() > max) {
-                max = c.getMaxQlength();
-            }
-        }
-        return max;
+
+        return maxLength;
     }
 
     /* (non-Javadoc)
@@ -113,10 +109,14 @@ public class Cashiers implements ClockListener, ICashiers {
      */
     @Override
     public void event(int tick) {
+        int currMax = 0;
         for (ICashier c : this) {
             c.event(tick);
+            currMax += c.getLeft();
         }
-        
+        if (currMax > maxLength) {
+            maxLength = currMax;
+        }
     }
     
     @Override
