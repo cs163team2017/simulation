@@ -1,13 +1,16 @@
 package Simulation.Tests;
 
-import java.util.Random;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import Simulation.Cashiers;
 import Simulation.Person;
 
+/**********************************************************************
+ * Tests for the cashiers class
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class CashiersTests {
     public CashierMock cm;
     
@@ -44,13 +47,13 @@ public class CashiersTests {
         assert(0 == cm.l.size());
         assert(true == cm.isEmpty());
         assert(true == c.haveEmpty());
-        c.add(p1, 1);
+        c.enQ(p1, 1);
         assert(false == c.haveEmpty());
         c.event(2);
         assert(2 == cm.currTick);
         assert(p1 == cm.l.get(0));
         assert(false == cm.isEmpty());
-        assert(1 == c.getMaxQlength());
+        assert(1 == c.getMaxQueueLength());
     }
     
     @Test(expected=RuntimeException.class) 
@@ -58,8 +61,8 @@ public class CashiersTests {
         Cashiers c = new Cashiers();
         c.add(cm);
         assert(true == cm.isEmpty());
-        c.add(p1, 1);
+        c.enQ(p1, 1);
         assert(false == cm.isEmpty());
-        c.add(p2, 2);
+        c.enQ(p2, 2);
     }
 }

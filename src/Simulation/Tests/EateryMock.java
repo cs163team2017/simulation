@@ -7,6 +7,11 @@ import Simulation.IEatery;
 import Simulation.IMainQ;
 import Simulation.Person;
 
+/**********************************************************************
+ * Mocked class for testing
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class EateryMock implements IEatery {
     public ArrayList<Person> l = new ArrayList<Person>();
     public int eventCalled = 0;
@@ -17,13 +22,11 @@ public class EateryMock implements IEatery {
 
     @Override
     public Person peek() {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Person deQ() {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -51,13 +54,13 @@ public class EateryMock implements IEatery {
     }
 
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
 
         return maxLength;
     }
 
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
 
         return thruPut;
     }
@@ -69,13 +72,11 @@ public class EateryMock implements IEatery {
 
     @Override
     public Iterator<Person> iterator() {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void setMainQueue(IMainQ q) {
-        // TODO Auto-generated method stub
         
     }
     

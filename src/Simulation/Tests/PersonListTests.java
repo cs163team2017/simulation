@@ -6,6 +6,11 @@ import org.junit.Test;
 import Simulation.Person;
 import Simulation.PersonList;
 
+/**********************************************************************
+ * Tests for the person list class 
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class PersonListTests {
     Person p1,p2,p3,p4,p5;
     PersonList l;

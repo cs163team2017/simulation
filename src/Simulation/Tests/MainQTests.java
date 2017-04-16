@@ -6,6 +6,11 @@ import org.junit.Test;
 import Simulation.MainQ;
 import Simulation.Person;
 
+/**********************************************************************
+ * Tests for the MainQ class
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class MainQTests {
     public CashiersMock c;
     public MainQ q;
@@ -72,8 +77,8 @@ public class MainQTests {
         assert(3 == c.l.size());
         assert(10 == c.givenTick);
         assert(0 == q.getLeft());
-        assert(3 == q.getThroughPut());
-        assert(3 == q.getMaxQlength());
+        assert(3 == q.getThroughput());
+        assert(3 == q.getMaxQueueLength());
         q.enQ(p5);
         assert(1 == q.getLeft());
     }

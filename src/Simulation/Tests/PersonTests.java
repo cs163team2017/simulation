@@ -3,6 +3,11 @@ import org.junit.Test;
 
 import Simulation.Person;
 
+/**********************************************************************
+ * Tests for the person class
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class PersonTests {
     @Test
     public void PersonWorksWhenGivenValidInput() {

@@ -8,6 +8,11 @@ import org.junit.Test;
 import Simulation.Eateries;
 import Simulation.Person;
 
+/**********************************************************************
+ * Tests for the Eateries class
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class EateriesTests {
     Random r;
     MainQMock mQ;
@@ -63,8 +68,8 @@ public class EateriesTests {
     public void EateriesWorksGivenValidInput() {
         Eateries e = new Eateries(r, mQ);
         e.add(e1);
-        e.add(p1);
-        e.add(p2);
+        e.enQ(p1);
+        e.enQ(p2);
         assert(2 == e1.enQCalled);
         assert(2 == e1.getLeft());
         assert(0 == e1.getLost());
@@ -76,7 +81,7 @@ public class EateriesTests {
         e.add(e3);
         EateryMock randE = (EateryMock)e.random();
         assert(e1 == randE);
-        e.add(p3);
+        e.enQ(p3);
         e.event(2);
         assert(2 == e1.eventCalled);
         assert(3 == e.getLeft());
@@ -85,7 +90,7 @@ public class EateriesTests {
         assert(2 == e1.l.size());
         randE = (EateryMock)e.random();
         assert(e2 == randE);
-        e.add(p4);
+        e.enQ(p4);
         assert(4 == e.getLeft());
         assert(3 == e1.l.size());
         e.event(18);
@@ -94,7 +99,7 @@ public class EateriesTests {
         assert(2 == e.getLost());
         assert(2 == e1.l.size());
         assert(0 == e2.l.size());
-        e.add(p5);
+        e.enQ(p5);
         assert(3 == e.getLeft());
         assert(2 == e.getLost());
         assert(1 == e2.enQCalled);
@@ -110,7 +115,7 @@ public class EateriesTests {
         e.add(e1);
         e.add(e2);
         e.add(e3);
-        assert(5 == e.getThroughPut());
+        assert(5 == e.getThroughput());
     }
     
     @Test
@@ -134,8 +139,8 @@ public class EateriesTests {
         e.add(e1);
         e.add(e2);
         e.add(e3);
-        assert(0 == e.getMaxQlength());
+        assert(0 == e.getMaxQueueLength());
         e.event(1);
-        assert(5 == e.getMaxQlength());
+        assert(5 == e.getMaxQueueLength());
     }
 }

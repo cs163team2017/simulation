@@ -5,6 +5,11 @@ import org.junit.Test;
 import Simulation.Cashier;
 import Simulation.Person;
 
+/**********************************************************************
+ * Tests for the cashier class 
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class CashierTests {
     public Person p1,p2,p3,p4,p5;
     
@@ -37,12 +42,12 @@ public class CashierTests {
         c.enQ(p1, 1);
         assert(false == c.isEmpty());
         assert(1 == c.getLeft());
-        assert(1 == c.getMaxQlength());
-        assert(0 == c.getThroughPut());
+        assert(1 == c.getMaxQueueLength());
+        assert(0 == c.getThroughput());
         c.event(12);
         assert(c.isEmpty());
         assert(0 == c.getLeft());
-        assert(1 == c.getThroughPut());
+        assert(1 == c.getThroughput());
         c.enQ(p2, 20);
         assert(false == c.isEmpty());
         assert(1 == c.getLeft());
@@ -52,7 +57,7 @@ public class CashierTests {
         c.event(42);
         assert(c.isEmpty());
         assert(0 == c.getLeft());
-        assert(2 == c.getThroughPut());
+        assert(2 == c.getThroughput());
         
     }
 }

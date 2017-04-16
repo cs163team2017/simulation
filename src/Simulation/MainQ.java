@@ -2,7 +2,13 @@ package Simulation;
 
 import java.util.Iterator;
 
-public class MainQ implements CisQueue<Person>, 
+/**********************************************************************
+ * The primary queue for the entire system, sits inbetween the eateries
+ * and the cashiers 
+ * @author Matthew Pische
+ *
+ *********************************************************************/
+public class MainQ implements CQueue<Person>, 
                               ClockListener,
                               QueuePerformance, 
                               IMainQ,
@@ -18,6 +24,9 @@ public class MainQ implements CisQueue<Person>,
     /** Threshold to trigger serving the next person */
     private ICashiers cashiers;
 
+    /******************************************************************
+     * instantiate a new empty main queue
+     *****************************************************************/
     public MainQ() {
        q = new PersonList();
        completed = 0;
@@ -35,7 +44,7 @@ public class MainQ implements CisQueue<Person>,
             }
             if (cashiers.haveEmpty()) {
                 Person p = q.deQ();
-                cashiers.add(p, tick);
+                cashiers.enQ(p, tick);
                 completed++;
             }
         }
@@ -62,7 +71,7 @@ public class MainQ implements CisQueue<Person>,
      * @see Simulation.IMainQ#getMaxQlength()
      */
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
         return maxQLength;
     }
 
@@ -70,7 +79,7 @@ public class MainQ implements CisQueue<Person>,
      * @see Simulation.IMainQ#getThroughPut()
      */
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
         return completed;
     }
 
@@ -111,10 +120,14 @@ public class MainQ implements CisQueue<Person>,
 
     @Override
     public Iterator<Person> iterator() {
-        // TODO Auto-generated method stub
         return new MainQIterator();
     }
     
+    /******************************************************************
+     * private class to implement java's foreach iteration
+     * @author Matthew Pische
+     *
+     ******************************************************************/
     private class MainQIterator implements Iterator<Person> {
         private int index = 0;
 

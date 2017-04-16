@@ -1,30 +1,14 @@
 package Simulation;
 
-import java.util.Iterator;
-
-public interface IEatery extends CisQueue<Person>, 
+public interface IEatery extends CQueue<Person>, 
                                  ClockListener, 
                                  QueuePerformance,
                                  Iterable<Person> {
-
+    /******************************************************************
+     * provide the eatery with a mainQ component where the eatery 
+     * will pass each person after they have completed their service
+     * @param q the main queue to add 
+     ******************************************************************/
     void setMainQueue(IMainQ q);
-//
-//    void event(int tick);
-//
-//    int getLeft();
-//
-//    int getMaxQlength();
-//
-//    int getThroughPut();
-//
-//    int getLost();
-//
-//    Person peek();
-//
-//    Person deQ();
-//
-//    void enQ(Person value);
-//
-//    Iterator<Person> iterator();
 
 }
