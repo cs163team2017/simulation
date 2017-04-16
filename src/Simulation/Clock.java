@@ -11,9 +11,10 @@ public class Clock {
 	private ClockListener[] myListeners;
 	private int numListeners;
 	private int MAX = 100;
-	private int currTick = 0;
+	private int currTick;
 
 	public Clock() {
+	        currTick = 0;
 		numListeners = 0;
 		myListeners = new ClockListener[MAX];
 	}
@@ -73,6 +74,15 @@ public class Clock {
 
 	public int getMAX() {
 		return MAX;
+	}
+	
+	/**************************************************************
+	 * removes all current listeners form this clock & resets it
+	 **************************************************************/
+	public void clear() {
+	    currTick = 0;
+	    numListeners = 0;
+            myListeners = new ClockListener[MAX];
 	}
 
 }
