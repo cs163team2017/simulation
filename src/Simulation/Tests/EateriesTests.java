@@ -120,7 +120,7 @@ public class EateriesTests {
         e.add(e1);
         e.add(e2);
         e.add(e3);
-        assert(16 == e.getMaxQFromCollection());
+        assert(16 == e.getMaxSubQLength());
     }
     
     @Test
