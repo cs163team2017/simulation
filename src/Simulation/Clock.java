@@ -27,7 +27,7 @@ public class Clock {
 	
 	public void tock(){
 		for (int j = 0; j < numListeners; j++){
-			myListeners[j].event(currTick++);
+			myListeners[j].event(currTick);
 			if (myListeners[j] instanceof Eateries){		
 				int i = 0;
 				for (IEatery E: (IEateries) myListeners[j]){
@@ -38,14 +38,15 @@ public class Clock {
 			if (myListeners[j] instanceof MainQ){		
 					Stats.pplAtMainQ = ((MainQ) myListeners[j]).getLeft();
 			}
-//			if (myListeners[j] instanceof Cashiers){		
-//				int i = 0;
-//				for (ICashier C: (ICashiers) myListeners[j]){
-//					Stats.pplAtCheckout[i] = C.getLeft();
-//					i++;
-//				}
-//			}
+			if (myListeners[j] instanceof Cashiers){		
+				int i = 0;
+				for (ICashier C: (ICashiers) myListeners[j]){
+					Stats.pplAtCheckout[i] = C.getLeft();
+					i++;
+				}
+			}
 		}
+		currTick++;
 		Stats.currTime = currTick;
 	}
 
