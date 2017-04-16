@@ -5,10 +5,10 @@ package Simulation;
 
 import java.util.Random;
 
-/**
+/**********************************************************************
  * @author Roger Ferguson
  * @author Matthew Pische       
- */
+ **********************************************************************/
 public class Sim {
     
 public static void main (String[] args) {

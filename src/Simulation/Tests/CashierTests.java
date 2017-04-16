@@ -5,6 +5,11 @@ import org.junit.Test;
 import Simulation.Cashier;
 import Simulation.Person;
 
+/**********************************************************************
+ * Tests for the cashier class 
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class CashierTests {
     public Person p1,p2,p3,p4,p5;
     

@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import Simulation.ICashier;
 import Simulation.Person;
 
+/**********************************************************************
+ * Mocked class for testing
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class CashierMock implements ICashier {
     public int eventCalled = 0;
     public boolean empty = true;

@@ -6,6 +6,7 @@ package Simulation;
 import java.util.Iterator;
 
 /**
+ * Class to implement a single eatery 
  * @author   Roger Ferguson
  * @author   Matthew Pische
  */
@@ -24,6 +25,9 @@ public class Eatery implements IEatery {
     /** the person currently being served by this eatery */
     Person atDesk;
 
+    /****************************************************************** 
+     * Instantiate a new empty eatery 
+     ******************************************************************/
     public Eatery() {
         Q = new PersonList();
         maxQlength = 0;
@@ -144,6 +148,11 @@ public class Eatery implements IEatery {
         return new EateryIterator();
     }
     
+    /******************************************************************
+     * Private class to implement java's foreach looping
+     * @author Matthew Pische
+     *
+     ******************************************************************/
     private class EateryIterator implements Iterator<Person> {
         private int index = 0;
         

@@ -1,13 +1,16 @@
 package Simulation.Tests;
 
-import java.util.Random;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import Simulation.Cashiers;
 import Simulation.Person;
 
+/**********************************************************************
+ * Tests for the cashiers class
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class CashiersTests {
     public CashierMock cm;
     

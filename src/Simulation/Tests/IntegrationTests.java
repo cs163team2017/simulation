@@ -1,7 +1,6 @@
 package Simulation.Tests;
 import java.util.Random;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import Simulation.Cashier;
@@ -12,6 +11,11 @@ import Simulation.MainQ;
 import Simulation.Person;
 import Simulation.PersonProducer;
 
+/**********************************************************************
+ * Test of the simulation
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class IntegrationTests {
     public Person p1,p2,p3,p4,p5;
     public Random r;

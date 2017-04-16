@@ -17,12 +17,12 @@ public class Eateries implements IEateries {
      */
     int maxLength;
     
-    /** instantiate a new eatery set
-     * 
+    /** ***************************************************************
+     * instantiate a new eatery set
      * @param r the random instance that drives the simulation
      * @param q the main queue where people go after service at these 
      * eateries
-     */
+     ******************************************************************/
     public Eateries(Random r, IMainQ q) {
         this.r = r;
         mainQ = q;
@@ -30,13 +30,13 @@ public class Eateries implements IEateries {
         eateryList = new DList<IEatery>();
     }
     
-    /**
+    /******************************************************************
      * overloaded constructor that instantiates the passed in number of
      * eateries
      * @param r random instance
-     * @param q mainQueue 
+     * @param q mainQueue to pass people to
      * @param n number of eateries to instantiate
-     */
+     ******************************************************************/
     public Eateries(Random r, IMainQ q, int n) {
         this(r, q);
         for (int i = 0; i < n; i++) {
@@ -148,6 +148,11 @@ public class Eateries implements IEateries {
         return new EateryIterator();
     }
     
+    /** 
+     * class to implement java foreach looping
+     * @author Matthew Pische
+     *
+     */
     private class EateryIterator implements Iterator<IEatery> {
 
         private int index = 0;

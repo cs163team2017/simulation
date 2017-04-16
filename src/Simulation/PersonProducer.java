@@ -24,7 +24,7 @@ public class PersonProducer implements ClockListener {
     /** the random instance for the simulation */	
     private Random r;
     	
-    /** 
+    /****************************************************************** 
      * instantiate a new person producer
      * @param r the random instance for the entire simulation
      * @param eateries eateries this producer should push new people to
@@ -32,7 +32,7 @@ public class PersonProducer implements ClockListener {
      * @param aveCashierTime time for a person to clear the register
      * @param averageEateryTime time for a person to clear an eatery
      * @param aveLeaveTime time before a person exits the system
-     */
+     ******************************************************************/
     public PersonProducer(Random r, 
                           IEateries eateries, 
                           int aveNumOfTicksToNextPerson, 
@@ -49,6 +49,7 @@ public class PersonProducer implements ClockListener {
         ticksToNextPerson = 0;
     }
     	
+    @Override
     public void event(int tick) {
         if (tick >= ticksToNextPerson) {
             ticksToNextPerson = tick + 

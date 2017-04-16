@@ -8,6 +8,11 @@ import org.junit.Test;
 import Simulation.Eateries;
 import Simulation.Person;
 
+/**********************************************************************
+ * Tests for the Eateries class
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class EateriesTests {
     Random r;
     MainQMock mQ;

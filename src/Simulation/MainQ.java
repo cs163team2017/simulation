@@ -2,6 +2,12 @@ package Simulation;
 
 import java.util.Iterator;
 
+/**********************************************************************
+ * The primary queue for the entire system, sits inbetween the eateries
+ * and the cashiers 
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class MainQ implements CQueue<Person>, 
                               ClockListener,
                               QueuePerformance, 
@@ -18,6 +24,9 @@ public class MainQ implements CQueue<Person>,
     /** Threshold to trigger serving the next person */
     private ICashiers cashiers;
 
+    /******************************************************************
+     * instantiate a new empty main queue
+     *****************************************************************/
     public MainQ() {
        q = new PersonList();
        completed = 0;
@@ -114,6 +123,11 @@ public class MainQ implements CQueue<Person>,
         return new MainQIterator();
     }
     
+    /******************************************************************
+     * private class to implement java's foreach iteration
+     * @author Matthew Pische
+     *
+     ******************************************************************/
     private class MainQIterator implements Iterator<Person> {
         private int index = 0;
 

@@ -6,6 +6,11 @@ import org.junit.Test;
 import Simulation.MainQ;
 import Simulation.Person;
 
+/**********************************************************************
+ * Tests for the MainQ class
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class MainQTests {
     public CashiersMock c;
     public MainQ q;

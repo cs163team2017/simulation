@@ -8,6 +8,11 @@ import Simulation.CQueue;
 import Simulation.DList;
 import Simulation.ListNode;
 
+/**********************************************************************
+ * Tests for the double linked list class 
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class DListTest {
 
     @Test

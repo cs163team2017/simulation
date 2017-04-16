@@ -3,11 +3,15 @@ package Simulation.Tests;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import Simulation.Cashier;
 import Simulation.ICashier;
 import Simulation.ICashiers;
 import Simulation.Person;
 
+/**********************************************************************
+ * Mocked class for testing
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class CashiersMock implements ICashiers {
     public int haveEmptyCalled;
     public boolean haveEmptyVal;
@@ -38,31 +42,26 @@ public class CashiersMock implements ICashiers {
 
     @Override
     public int getMaxQueueLength() {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public int getThroughput() {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public int getLost() {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public Iterator<ICashier> iterator() {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void event(int tick) {
-        // TODO Auto-generated method stub
         
     }
 
@@ -74,7 +73,6 @@ public class CashiersMock implements ICashiers {
 
     @Override
     public void add(ICashier c) {
-        // TODO Auto-generated method stub
         
     }
 

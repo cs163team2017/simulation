@@ -6,6 +6,11 @@ import org.junit.Test;
 import Simulation.Eatery;
 import Simulation.Person;
 
+/**********************************************************************
+ * Tests for the eatery class
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class EateryTests {
     MainQMock mQ;
     Person p1,p2,p3,p4,p5;

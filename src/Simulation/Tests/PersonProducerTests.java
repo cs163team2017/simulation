@@ -1,5 +1,4 @@
 package Simulation.Tests;
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,20 +7,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Simulation.Gauss;
-import Simulation.IMainQ;
 import Simulation.Person;
 import Simulation.PersonProducer;
 
+/**********************************************************************
+ * Tests for the person producer class
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class PersonProducerTests {
     private Random r;
     private EateriesMock eateries;
-    private IMainQ mainQ;
     private ArrayList<Double> gaussians;
      
     @Before
     public void setUp() {
         r = new Random(1);
-        mainQ = new MainQMock();
         eateries = new EateriesMock();
         gaussians = new ArrayList<Double>();
         gaussians.add(  1.561581040188955);
