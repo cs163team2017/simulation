@@ -57,6 +57,8 @@ public class Controller {
 	}
 	
 	public void setupSim(){
+		clk.clear();
+		//stats.clear()?
 	    for (int i = 0; i < Stats.numEaterys; i++)
 	    	eateries.add();
 	    for (int i = 0; i < Stats.numCheckouts; i++)
