@@ -11,14 +11,12 @@ public class ListNode<T> {
     private ListNode<T> next;
     private ListNode<T> prev;
     private T value;
-    private DblLList<T> itsList = null;
     
     /**
      * constructor taking only the value for the node, links are null
      * @param value
      */
-    public ListNode(DblLList<T> l, T value) {
-        itsList = l;
+    public ListNode(DList<T> l, T value) {
         this.value = value;
         next = null;
         prev = null;
@@ -30,8 +28,7 @@ public class ListNode<T> {
      * @param value content of the node
      * @param next the next node in the list
      */
-    public ListNode(DblLList<T> l, T value, ListNode<T> next) {
-        itsList = l;
+    public ListNode(DList<T> l, T value, ListNode<T> next) {
         this.value = value;
         this.next = next;
         prev = null;
@@ -43,11 +40,10 @@ public class ListNode<T> {
      * @param next next node in the list
      * @param prev prior node in the list
      */
-    public ListNode(DblLList<T> l, 
+    public ListNode(DList<T> l, 
                     T value, 
                     ListNode<T> next, 
                     ListNode<T> prev) {
-        itsList = l;
         this.value = value;
         this.next = next;
         this.prev = prev;
@@ -99,32 +95,6 @@ public class ListNode<T> {
      */
     public ListNode<T> prevNode() {
         return prev;
-    }
-    
-    public void removeSelf() {
-        if (itsList == null) {
-            throw new RuntimeException();
-        }
-        if (itsList.isFirstNode(this)) {
-            if (itsList.isLastNode(this)) {
-                itsList.removeLast();
-                return;
-            }
-            itsList.removeFirst();
-            return;
-        }
-        if (itsList.isLastNode(this)) {
-            itsList.removeLast();
-            return;
-        }
-        ListNode<T> n = this.next;
-        ListNode<T> p = this.prev;
-        if (p != null) {
-            p.setNext(n);
-        }
-        if (n != null) {
-            n.setNext(p);
-        }
     }
 
 }

@@ -20,12 +20,12 @@ public interface IMainQ {
     /* (non-Javadoc)
      * @see Simulation.IMainQ#getMaxQlength()
      */
-    int getMaxQlength();
+    int getMaxQueueLength();
 
     /* (non-Javadoc)
      * @see Simulation.IMainQ#getThroughPut()
      */
-    int getThroughPut();
+    int getThroughput();
 
     /* (non-Javadoc)
      * @see Simulation.IMainQ#getLost()

@@ -60,13 +60,13 @@ public class IntegrationTests {
               
             clk.run(800);
             
-            int totalThroughEateries = eateries.getThroughPut() + 
+            int totalThroughEateries = eateries.getThroughput() + 
                                   eateries.getLeft() +
                                   eateries.getLost();
-            int totalThroughMainQ = mainQ.getThroughPut() +
+            int totalThroughMainQ = mainQ.getThroughput() +
                                     mainQ.getLeft() +
                                     mainQ.getLost();
-            int totalThroughCashiers = cashiers.getThroughPut() +
+            int totalThroughCashiers = cashiers.getThroughput() +
                                        cashiers.getLeft() + 
                                        cashiers.getLost();
             
@@ -77,8 +77,8 @@ public class IntegrationTests {
             assert(totalThroughEateries > totalThroughCashiers);
             assert(totalThroughEateries > totalThroughMainQ);
             assert(totalThroughMainQ > totalThroughCashiers);
-            assert(eateries.getThroughPut() == totalThroughMainQ);
-            assert(mainQ.getThroughPut() == totalThroughCashiers);
+            assert(eateries.getThroughput() == totalThroughMainQ);
+            assert(mainQ.getThroughput() == totalThroughCashiers);
         }
     }
 }

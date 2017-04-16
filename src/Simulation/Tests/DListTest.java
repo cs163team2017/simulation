@@ -4,29 +4,29 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import Simulation.CisQueue;
-import Simulation.DblLList;
+import Simulation.CQueue;
+import Simulation.DList;
 import Simulation.ListNode;
 
-public class DblLListTest {
+public class DListTest {
 
     @Test
     public void QueueInterfaceSetsFirstWhenenQCalled() {
-        CisQueue<String> q = new DblLList<String>();
+        CQueue<String> q = new DList<String>();
         q.enQ("a");
         assert(q.peek().equals("a"));
-        DblLList<String> l = (DblLList<String>)q;
+        DList<String> l = (DList<String>)q;
         assert(1 == l.size());
         assert(l.first() == l.last());
     }
     
     @Test 
     public void QueueReturnsFirstValueWhenDeQueued() {
-        CisQueue<String> q = new DblLList<String>();
+        CQueue<String> q = new DList<String>();
         q.enQ("abc");
         String a = q.deQ();
         assert(a.equals("abc"));
-        DblLList<String> l = (DblLList<String>)q;
+        DList<String> l = (DList<String>)q;
         assert(0 == l.size());
         assert(l.first() == null);
         assert(l.first() == l.last());
@@ -36,7 +36,7 @@ public class DblLListTest {
     
     @Test
     public void AQueueHandlesMultipleEnqueuesAndDequeues() {
-        CisQueue<Integer> q = new DblLList<Integer>();
+        CQueue<Integer> q = new DList<Integer>();
         q.enQ(1);
         q.enQ(2);
         q.enQ(3);
@@ -46,14 +46,14 @@ public class DblLListTest {
         assert(q.deQ() == 2);
         assert(q.peek() == 3);
         q.enQ(5);
-        assert(2 == ((DblLList<Integer>)q).size());
+        assert(2 == ((DList<Integer>)q).size());
         assert(q.deQ() == 3);
         assert(q.peek() == 5);
     }
     
     @Test
     public void DblLListBasicFuncsWorkGivenValidCalls() {
-        DblLList<Integer> list = new DblLList<Integer>();
+        DList<Integer> list = new DList<Integer>();
         list.add(1); //[1]
         assert(1 == list.first());
         assert(1 == list.last());
@@ -107,21 +107,21 @@ public class DblLListTest {
     
     @Test
     public void DblLListAddFirstWorksGivenEmptyList() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.addFirst("a");
         assert("a" == list.last());
     }
     
     @Test
     public void DblLListRemoveLastWorksGivenShortList() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.addFirst("a");
         assert("a" == list.removeLast());
     }
     
     @Test
     public void DblLListGetAtIndexAfterHalfWorksGivenLongList() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.add("a");
         list.add("b");
         list.add("c");
@@ -133,34 +133,34 @@ public class DblLListTest {
 
     @Test
     public void DblLListSetAtIndexDoesNotThrowGivenValidInput() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.setAtIndex("a", 0);
         assert("a" == list.last());
     }
     
     @Test
     public void DblLListInsertAtIndexDoesNotThrowGivenValidInput() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.insertAtIndex("a", 0);
         assert("a" == list.first());
     }
     
     @Test(expected=IndexOutOfBoundsException.class)
     public void DblLListGetNodeAtIndexThowsGivenInvalidInput1() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.getAtIndex(0);
     }
     
     @Test(expected=IndexOutOfBoundsException.class)
     public void DblLListGetNodeAtIndexThowsGivenInvalidInput2() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.add("a");
         list.getAtIndex(1);
     }
     
     @Test(expected=IndexOutOfBoundsException.class)
     public void DblLListGetNodeAtIndexThowsGivenInvalidInput3() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.add("a");
         list.getAtIndex(-1);
     }
@@ -168,53 +168,53 @@ public class DblLListTest {
     
     @Test(expected=IndexOutOfBoundsException.class)
     public void DblLListSetAtIndexThrowsGivenInvalidInput1() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.setAtIndex("a", -1);
     }
     
     @Test(expected=IndexOutOfBoundsException.class)
     public void DblLListSetAtIndexThrowsGivenInvalidInput2() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.add("a");
         list.setAtIndex("a", 1);
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void DblLListInsertAtIndexThrowsGivenInvalidInput1() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.insertAtIndex("a", -1);
     }
     
     @Test(expected=IndexOutOfBoundsException.class)
     public void DblLListInsertAtIndexThrowsGivenInvalidInput2() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.add("a");
         list.insertAtIndex("a", 1);
     }
     
     @Test(expected=IndexOutOfBoundsException.class)
     public void DblLListRemoveAtIndexThrowsGivenInvalidInput1() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.add("a");
         list.removeAtIndex(1);
     }
     
     @Test(expected=IndexOutOfBoundsException.class)
     public void DblLListRemoveAtIndexThrowsGivenInvalidInput2() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.add("a");
         list.removeAtIndex(-1);
     }
     
     @Test(expected=IndexOutOfBoundsException.class)
     public void DblLListRemoveAtIndexThrowsGivenInvalidInput3() {
-        DblLList<String> list = new DblLList<String>();
+        DList<String> list = new DList<String>();
         list.removeAtIndex(0);
     }
     
     @Test
     public void ForEachLoopingWorksGivenValidInput() {
-        DblLList<Integer> list = new DblLList<Integer>();
+        DList<Integer> list = new DList<Integer>();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -230,7 +230,7 @@ public class DblLListTest {
     
     @Test
     public void QueueMethodsUpdateSizeGivenValidInput() {
-        DblLList<String> l = new DblLList<String>();
+        DList<String> l = new DList<String>();
         l.enQ("a");
         l.enQ("b");
         l.enQ("c");

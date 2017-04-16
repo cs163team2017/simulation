@@ -11,13 +11,13 @@ public interface QueuePerformance {
      * peak length of the queue, not necessarily its current size
      * @return 
      */
-    int getMaxQlength();
+    int getMaxQueueLength();
     
     /**
      * Total number of elements that have passed through the queue
      * @return
      */
-    int getThroughPut();
+    int getThroughput();
     
     /**
      * Returns the total number of elements removed from the queue

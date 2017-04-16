@@ -1,12 +1,15 @@
 package Simulation;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public interface IEateries extends ClockListener, 
                                    Iterable<IEatery>, 
                                    QueuePerformance  {
-
+    /**
+     * set the main queue that people will be sent to once service is 
+     * complete at their respective eateries
+     * @param q the queue to recieve people after service at the eatery
+     */
     void setMainQueue(IMainQ q);
 
     /** 
@@ -23,7 +26,7 @@ public interface IEateries extends ClockListener,
     /** 
      * Add a person to a random eatery
      */
-    void add(Person p);
+    void enQ(Person p);
 
     /**
      * removes the last eatery 
@@ -48,20 +51,18 @@ public interface IEateries extends ClockListener,
 
     Iterator<IEatery> iterator();
 
-    /**
-     * create an ArrayList of the held Eateries
-     * @return
-     */
-    ArrayList<IEatery> toArrayList();
-
     int getLeft();
 
-    int getMaxQlength();
+    int getMaxQueueLength();
 
-    int getThroughPut();
+    int getThroughput();
 
     int getLost();
 
+    /**
+     * adds the passed in eatery to the current set of eateries
+     * @param e
+     */
     void add(IEatery e);
 
 }

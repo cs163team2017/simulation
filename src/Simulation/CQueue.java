@@ -6,7 +6,7 @@ package Simulation;
  *
  * @param <T> Type of the queues values
  */
-public interface CisQueue<T> {
+public interface CQueue<T> {
     /**
      * Fetch the value of the first element in the queue, 
      * without removing it

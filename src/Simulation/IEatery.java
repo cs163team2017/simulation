@@ -1,8 +1,6 @@
 package Simulation;
 
-import java.util.Iterator;
-
-public interface IEatery extends CisQueue<Person>, 
+public interface IEatery extends CQueue<Person>, 
                                  ClockListener, 
                                  QueuePerformance,
                                  Iterable<Person> {

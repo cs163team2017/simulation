@@ -1,6 +1,6 @@
 package Simulation;
 
-public class PersonList extends DblLList<Person> {
+public class PersonList extends DList<Person> {
 
     /**
      * Checks all people objects in the list to see if their maximum

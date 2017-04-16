@@ -1,25 +1,38 @@
 package Simulation;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
 public class Eateries implements IEateries {
-    
-    private DblLList<IEatery> eateryList;
+    /** container for all eateries in this object */
+    private DList<IEatery> eateryList;
+    /** the random number generator */
     Random r;
+    /** the main queue where this eatery set will pass people once 
+     * they have completed their time at the various kiosks
+     */
     IMainQ mainQ;
+    /** the maximum number of people ever queued across all eateries 
+     * within this set 
+     */
     int maxLength;
     
+    /** instantiate a new eatery set
+     * 
+     * @param r the random instance that drives the simulation
+     * @param q the main queue where people go after service at these 
+     * eateries
+     */
     public Eateries(Random r, IMainQ q) {
         this.r = r;
         mainQ = q;
         maxLength = 0;
-        eateryList = new DblLList<IEatery>();
+        eateryList = new DList<IEatery>();
     }
     
     /**
-     * 
+     * overloaded constructor that instantiates the passed in number of
+     * eateries
      * @param r random instance
      * @param q mainQueue 
      * @param n number of eateries to instantiate
@@ -51,6 +64,9 @@ public class Eateries implements IEateries {
         eateryList.add(e);
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.IEateries#add()
+     */
     @Override
     public void add(IEatery e) {
         e.setMainQueue(mainQ);
@@ -73,7 +89,7 @@ public class Eateries implements IEateries {
      * @see Simulation.IEateries#add(Simulation.Person)
      */
     @Override
-    public void add(Person p) {
+    public void enQ(Person p) {
         IEatery e = this.random();
         e.enQ(p);
     }
@@ -145,14 +161,6 @@ public class Eateries implements IEateries {
             return eateryList.getAtIndex(index++);
         }
     }
-    
-    /* (non-Javadoc)
-     * @see Simulation.IEateries#toArrayList()
-     */
-    @Override
-    public ArrayList<IEatery> toArrayList() {
-        return eateryList.toArrayList();
-    }
 
     /* (non-Javadoc)
      * @see Simulation.IEateries#getLeft()
@@ -170,15 +178,19 @@ public class Eateries implements IEateries {
      * @see Simulation.IEateries#getMaxQlength()
      */
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
         return maxLength;
     }
     
+    /**
+     * the longest queue any of the eateries in this set has seen
+     * @return the maximum queue length for any child eatery
+     */
     public int getMaxSubQLength() {
         int maxQ = 0;
         for (IEatery e : this) {
-            if (e.getMaxQlength() > maxQ) {
-                maxQ = e.getMaxQlength();
+            if (e.getMaxQueueLength() > maxQ) {
+                maxQ = e.getMaxQueueLength();
             }
         }
         return maxQ;
@@ -188,10 +200,10 @@ public class Eateries implements IEateries {
      * @see Simulation.IEateries#getThroughPut()
      */
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
         int totalThroughPut = 0;
         for (IEatery e : this) {
-            totalThroughPut += e.getThroughPut();
+            totalThroughPut += e.getThroughput();
         }
         return totalThroughPut;
     }

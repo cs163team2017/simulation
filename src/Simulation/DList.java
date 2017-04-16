@@ -1,6 +1,6 @@
 package Simulation;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -9,7 +9,7 @@ import java.util.Iterator;
  *
  * @param <T> type of the values in the list's nodes
  */
-public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
+public class DList<T> implements CQueue<T>, Iterable<ListNode<T>> {
     /** first node in the list */
     protected ListNode<T> head;
     /** last node in the list */
@@ -21,7 +21,7 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
      * initializes an empty linked list, with null values for 
      * the head and tail, and an element count of zero
      */
-    public DblLList() {
+    public DList() {
         head = null;
         tail = null;
         count = 0;
@@ -352,17 +352,5 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         public ListNode<T> next() {
             return getNodeAtIndex(index++);
         }
-    }
-    
-    /** 
-     * Builds an ArrayList of this lists values 
-     * @return An ArrayList of this list's values
-     */
-    public ArrayList<T> toArrayList() {
-        ArrayList<T> a = new ArrayList<T>(count);
-        for (ListNode<T> curr : this) {
-            a.add(curr.getValue());
-        }
-        return a;
     }
 }

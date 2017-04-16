@@ -1,27 +1,27 @@
 package Simulation;
 
-import java.util.Iterator;
-
-public class Cashier implements // CisQueue<Person>, 
-                                ClockListener,
+public class Cashier implements ClockListener,
                                 QueuePerformance,
                                 ICashier
-                                {
-    /** internal holder for all people in the cashier's queue */
-  //  private PersonList q;
-    
+                                {    
+    /** person currently at the counter */
     private Person p;
-    /** number of customers that leave before completion */
-    private int lost;
+    /** number of customers that leave before completion, 
+     * always zero here */
+    private int lost = 0;
     /** maximum queue length ever achieved in this run */
     private int maxQLength;
-    /** Threshold to trigger serving the next person */
-    private int ticksToNextPerson = 0;
     /** total number of people that have passed through the queue */
     private int completed = 0;
-    
+    /** tick that the customer currently at the cashier began checkout
+     * checkout completes when this number + the person's checkout
+     * duration are exceeded by the clock time
+     */
     private int serviceStartTick;
     
+    /** 
+     * instantiate a cashier
+     */
     public Cashier() {
         p = null;
         maxQLength = 0;
@@ -33,20 +33,6 @@ public class Cashier implements // CisQueue<Person>,
      */
     @Override
     public void event(int tick) {
-//        if (q.size() > 0) {
-//            lost += q.checkLeavers(tick);
-//            if (0 >= q.size()) {
-//                return;
-//            }
-            // TODO 1: this logic is not correct, check if person at 
-            // head dumped out due to delay 
-//            if (tick >= ticksToNextPerson) {
-//                Person p = q.deQ();
-//                ticksToNextPerson = tick + 
-//                                    (int)(p.getCashierTime() + 1);
-//                completed++;
-//            }
-//        }
         if (p == null) {
             return;
         }
@@ -55,11 +41,6 @@ public class Cashier implements // CisQueue<Person>,
             p = null;
             return;
         }
-//        if (tick >= p.getLeaveTime()) {
-//            lost++;
-//            p = null;
-//            return;
-//        }
     }
 
 
@@ -70,12 +51,6 @@ public class Cashier implements // CisQueue<Person>,
     public boolean isEmpty() {
         return p == null ? true : false;
     }
-//
-//    @Override
-//    public Person deQ() {
-//        lost++;
-//        return q.deQ();
-//    }
 
     //@Override
     /* (non-Javadoc)
@@ -83,10 +58,6 @@ public class Cashier implements // CisQueue<Person>,
      */
     @Override
     public void enQ(Person value, int tick) {
-//        q.add(value);
-//        if (q.size() > maxQLength) {
-//            maxQLength = q.size();
-//        }
         if (p != null) {
             throw new RuntimeException("Already a person at cashier");
         }
@@ -107,7 +78,7 @@ public class Cashier implements // CisQueue<Person>,
      * @see Simulation.ICashier#getMaxQlength()
      */
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
         return maxQLength;
     }
 
@@ -115,7 +86,7 @@ public class Cashier implements // CisQueue<Person>,
      * @see Simulation.ICashier#getThroughPut()
      */
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
         return completed;
     }
 
@@ -126,24 +97,4 @@ public class Cashier implements // CisQueue<Person>,
     public int getLost() {
         return lost;
     }
-
-//    @Override
-//    public Iterator<Person> iterator() {
-//        // TODO Auto-generated method stub
-//        return new CashierIterator();
-//    }
-//    
-//    private class CashierIterator implements Iterator<Person> {
-//        private int index = 0;
-//
-//        @Override
-//        public boolean hasNext() {
-//            return index < q.size();
-//        }
-//
-//        @Override
-//        public Person next() {
-//            return q.getAtIndex(index++);
-//        }
-//    }
 }

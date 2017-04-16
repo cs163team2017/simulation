@@ -51,13 +51,13 @@ public class EateryMock implements IEatery {
     }
 
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
 
         return maxLength;
     }
 
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
 
         return thruPut;
     }

@@ -29,13 +29,13 @@ public class MainQMock implements IMainQ {
     }
 
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
         // TODO Auto-generated method stub
         return 0;
     }

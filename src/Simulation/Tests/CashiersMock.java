@@ -25,7 +25,7 @@ public class CashiersMock implements ICashiers {
     }
 
     @Override
-    public void add(Person p, int tick) {
+    public void enQ(Person p, int tick) {
         l.add(p);
         addCalled++;
         givenTick = tick;
@@ -37,13 +37,13 @@ public class CashiersMock implements ICashiers {
     }
 
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
         // TODO Auto-generated method stub
         return 0;
     }

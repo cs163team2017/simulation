@@ -40,7 +40,7 @@ public class EateryTests {
         
         e.setMainQueue(mQ);
         assert(3 == e.getLeft());
-        assert(3 == e.getMaxQlength());
+        assert(3 == e.getMaxQueueLength());
         assert(p1 == e.peek());
         e.event(0); // [1,2,3] tick 0 enqueues the person at the desk
         e.event(1); // [2,3] tick 1 completes p1's eatery time
@@ -59,7 +59,7 @@ public class EateryTests {
         assert(p2 == mQ.list.get(1));
         assert(1 == e.getLeft()); // [5]
         assert(p5 == e.peek());
-        assert(2 == e.getThroughPut());
+        assert(2 == e.getThroughput());
         assert(2 == e.getLost());
         
     }

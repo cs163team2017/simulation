@@ -37,7 +37,7 @@ public class EateriesMock implements IEateries {
     }
 
     @Override
-    public void add(Person p) {
+    public void enQ(Person p) {
         addPersonCalled++;
         people.add(p);
     }
@@ -73,25 +73,19 @@ public class EateriesMock implements IEateries {
     }
 
     @Override
-    public ArrayList<IEatery> toArrayList() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public int getLeft() {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
         // TODO Auto-generated method stub
         return 0;
     }

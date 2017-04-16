@@ -2,7 +2,7 @@ package Simulation;
 
 import java.util.Iterator;
 
-public class MainQ implements CisQueue<Person>, 
+public class MainQ implements CQueue<Person>, 
                               ClockListener,
                               QueuePerformance, 
                               IMainQ,
@@ -35,7 +35,7 @@ public class MainQ implements CisQueue<Person>,
             }
             if (cashiers.haveEmpty()) {
                 Person p = q.deQ();
-                cashiers.add(p, tick);
+                cashiers.enQ(p, tick);
                 completed++;
             }
         }
@@ -62,7 +62,7 @@ public class MainQ implements CisQueue<Person>,
      * @see Simulation.IMainQ#getMaxQlength()
      */
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
         return maxQLength;
     }
 
@@ -70,7 +70,7 @@ public class MainQ implements CisQueue<Person>,
      * @see Simulation.IMainQ#getThroughPut()
      */
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
         return completed;
     }
 

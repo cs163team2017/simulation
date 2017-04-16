@@ -37,12 +37,12 @@ public class CashierMock implements ICashier {
     }
 
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
         return max;
     }
 
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
         return l.size();
     }
 

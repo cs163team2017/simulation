@@ -13,6 +13,12 @@ public class Gauss {
         return ave * 0.5 * r.nextGaussian() + ave + 0.5;
     }
     
+    /**
+     * artifical version of the gaussian distribution for testing
+     * @param d gaussian value
+     * @param ave target average
+     * @return
+     */
     public static double get(Double d, int ave) {
         return ave * 0.5 * d + ave + 0.5;
     }

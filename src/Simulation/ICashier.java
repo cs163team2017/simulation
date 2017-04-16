@@ -2,17 +2,26 @@ package Simulation;
 
 public interface ICashier extends ClockListener, QueuePerformance {
 
-  //  void event(int tick);
-
+    /**
+     * determines if this cashier is not currently serving a customer
+     * @return if the cashier can take a new person
+     */
     boolean isEmpty();
     
+    /**
+     * makes the cashier recieve the passed in customer
+     * @param value the person to begin checking out
+     * @param tick the current tick at which the person's checkout 
+     * process begins (used to calculate when the checkout process 
+     * completes)
+     */
     void enQ(Person value, int tick);
 
     int getLeft();
 
-    int getMaxQlength();
+    int getMaxQueueLength();
 
-    int getThroughPut();
+    int getThroughput();
 
     int getLost();
 
