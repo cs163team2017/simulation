@@ -21,6 +21,8 @@ public static void main (String[] args) {
     MainQ mainQ = new MainQ();
     Eateries eateries = new Eateries(rand, mainQ);
     Cashiers cashiers = new Cashiers();
+    cashiers.add(new Cashier());
+    cashiers.add(new Cashier());
     eateries.add();
     eateries.add();
     int numTicks2Person = 20; 

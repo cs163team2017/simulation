@@ -40,13 +40,26 @@ public class CashiersTests {
     @Test
     public void CashiersWorksGivenValidInput() {
         Cashiers c = new Cashiers();
-        
         c.add(cm);
+        assert(0 == cm.l.size());
+        assert(true == cm.isEmpty());
+        assert(true == c.haveEmpty());
         c.add(p1, 1);
+        assert(false == c.haveEmpty());
         c.event(2);
         assert(2 == cm.currTick);
         assert(p1 == cm.l.get(0));
-        assert(true != cm.isEmpty());
-
+        assert(false == cm.isEmpty());
+        assert(1 == c.getMaxQlength());
+    }
+    
+    @Test(expected=RuntimeException.class) 
+    public void CashiersThrowsWhenItAttempsToAddPersonToFullCashier() {
+        Cashiers c = new Cashiers();
+        c.add(cm);
+        assert(true == cm.isEmpty());
+        c.add(p1, 1);
+        assert(false == cm.isEmpty());
+        c.add(p2, 2);
     }
 }
