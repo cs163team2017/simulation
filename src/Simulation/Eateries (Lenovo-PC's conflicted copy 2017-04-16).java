@@ -171,18 +171,17 @@ public class Eateries implements IEateries {
      */
     @Override
     public int getMaxQlength() {
-
         return maxLength;
     }
     
-    public int getMaxQFromCollection() {
-      int maxQ = 0;
-      for (IEatery e : this) {
-          if (e.getMaxQlength() > maxQ) {
-              maxQ = e.getMaxQlength();
-          }
-      }
-      return maxQ;
+    public int getMaxSubQLength() {
+        int maxQ = 0;
+        for (IEatery e : this) {
+            if (e.getMaxQlength() > maxQ) {
+                maxQ = e.getMaxQlength();
+            }
+        }
+        return maxQ;
     }
 
     /* (non-Javadoc)
