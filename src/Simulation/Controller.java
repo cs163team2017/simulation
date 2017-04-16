@@ -1,9 +1,12 @@
 package Simulation;
 
-import java.time.Duration;
+//import java.time.Duration;
 import java.util.Random;
+import javafx.util.Duration;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -67,18 +70,31 @@ public class Controller {
 	    clk.add(eateries);
 	    clk.add(mainQ);
 	    clk.add(cashiers);
-	    for (int i = 0; i < Stats.runtime; i++){
-	    	clk.tock();
-	    	statsPn.repaint();
-	    	animePn.repaint();
-	    }
+	    
+//	    for (int i = 0; i < Stats.runtime; i++){
+//	    	clk.tock();
+//	    	statsPn.repaint();
+//	    	animePn.repaint();
+//	    }
+	    
+	    Timeline timeline = new Timeline(
+	        new KeyFrame(
+	            Duration.seconds(0.10),
+	            event -> {
+ 	    	    	clk.tock();
+	    	    	statsPn.repaint();
+	    	    	animePn.repaint();
+	            } 
+	        )
+	    );
+	    timeline.setCycleCount(Animation.INDEFINITE);
+	    timeline.play();
+
+	
+
+	
+	
+
 	}
-	
-//	    private Timeline runLater(Duration delay, Runnable action) {
-//	        Timeline timeline = new Timeline(new KeyFrame(delay, ae -> action.run()));
-//	        timeline.play();
-//	        return timeline;
-//	}
-	
 	
 }
