@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Cashiers implements ClockListener, ICashiers {
 
+
     DblLList<ICashier> cashiersList;
     ICashier firstEmpty;
     int maxLength;
@@ -51,6 +52,7 @@ public class Cashiers implements ClockListener, ICashiers {
      */
     @Override
     public int getMaxQlength() {
+
         return maxLength;
     }
 
@@ -107,13 +109,13 @@ public class Cashiers implements ClockListener, ICashiers {
      */
     @Override
     public void event(int tick) {
-        int currPeople = 0;
+        int currMax = 0;
         for (ICashier c : this) {
             c.event(tick);
-            currPeople += c.getLeft();
+            currMax += c.getLeft();
         }
-        if (currPeople > maxLength) {
-            maxLength = currPeople;
+        if (currMax > maxLength) {
+            maxLength = currMax;
         }
     }
     
