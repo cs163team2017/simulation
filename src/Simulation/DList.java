@@ -1,14 +1,13 @@
 package Simulation;
 
-//import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
+/**********************************************************************
  * A simple generic double linked list implementation 
  * @author Matthew Pische
  *
  * @param <T> type of the values in the list's nodes
- */
+ **********************************************************************/
 public class DList<T> implements CQueue<T>, Iterable<ListNode<T>> {
     /** first node in the list */
     protected ListNode<T> head;
@@ -17,39 +16,39 @@ public class DList<T> implements CQueue<T>, Iterable<ListNode<T>> {
     /** number of nodes in the list */
     protected int count;
         
-    /**
+    /******************************************************************
      * initializes an empty linked list, with null values for 
      * the head and tail, and an element count of zero
-     */
+     *****************************************************************/
     public DList() {
         head = null;
         tail = null;
         count = 0;
     }
     
-    /**
+    /******************************************************************
      * Getter for the list's size
      * @return size of the list
-     */
+     ******************************************************************/
     public int size() {
         return count;
     }
     
-    /**
+    /******************************************************************
      * getter for the value of the list's head node
-     * @return
-     */
+     * @return value of the first element
+     *****************************************************************/
     public T first() {
         if (head == null)
             return null;
         return head.getValue();
     }
     
-    /** 
+    /****************************************************************** 
      * evaluates if a node is the head node
      * @param n the node to evaluate
-     * @return head
-     */
+     * @return head first node in the list
+     ******************************************************************/
     public boolean isFirstNode(ListNode<T> n) {
         if (n == head) {
             return true;
@@ -57,7 +56,7 @@ public class DList<T> implements CQueue<T>, Iterable<ListNode<T>> {
         return false;
     }
     
-    /**
+    /*******************************************************************
      * evaluates if a given node is the tail node
      * @param n the node to evaluate
      * @return

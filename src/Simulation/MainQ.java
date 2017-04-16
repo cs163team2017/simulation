@@ -111,7 +111,6 @@ public class MainQ implements CQueue<Person>,
 
     @Override
     public Iterator<Person> iterator() {
-        // TODO Auto-generated method stub
         return new MainQIterator();
     }
     

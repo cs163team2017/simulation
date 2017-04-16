@@ -76,6 +76,12 @@ public class IntegrationTests {
                                i + " = " + totalThroughCashiers);
             assert(totalThroughEateries > totalThroughCashiers);
             assert(totalThroughEateries > totalThroughMainQ);
+            /** due to the random starting value, and the large number 
+             * of iterations, on rare occasions this assertion 
+             * will fail, simply because occasionally no one will wind
+             * up getting lost, or remaining in the mainQ.
+             * setting > to >= should ensure it always passes
+             */
             assert(totalThroughMainQ > totalThroughCashiers);
             assert(eateries.getThroughput() == totalThroughMainQ);
             assert(mainQ.getThroughput() == totalThroughCashiers);

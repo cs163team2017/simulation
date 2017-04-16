@@ -1,5 +1,10 @@
 package Simulation;
 
+/**********************************************************************
+ * class to create a new cashier 
+ * @author Matthew Pische
+ *
+ **********************************************************************/
 public class Cashier implements ClockListener,
                                 QueuePerformance,
                                 ICashier
@@ -19,9 +24,9 @@ public class Cashier implements ClockListener,
      */
     private int serviceStartTick;
     
-    /** 
+    /******************************************************************
      * instantiate a cashier
-     */
+     ******************************************************************/
     public Cashier() {
         p = null;
         maxQLength = 0;

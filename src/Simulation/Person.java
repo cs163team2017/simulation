@@ -4,7 +4,7 @@
 package Simulation;
 
 /**
- * @author   Roger Ferguson
+ * @author Roger Ferguson
  * @author Matthew Pische
  */
 public class Person {
@@ -21,25 +21,43 @@ public class Person {
     protected ListNode<Person> holdingNode;
     	
     /**
-     * the time the person will remain at the eatery counter
+     * fetches the time the person will remain at the eatery counter
      * @return
      */
     public double getEateryTime() {
     	return eateryTime;
     }
     
+    /**
+     * sets how long the person will stay at the eatery kiosk
+     * @param time delay at the eatery kiosk
+     */
     public void setEateryTime(double time) {
     	this.eateryTime = time;
     }
     	
+    /**
+     * sets the maximum amount of time the person will remain in the system
+     * before exiting 
+     * @param time maxium duration until exit
+     */
     public void setLeaveTime(double time) {
         leaveTime = time;
     }
     	
+    /**
+     * sets how long the person will take at the cashier register
+     * before successfully completing checkout
+     * @param time
+     */
     public void setCashierTime(double time) {
         cashierTime = time;
     }
     	
+    /**
+     * sets the time of the person's creation
+     * @param time tick the person was instantiated 
+     */
     public void setCreationTime(double time) {
         creationTime = (int)time;
     }
@@ -53,13 +71,17 @@ public class Person {
     }
     	
     /**
-     * how long the person will remain at the cashier counter
-     * @return
+     * fetches how long the person will remain at the cashier counter
+     * @return time at the cashier 
      */
     public double getCashierTime() {
         return cashierTime;
     }
     	
+    /**
+     * fetches the time at which this person was instantiated
+     * @return the tick at which this person was instantiated
+     */
     public int getCreationTime() {
         return creationTime;
     }

@@ -3,9 +3,9 @@
  */
 package Simulation;
 
-/**
+/**********************************************************************
  * @author   Roger Ferguson
- */
+ **********************************************************************/
 public class Clock {
 
 	private ClockListener[] myListeners;

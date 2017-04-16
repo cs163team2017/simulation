@@ -3,6 +3,11 @@ package Simulation;
 import java.util.Iterator;
 import java.util.Random;
 
+/**********************************************************************
+ * Class to hold and iterate over multiple cashiers 
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class Cashiers implements ClockListener, ICashiers {
     /** list of cashier instances */
     DList<ICashier> cashiersList;
@@ -12,12 +17,18 @@ public class Cashiers implements ClockListener, ICashiers {
      * across all cashiers */
     int maxLength;
     
+    /******************************************************************
+     * instantiate a new empty cashiers set 
+     *****************************************************************/
     public Cashiers() {
         cashiersList = new DList<ICashier>();
         firstEmpty = null;
         maxLength = 0;
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#add(Simulation.ICashier)
+     */
     public void add(ICashier c) {
         if (firstEmpty == null) {
             firstEmpty = c;
@@ -90,6 +101,11 @@ public class Cashiers implements ClockListener, ICashiers {
         return new CashierIterator();
     }
     
+    /******************************************************************
+     * private class to implement java's foreach iteration
+     * @author Matthew Pische
+     *
+     *****************************************************************/
     private class CashierIterator implements Iterator<ICashier> {
         
         private int index = 0;
@@ -121,6 +137,9 @@ public class Cashiers implements ClockListener, ICashiers {
         }
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#haveEmpty()
+     */
     @Override
     public boolean haveEmpty() {
         for (ICashier c : this) {

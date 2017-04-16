@@ -31,7 +31,7 @@ public interface ICashiers extends ClockListener,
     void event(int tick);
 
     /**
-     * Determine if there is at least one available cashier to recieve
+     * Determine if there is at least one available cashier to receive
      * a customer
      * @return if a empty cashier exists
      */
