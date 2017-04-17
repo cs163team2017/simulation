@@ -37,14 +37,17 @@ public class SimAnimationPane extends HBox {
 		setSpacing(25);
 		setAlignment(Pos.CENTER);
 		repaint();
-		getChildren().addAll(leftPn, centerPn, rightPn); 
-		
+		update();
 	}
 	
 	public void repaint(){
 		//Clear the Arrays for the board
 		eateryLbl.clear();
 		checkoutLbl.clear();
+		
+		leftPn.getChildren().clear();
+		centerPn.getChildren().clear();
+		rightPn.getChildren().clear();
 		
 		//Make the Left, Center, and Right Column Labels
 		for (int i = 0; i < Stats.numEaterys; i++)
@@ -55,7 +58,14 @@ public class SimAnimationPane extends HBox {
 		for (int i = 0; i < Stats.numCheckouts; i++)
 			rightPn.getChildren().add(makeCheckoutRow(i));
 		
-		
+		//Align Panes
+		leftPn.setAlignment(Pos.CENTER);
+		centerPn.setAlignment(Pos.CENTER);
+		rightPn.setAlignment(Pos.CENTER);
+		this.getChildren().addAll(leftPn, centerPn, rightPn);
+	}
+	
+	public void update(){
 		//Fill the Labels with information		
 		for (int i = 0; i < Stats.numEaterys; i++)
 			eateryLbl.get(i).setText("Num people at eatery " + (i+1) + 
@@ -66,11 +76,6 @@ public class SimAnimationPane extends HBox {
 		for (int i = 0; i < Stats.numCheckouts; i++)
 			checkoutLbl.get(i).setText("Num people at checkout " + (i+1) + 
 					" : " + Stats.pplAtCheckout[i]);
-		
-		//Align Panes
-		leftPn.setAlignment(Pos.CENTER);
-		centerPn.setAlignment(Pos.CENTER);
-		rightPn.setAlignment(Pos.CENTER);
 	}
 
 	/***********************************************************************
@@ -80,10 +85,8 @@ public class SimAnimationPane extends HBox {
 	 ***********************************************************************/
 	private HBox makeEateryRow(int n){
 		HBox row = new HBox(25);
-
 		eateryLbl.add(new Label("Num people at Eatery " + (n+1) + " :"));
 		row.getChildren().add(eateryLbl.get(n));
-		
 		return row;
 	}
 	
@@ -94,7 +97,7 @@ public class SimAnimationPane extends HBox {
 	 ***********************************************************************/
 	private HBox makeCheckoutRow(int n){
 		HBox row = new HBox(25);
-		checkoutLbl.add(new Label());
+		checkoutLbl.add(new Label("Num people at Checkout " + (n+1) + " :"));
 		row.getChildren().add(checkoutLbl.get(n));
 		return row;
 	}

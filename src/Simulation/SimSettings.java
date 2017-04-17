@@ -15,9 +15,6 @@ import javafx.scene.layout.*;
  ***************************************************************************/
 public class SimSettings {
 	
-	private SimAnimationPane animePn;
-	private SimStatsPane statsPn;
-	
 	private Button saveBtn;
 	private Button exitBtn;
 	
@@ -42,11 +39,7 @@ public class SimSettings {
 	
 	private Stage window;
 	
-	
-	public SimSettings(SimAnimationPane animePn, SimStatsPane statsPn){
-		this.animePn = animePn;
-		this.statsPn = statsPn;
-	}
+
 	
 	/***********************************************************************
 	 * Displays the current Pane an does not allow the user to access other
@@ -71,7 +64,7 @@ public class SimSettings {
 		horizontal.setAlignment(Pos.CENTER);
 		horizontal.getChildren().addAll(col1, col2);
 		
-		listen();
+		//listen();//XXX
 		Scene settingScene = new Scene(horizontal);
 		window.setScene(settingScene);
 		window.showAndWait();
@@ -139,44 +132,56 @@ public class SimSettings {
 				avgEateryTimeTF, quitTimeTF, numEaterysTF, 
 				numCheckoutsTF, runtimeTF, exitBtn);
 	}
+
+
 	
-	/***********************************************************************
-	 * "Event Handler" for the Settings GUI
-	 ***********************************************************************/
-	private void listen(){
-		saveBtn.setOnAction(e -> {
-			try{
-				Stats.inflow = Integer.parseInt(inflowTF.getText());
-				Stats.cashierTime = Integer.parseInt(cashierTimeTF.getText());
-				Stats.avgEateryTime = Integer.parseInt(avgEateryTimeTF.getText());
-				Stats.quitTime = Integer.parseInt(quitTimeTF.getText());
-				Stats.numEaterys = Integer.parseInt(numEaterysTF.getText());
-				Stats.numCheckouts = Integer.parseInt(numCheckoutsTF.getText());
-				Stats.runtime = Integer.parseInt(runtimeTF.getText());
-			}
-			catch(Exception ex){
-				System.out.println("This is parse int Error");//FIXME
-			}
-			if(		Stats.inflow >= 0 		&&
-					Stats.cashierTime >= 0	&&
-					Stats.avgEateryTime >=0 &&
-					Stats.quitTime >= 0		&& 
-					Stats.numEaterys >= 0	&&
-					Stats.numCheckouts >= 0	&&
-					Stats.runtime >= 0	
-					){
-				
-				window.close();
-				statsPn.repaint();
-				animePn.repaint();
-				
-			}
-			else 
-				System.out.println("This is a negitive number error");//FIXME
-		});
-		
-		exitBtn.setOnAction(e -> {
-			window.close();
-		});
+	public void saveSettings(){
+		try{
+			Stats.inflow = Integer.parseInt(inflowTF.getText());
+			Stats.cashierTime = Integer.parseInt(cashierTimeTF.getText());
+			Stats.avgEateryTime = Integer.parseInt(avgEateryTimeTF.getText());
+			Stats.quitTime = Integer.parseInt(quitTimeTF.getText());
+			Stats.numEaterys = Integer.parseInt(numEaterysTF.getText());
+			Stats.numCheckouts = Integer.parseInt(numCheckoutsTF.getText());
+			Stats.runtime = Integer.parseInt(runtimeTF.getText());
+		}
+		catch(Exception ex){
+			System.out.println("This is parse int Error");//FIXME
+		}
 	}
+	
+	//THINK of other invalid inputs
+	public boolean isValidInput(){
+		boolean valid = true;
+		if(		Stats.inflow <= 0 		||
+				Stats.cashierTime <= 0	||
+				Stats.avgEateryTime <=0 ||
+				Stats.quitTime <= 0		|| 
+				Stats.numEaterys <= 0	||
+				Stats.numCheckouts <= 0	||
+				Stats.runtime <= 0	
+				)
+			valid = false;
+		return valid;
+	}
+
+	public void closeWindow(){
+		window.close();
+	}
+	
+	/**
+	 * @return the saveBtn
+	 */
+	public Button getSaveBtn() {
+		return saveBtn;
+	}
+	
+	/**
+	 * @return the exitBtn
+	 */
+	public Button getExitBtn() {
+		return exitBtn;
+	}
+	
+	
 }

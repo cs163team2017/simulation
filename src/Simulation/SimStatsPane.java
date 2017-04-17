@@ -31,13 +31,13 @@ public class SimStatsPane extends HBox{
 		quitTimeLbl = new Label();
 		currStepLbl = new Label();
 		
-		repaint();
+		update();
 		
 		getChildren().addAll(inflowLbl, cashierTimeLbl, avgEateryTimeLbl,
 				quitTimeLbl, currStepLbl);
 	}
 	
-	public void repaint(){
+	public void update(){
 		inflowLbl.setText("Seconds between customers: " + Stats.inflow);
 		cashierTimeLbl.setText("Cashier Time: " + Stats.cashierTime);
 		avgEateryTimeLbl.setText("Avg Time at Eatery: " + Stats.avgEateryTime);
