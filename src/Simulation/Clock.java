@@ -3,11 +3,11 @@
  */
 package Simulation;
 
-import java.util.Arrays;
 
-/**
+import java.util.Arrays;
+/**********************************************************************
  * @author   Roger Ferguson
- */
+ **********************************************************************/
 public class Clock {
 
 	private ClockListener[] myListeners;

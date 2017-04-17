@@ -5,10 +5,10 @@ package Simulation;
 
 import java.util.Random;
 
-/**
+/**********************************************************************
  * @author Roger Ferguson
  * @author Matthew Pische       
- */
+ **********************************************************************/
 public class Sim {
     
 public static void main (String[] args) {
@@ -47,33 +47,33 @@ public static void main (String[] args) {
     
     System.out.println("___EATERIES___\n");
     System.out.println("Eateries total throughput is: " + 
-                        eateries.getThroughPut() + 
+                        eateries.getThroughput() + 
                         " people.");
     System.out.println("Eateries Ppl still Queued: " + 
                         eateries.getLeft() + ".");
     System.out.println ("Eateries Maximum people Queued: " + 
-                        eateries.getMaxQlength() + 
+                        eateries.getMaxQueueLength() + 
                         ".");
     System.out.println("Eateries people lost: " + 
                         eateries.getLost() + ".\n");
     System.out.println("___MAIN QUEUE___\n");
     System.out.println("MainQ throughput is: "  + 
-                        mainQ.getThroughPut() + ".");
+                        mainQ.getThroughput() + ".");
     System.out.println("MainQ people still Queued: " + 
                         mainQ.getLeft() + ".");
     System.out.println("MainQ maximum queue size: " + 
-                        mainQ.getMaxQlength() + ".");
+                        mainQ.getMaxQueueLength() + ".");
     System.out.println("MainQ people lost: " + 
                         mainQ.getLost() + ".\n");
     System.out.println("___CASHIERS___\n");
     System.out.println("Cashiers total throughput is: " +
-                       cashiers.getThroughPut() +
+                       cashiers.getThroughput() +
                        " people.");
     System.out.println("Cashiers Ppl still Queued: " +
                        cashiers.getLeft() + 
                        ".");
     System.out.println("Cashiers maximum people queued: " +
-                       cashiers.getMaxQlength() + 
+                       cashiers.getMaxQueueLength() + 
                        ".");
     System.out.println("Cashiers people lost: " + 
                        cashiers.getLost() + ".");

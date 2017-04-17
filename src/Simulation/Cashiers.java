@@ -1,21 +1,33 @@
 package Simulation;
 
 import java.util.Iterator;
-import java.util.Random;
 
+/**********************************************************************
+ * Class to hold and iterate over multiple cashiers 
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class Cashiers implements ClockListener, ICashiers {
-
-
-    DblLList<ICashier> cashiersList;
+    /** list of cashier instances */
+    DList<ICashier> cashiersList;
+    /** first empty register */
     ICashier firstEmpty;
+    /** the maximum number of people ever being simultaneously served 
+     * across all cashiers */
     int maxLength;
     
+    /******************************************************************
+     * instantiate a new empty cashiers set 
+     *****************************************************************/
     public Cashiers() {
-        cashiersList = new DblLList<ICashier>();
+        cashiersList = new DList<ICashier>();
         firstEmpty = null;
         maxLength = 0;
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#add(Simulation.ICashier)
+     */
     public void add(ICashier c) {
         if (firstEmpty == null) {
             firstEmpty = c;
@@ -27,7 +39,7 @@ public class Cashiers implements ClockListener, ICashiers {
      * @see Simulation.ICashiers#add(Simulation.Person)
      */
     @Override
-    public void add(Person p, int tick) {
+    public void enQ(Person p, int tick) {
         if (firstEmpty == null) {
             throw new RuntimeException("No empty cashier available");
         }
@@ -51,7 +63,7 @@ public class Cashiers implements ClockListener, ICashiers {
      * @see Simulation.ICashiers#getMaxQlength()
      */
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
 
         return maxLength;
     }
@@ -60,10 +72,10 @@ public class Cashiers implements ClockListener, ICashiers {
      * @see Simulation.ICashiers#getThroughPut()
      */
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
         int t = 0;
         for (ICashier c : this) {
-            t += c.getThroughPut();
+            t += c.getThroughput();
         }
         return t;
     }
@@ -88,6 +100,11 @@ public class Cashiers implements ClockListener, ICashiers {
         return new CashierIterator();
     }
     
+    /******************************************************************
+     * private class to implement java's foreach iteration
+     * @author Matthew Pische
+     *
+     *****************************************************************/
     private class CashierIterator implements Iterator<ICashier> {
         
         private int index = 0;
@@ -119,6 +136,9 @@ public class Cashiers implements ClockListener, ICashiers {
         }
     }
     
+    /* (non-Javadoc)
+     * @see Simulation.ICashiers#haveEmpty()
+     */
     @Override
     public boolean haveEmpty() {
         for (ICashier c : this) {

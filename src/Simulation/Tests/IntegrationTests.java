@@ -1,7 +1,6 @@
 package Simulation.Tests;
 import java.util.Random;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import Simulation.Cashier;
@@ -12,6 +11,11 @@ import Simulation.MainQ;
 import Simulation.Person;
 import Simulation.PersonProducer;
 
+/**********************************************************************
+ * Test of the simulation
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class IntegrationTests {
     public Person p1,p2,p3,p4,p5;
     public Random r;
@@ -60,13 +64,13 @@ public class IntegrationTests {
               
             clk.run(800);
             
-            int totalThroughEateries = eateries.getThroughPut() + 
+            int totalThroughEateries = eateries.getThroughput() + 
                                   eateries.getLeft() +
                                   eateries.getLost();
-            int totalThroughMainQ = mainQ.getThroughPut() +
+            int totalThroughMainQ = mainQ.getThroughput() +
                                     mainQ.getLeft() +
                                     mainQ.getLost();
-            int totalThroughCashiers = cashiers.getThroughPut() +
+            int totalThroughCashiers = cashiers.getThroughput() +
                                        cashiers.getLeft() + 
                                        cashiers.getLost();
             
@@ -76,9 +80,15 @@ public class IntegrationTests {
                                i + " = " + totalThroughCashiers);
             assert(totalThroughEateries > totalThroughCashiers);
             assert(totalThroughEateries > totalThroughMainQ);
-            assert(totalThroughMainQ > totalThroughCashiers);
-            assert(eateries.getThroughPut() == totalThroughMainQ);
-            assert(mainQ.getThroughPut() == totalThroughCashiers);
+            /** due to the random starting value, and the large number 
+             * of iterations, on some occasions this assertion as >
+             * will fail, simply because occasionally no one will wind
+             * up getting lost, or remaining in the mainQ.
+             * setting > to >= should ensure it always passes
+             */
+            assert(totalThroughMainQ >= totalThroughCashiers);
+            assert(eateries.getThroughput() == totalThroughMainQ);
+            assert(mainQ.getThroughput() == totalThroughCashiers);
         }
     }
 }

@@ -1,15 +1,14 @@
 package Simulation;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
+/**********************************************************************
  * A simple generic double linked list implementation 
  * @author Matthew Pische
  *
  * @param <T> type of the values in the list's nodes
- */
-public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
+ **********************************************************************/
+public class DList<T> implements CQueue<T>, Iterable<ListNode<T>> {
     /** first node in the list */
     protected ListNode<T> head;
     /** last node in the list */
@@ -17,39 +16,39 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
     /** number of nodes in the list */
     protected int count;
         
-    /**
+    /******************************************************************
      * initializes an empty linked list, with null values for 
      * the head and tail, and an element count of zero
-     */
-    public DblLList() {
+     *****************************************************************/
+    public DList() {
         head = null;
         tail = null;
         count = 0;
     }
     
-    /**
+    /******************************************************************
      * Getter for the list's size
      * @return size of the list
-     */
+     ******************************************************************/
     public int size() {
         return count;
     }
     
-    /**
+    /******************************************************************
      * getter for the value of the list's head node
-     * @return
-     */
+     * @return value of the first element
+     *****************************************************************/
     public T first() {
         if (head == null)
             return null;
         return head.getValue();
     }
     
-    /** 
+    /****************************************************************** 
      * evaluates if a node is the head node
      * @param n the node to evaluate
-     * @return head
-     */
+     * @return head first node in the list
+     ******************************************************************/
     public boolean isFirstNode(ListNode<T> n) {
         if (n == head) {
             return true;
@@ -57,11 +56,11 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         return false;
     }
     
-    /**
+    /*******************************************************************
      * evaluates if a given node is the tail node
      * @param n the node to evaluate
-     * @return
-     */
+     * @return whether or not the node is the last one
+     ******************************************************************/
     public boolean isLastNode(ListNode<T> n) {
         if (n == tail) {
             return true;
@@ -69,19 +68,19 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         return false;
     }
     
-    /**
+    /******************************************************************
      * fetch the tail node
-     * @return tail
-     */
+     * @return tail the last node in the list
+     ******************************************************************/
     public ListNode<T> lastNode() {
         return tail;
     }
 
-    /**
+    /******************************************************************
      * adds a new node, holding the passed in value, to the head of 
      * the list
      * @param value value to be added to the new head node
-     */
+     ******************************************************************/
     public void addFirst(T value) {
         if (head == null) {
             tail = head = new ListNode<T>(this, value);
@@ -94,21 +93,21 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         count++;
     }
     
-    /**
+    /******************************************************************
      * getter for the value of the tail node
      * @return value of the last node in the list
-     */
+     *****************************************************************/
     public T last() {
         if (tail == null)
             return null;
         return tail.getValue();
     }
         
-    /**
+    /******************************************************************
      * Inserts a new node holding the passed in value at the end 
      * of the list
      * @param value to insert in a new node at the tail
-     */
+     *****************************************************************/
     public void add(T value) {
         if (tail == null) {
             head = tail = new ListNode<T>(this, value);
@@ -120,12 +119,12 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         count++;
     }
     
-    /**
+    /******************************************************************
      * Gets the node, not just the value, from the element of the list
      * at the given position. Returns null if index is out of bounds
      * @param index Nth element of the list to retrieve 
      * @return the node at the given position
-     */
+     ******************************************************************/
     protected ListNode<T> getNodeAtIndex(int index) {
         if (index >= count || index < 0) {
             throw new IndexOutOfBoundsException();
@@ -145,20 +144,20 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         return n;
     }
     
-    /**
+    /******************************************************************
      * Gets the value of the node at the given index
      * @param index location of the node to interrogate
      * @return value of the desired node
-     */
+     ******************************************************************/
     public T getAtIndex(int index) {
         return getNodeAtIndex(index).getValue();
     }
     
-    /**
+    /******************************************************************
      * Updates the value of the node at the given position 
      * @param value new value for the node
      * @param index location of the node to update
-     */
+     ******************************************************************/
     public void setAtIndex(T value, int index) {
         if (index == 0 && head == null) {
             head = tail = new ListNode<T>(this, value);
@@ -171,13 +170,13 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         getNodeAtIndex(index).setValue(value);
     }
     
-    /**
+    /******************************************************************
      * Adds the given value as a new node at the passed in position 
      * in the list
      * @param value value to insert in the new node
      * @param index location to place the new node
-     * @throws IndexOutOfBoundsException if the index exceeds list length
-     */
+     * @throws IndexOutOfBoundsException if index exceeds list length
+     ******************************************************************/
     public void insertAtIndex(T value, int index) {
         if (index == 0 && head == null) {
             head = tail = new ListNode<T>(this, value);
@@ -196,10 +195,10 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         count++;
     }
     
-    /**
+    /******************************************************************
      * Removes the first node, and returns its value
      * @return value of the first, now removed, node
-     */
+     ******************************************************************/
     public T removeFirst() {
         ListNode<T> n = removeFirstNode();
         if (n == null) 
@@ -223,10 +222,10 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         return h;
     }
     
-    /**
+    /******************************************************************
      * Removes the last node in the list and returns its value
      * @return value of the, now removed, final node
-     */
+     ******************************************************************/
     public T removeLast() {
         ListNode<T> n = removeLastNode();
         if (n == null) 
@@ -234,11 +233,11 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         return n.getValue();
     }
     
-    /**
+    /******************************************************************
      * Removes and returns the last node from the list, returns null
      *  if the list is empty
      * @return the last node on the list
-     */
+     ******************************************************************/
     public ListNode<T> removeLastNode() {
         if (tail == null) {
             return null;
@@ -255,11 +254,11 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         return t;
     }
     
-    /**
+    /******************************************************************
      * Removes and returns the node at the given location in the list
      * @param index location of the target node
      * @return node at the given index
-     */
+     *****************************************************************/
     protected ListNode<T> removeNodeAtIndex(int index) {
         if (index >= count || index < 0) {
             throw new IndexOutOfBoundsException();
@@ -281,29 +280,29 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         return curr;
     }
     
-    /**
+    /******************************************************************
      * Removes the node at the given location in the list, and returns
      * its held value
      * @param index location of the node to remove 
      * @return
-     */
+     ******************************************************************/
     public T removeAtIndex(int index) {
         return removeNodeAtIndex(index).getValue();
     }
     
-    /**
+    /******************************************************************
      * wraps adding a new tail value, alias for add()
      * @param value value to add to the new tail node
-     */
+     ******************************************************************/
     public void push(T value) {
         add(value);
     }
     
-    /**
+    /******************************************************************
      * Removes and returns the value from the last node of the list,
      * alias for removeLast()
      * @return value of the last node, now removed 
-     */
+     ******************************************************************/
     public T pop() {
         return removeLast();       
     }
@@ -323,46 +322,36 @@ public class DblLList<T> implements CisQueue<T>, Iterable<ListNode<T>> {
         add(value);
     }
     
-    /**
+    /******************************************************************
      * Implementing the methods necessary to enable foreach looping
-     */
+     ******************************************************************/
     public Iterator<ListNode<T>> iterator() {
         return new ListIterator();
     }
     
-    /**
+    /******************************************************************
      * Private class to implement iteration methods enabling foreach
      * looping
      * @author Matthew Pische
      *
-     */
+     ******************************************************************/
     protected class ListIterator implements Iterator<ListNode<T>> {
         private int index = 0;
         
-        /**
+        /**************************************************************
          * check if there is at least one more element in the set
-         */
+         **************************************************************/
+        @Override
         public boolean hasNext() {
             return index < count;
         }
         
-        /**
+        /**************************************************************
          * return the next element of the set, and increment counter
-         */
+         **************************************************************/
+        @Override
         public ListNode<T> next() {
             return getNodeAtIndex(index++);
         }
-    }
-    
-    /** 
-     * Builds an ArrayList of this lists values 
-     * @return An ArrayList of this list's values
-     */
-    public ArrayList<T> toArrayList() {
-        ArrayList<T> a = new ArrayList<T>(count);
-        for (ListNode<T> curr : this) {
-            a.add(curr.getValue());
-        }
-        return a;
     }
 }

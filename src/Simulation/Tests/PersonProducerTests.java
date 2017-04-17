@@ -1,5 +1,4 @@
 package Simulation.Tests;
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,41 +7,83 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Simulation.Gauss;
-import Simulation.IMainQ;
+import Simulation.LimitedTimePerson;
 import Simulation.Person;
 import Simulation.PersonProducer;
+import Simulation.RegularPerson;
+import Simulation.SpecialNeedsPerson;
 
+/**********************************************************************
+ * Tests for the person producer class
+ * @author Matthew Pische
+ *
+ *********************************************************************/
 public class PersonProducerTests {
     private Random r;
     private EateriesMock eateries;
-    private IMainQ mainQ;
     private ArrayList<Double> gaussians;
      
     @Before
     public void setUp() {
         r = new Random(1);
-        mainQ = new MainQMock();
         eateries = new EateriesMock();
-        gaussians = new ArrayList<Double>();
-        gaussians.add(  1.561581040188955);
-        gaussians.add(-0.6081826070068602);
-        gaussians.add(-1.0912278829447088);
-        gaussians.add(-0.6245401364066232);
-        gaussians.add(-1.1182832102556484);
-        gaussians.add(-1.6583217791337177);
-        gaussians.add(-1.8821643777572246);
-        gaussians.add(0.059255494425680996);
-        gaussians.add(-0.4084113286637019);
-        gaussians.add(0.28770950299107917);
-        gaussians.add(0.4452322425599013);
-        gaussians.add(-0.9558118873968129);
+    }
+    
+    public void GetTheFirst15ResultsFromRandomSeed1AsGaussAndInt() {
+        for (int i = 0; i < 3; i++) {
+            System.out.println(r.nextGaussian()) ;
+            System.out.println(r.nextInt(10));
+            System.out.println(r.nextGaussian()) ;
+            System.out.println(r.nextGaussian()) ;
+            System.out.println(r.nextGaussian()) ;
+            System.out.println();
+            
+            /**
+             *  1.561581040188955 // next
+                4 // regular
+                -0.6081826070068602 // cash
+                -0.2659156285970381 // eatery
+                0.09109207606964836 // leave
+                
+                0.4729310851145204
+                3 // regular
+                -0.7793116416355956
+                0.63847575097573
+                -0.15020446215665365
+                
+                -0.9730277344207469
+                8 // regular
+                -1.3141764794994628
+                1.1078884748368834
+                0.119340882129378
+             */
+        }
     }
     
     @Test
-    public void LetsSeeTheFirst12ResultsFromRandomSeed1() {
-        for (int i = 0; i < 12; i++) {
-            System.out.println(r.nextGaussian()) ;
-        }
+    public void PersonTypesWorks() {
+        // set the thresholds to work with the known "random" values
+        // from a Random (1) seed
+        PersonProducer pp = new PersonProducer(r, 
+                                               eateries, 
+                                               1, 20, 20, 40,
+                                               4, 1, 5);
+        // get how many ticks are needed to spawn a second person
+        int neededTicks = (int) Gauss.get(1.561581040188955, 20);
+        pp.event(1);
+        pp.event(neededTicks);
+        // check that the internal method was called expected times
+        assert(2 == eateries.addPersonCalled);
+        Person p = eateries.people.get(0);
+        assert(p instanceof LimitedTimePerson);
+        p = eateries.people.get(1);
+        System.out.println(p.getClass());
+        assert(p instanceof SpecialNeedsPerson);
+        neededTicks += (int) Gauss.get(0.4729310851145204, 20);
+        pp.event(neededTicks);
+        assert(3 == eateries.addPersonCalled);
+        p = eateries.people.get(2);
+        assert(p instanceof RegularPerson);
     }
     
     @Test
@@ -68,34 +109,36 @@ public class PersonProducerTests {
          * ticks
          * setCash
          * setEat
-         * setLeave
+         * setLeave 
          */
         
         // make the producer under test
         PersonProducer pp = new PersonProducer(r, eateries, 
                                                1, 20, 20, 40);
         // get how many ticks are needed to spawn a second person
-        int neededTicks = (int) Gauss.get(gaussians.get(4), 20);
+        int neededTicks = (int) Gauss.get(1.561581040188955, 20);
         pp.event(1);
         pp.event(neededTicks);
         // check that the internal method was called expected times
         assert(2 == eateries.addPersonCalled);
         Person p = eateries.people.get(1);
+        assert(p instanceof RegularPerson);
         // create duplicate values to those made internally by producer
-        int secondCashTime = (int)Gauss.get(gaussians.get(5), 20);
-        int secondEateryTime = (int) Gauss.get(gaussians.get(6), 20);
+        int secondCashTime = (int)Gauss.get(-0.7793116416355956, 20);
+        int secondEateryTime = (int) Gauss.get(0.63847575097573, 20);
         // check expected values are same as actual internal values
         assert(secondCashTime == (int) p.getCashierTime());
         assert(secondEateryTime == (int) p.getEateryTime());
-        neededTicks = (int) Gauss.get(gaussians.get(8), 20);
+        neededTicks += (int) Gauss.get(0.4729310851145204, 20);
         pp.event(neededTicks);
         assert(3 == eateries.addPersonCalled);
         p = eateries.people.get(2);
-        int thirdCashTime = (int) Gauss.get(gaussians.get(9), 20);
-        int thirdEateryTime = (int) Gauss.get(gaussians.get(10), 20);
+        int thirdCashTime = (int) Gauss.get(-1.3141764794994628, 20);
+        int thirdEateryTime = (int) Gauss.get(1.1078884748368834, 20);
         assert(thirdCashTime == (int) p.getCashierTime());
         assert(thirdEateryTime == (int) p.getEateryTime());
         assert(secondCashTime != thirdCashTime);
         assert(secondEateryTime != thirdEateryTime);
+        assert(p instanceof RegularPerson);
     }
 }

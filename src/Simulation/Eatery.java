@@ -6,6 +6,7 @@ package Simulation;
 import java.util.Iterator;
 
 /**
+ * Class to implement a single eatery 
  * @author   Roger Ferguson
  * @author   Matthew Pische
  */
@@ -13,8 +14,6 @@ public class Eatery implements IEatery {
     
     /** internal holder for all people in the eatery's queue */
     private PersonList Q;
-    /** Threshold to trigger serving the next person */
-    private int ticksToNextPerson;
     /** peak number of people waiting for service */
     private int maxQlength;
     /** total number of people that have passed through the queue */
@@ -23,16 +22,17 @@ public class Eatery implements IEatery {
     private int lost;
     /** the main queue for the simulation */
     IMainQ mainQ;
+    /** the person currently being served by this eatery */
     Person atDesk;
-    int serviceStartTick;
-    
+
+    /****************************************************************** 
+     * Instantiate a new empty eatery 
+     ******************************************************************/
     public Eatery() {
         Q = new PersonList();
-        ticksToNextPerson = 0;
         maxQlength = 0;
         completed = 0;
         lost = 0;
-        serviceStartTick = 0;
         atDesk = null;
     }
     	
@@ -50,22 +50,9 @@ public class Eatery implements IEatery {
     @Override
     public void event (int tick){
         
-        //if (tick >= ticksToNextPerson) {
-        // Notice the delay that takes place here
-        //if (person != null) {  
-        // take this person to the next station. 
-        //	person.getDestination().add(person);  
-        // I have send the person on. 
-        //person = null;				
-        //}
-        
         int s = Q.size();
         
-        // TODO 1: this logic is not actually correct
-        // need to check if the one at the counter is leaving,
-        // if so, reset ticks to next to the _next_ person in the queue
         if (s >= 1) {
-
 
             // remove all people who won't wait anymore
             lost += Q.checkLeavers(tick);
@@ -104,7 +91,7 @@ public class Eatery implements IEatery {
      * @see Simulation.IEatery#getMaxQlength()
      */
     @Override
-    public int getMaxQlength() {
+    public int getMaxQueueLength() {
     	return maxQlength;
     }
     
@@ -112,7 +99,7 @@ public class Eatery implements IEatery {
      * @see Simulation.IEatery#getThroughPut()
      */
     @Override
-    public int getThroughPut() {
+    public int getThroughput() {
     	return completed;
     }
     
@@ -161,6 +148,11 @@ public class Eatery implements IEatery {
         return new EateryIterator();
     }
     
+    /******************************************************************
+     * Private class to implement java's foreach looping
+     * @author Matthew Pische
+     *
+     ******************************************************************/
     private class EateryIterator implements Iterator<Person> {
         private int index = 0;
         
