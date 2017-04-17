@@ -37,15 +37,12 @@ public class SimMainStage extends Application {
 		BorderPane  mainPn = new BorderPane();
 		SimStatsPane statsPn = new SimStatsPane();
 		SimAnimationPane animePn = new SimAnimationPane();
-		SimButtonPane buttonPn = new SimButtonPane(animePn, statsPn);
+		SimButtonPane buttonPn = new SimButtonPane();
+		SimSettings settings = new SimSettings();
 		
 		MenuBar menuBar = new MenuBar();
 		Menu fileMenu = new Menu("File");
 		MenuItem newItm = new MenuItem("New");
-		newItm.setOnAction(e -> {	
-			SimSettings settings = new SimSettings(animePn, statsPn);
-			settings.display();	
-		});
 		
 	    fileMenu.getItems().add(newItm);
 	    menuBar.getMenus().add(fileMenu);
@@ -59,6 +56,11 @@ public class SimMainStage extends Application {
 		Scene mainScene = new Scene(mainPn, 800, 600);
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
+		
+		Controller c = new Controller(buttonPn, animePn, statsPn, 
+									  settings, newItm);
+		c.setupSim();
+		
 		
 		primaryStage.setOnCloseRequest(e -> {
 	        Platform.exit();
