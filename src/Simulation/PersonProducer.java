@@ -23,6 +23,12 @@ public class PersonProducer implements ClockListener {
     private int avgLeaveTime;
     /** the random instance for the simulation */	
     private Random r;
+    /** weight of normal person type */
+    private int regular = 7;
+    /** weight of special person type */
+    private int special = 1;
+    /** weight of limited person type */
+    private int limited = 2;
     	
     /****************************************************************** 
      * instantiate a new person producer
@@ -48,6 +54,17 @@ public class PersonProducer implements ClockListener {
         this.avgLeaveTime = aveLeaveTime;
         ticksToNextPerson = 0;
     }
+    
+    public Person randomPerson() {
+        int next = r.nextInt(special + limited + regular);
+        if (next < special) {
+            return new SpecialNeedsPerson();
+        }
+        if (next < (special + limited)) {
+            return new LimitedTimePerson();
+        }
+        return new RegularPerson();
+    }
     	
     @Override
     public void event(int tick) {
@@ -55,7 +72,7 @@ public class PersonProducer implements ClockListener {
             ticksToNextPerson = tick + 
                                 Gauss.get(r, avgNumOfTicksToNextPerson);
             
-            Person person = new Person();
+            Person person = randomPerson();
             
             // record the current moment of instantiation 
             person.setCreationTime(tick);
