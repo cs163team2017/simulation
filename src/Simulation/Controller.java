@@ -1,6 +1,5 @@
 package Simulation;
 
-//import java.time.Duration;
 import java.util.Random;
 import javafx.util.Duration;
 
@@ -183,6 +182,7 @@ public class Controller {
 					timer.stop();
 				settings.closeWindow();
 				cleanBoard();
+				setupSim();
 				buttonPn.getStartBtn().setText("Start");
 			}
 			else 
