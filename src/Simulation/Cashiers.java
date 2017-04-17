@@ -1,7 +1,6 @@
 package Simulation;
 
 import java.util.Iterator;
-import java.util.Random;
 
 /**********************************************************************
  * Class to hold and iterate over multiple cashiers 
