@@ -61,11 +61,11 @@ public class MainQMock implements IMainQ {
         enQCalled++;
         list.add(value);
     }
+  
+    @Override
+    public Iterator<Person> iterator() {
+        return null;
+    }
 
-	@Override
-	public Iterator<Person> iterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

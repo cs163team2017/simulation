@@ -56,10 +56,10 @@ public class CashierMock implements ICashier {
         return 0;
     }
 
-	@Override
-	public Person peek() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Person peek() {
+        return null;
+    }
+
     
 }

@@ -49,7 +49,6 @@ public class EateryTests {
         assert(p1 == e.peek());
         e.event(0); // [1,2,3] tick 0 enqueues the person at the desk
         e.event(1); // [2,3] tick 1 completes p1's eatery time
-        System.out.println(e.getLeft());
         assert(2 == e.getLeft());
         assert(1 == mQ.enQCalled);
         assert(1 == mQ.list.size());

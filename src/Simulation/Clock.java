@@ -153,6 +153,7 @@ public class Clock {
                                     new ArrayList<ArrayList<Person>>();
         IEateries es = (IEateries) myListeners[1];
         int i = 0;
+        
         for (IEatery e : es) {
             output.add(new ArrayList<Person>());
             for (Person p : e) {
