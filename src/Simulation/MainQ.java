@@ -11,8 +11,7 @@ import java.util.Iterator;
 public class MainQ implements CQueue<Person>, 
                               ClockListener,
                               QueuePerformance, 
-                              IMainQ,
-                              Iterable<Person> {
+                              IMainQ {
     /** holder of people */
     PersonList q;
     /** total number of people that have passed through the queue */

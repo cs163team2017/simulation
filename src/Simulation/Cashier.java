@@ -102,4 +102,9 @@ public class Cashier implements ClockListener,
     public int getLost() {
         return lost;
     }
+
+    @Override
+    public Person peek() {
+        return p;
+    }
 }

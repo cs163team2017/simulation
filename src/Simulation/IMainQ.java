@@ -1,6 +1,8 @@
 package Simulation;
 
-public interface IMainQ {
+import java.util.Iterator;
+
+public interface IMainQ extends Iterable<Person> {
 
     /* (non-Javadoc)
      * @see Simulation.IMainQ#event(int)
@@ -46,5 +48,7 @@ public interface IMainQ {
      * @see Simulation.IMainQ#enQ(Simulation.Person)
      */
     void enQ(Person value);
+    
+    Iterator<Person> iterator();
 
 }
