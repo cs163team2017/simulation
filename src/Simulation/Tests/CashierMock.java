@@ -55,5 +55,10 @@ public class CashierMock implements ICashier {
     public int getLost() {
         return 0;
     }
+
+    @Override
+    public Person peek() {
+        return null;
+    }
     
 }
