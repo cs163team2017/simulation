@@ -21,7 +21,6 @@ import Simulation.SpecialNeedsPerson;
 public class PersonProducerTests {
     private Random r;
     private EateriesMock eateries;
-    private ArrayList<Double> gaussians;
      
     @Before
     public void setUp() {
@@ -77,7 +76,7 @@ public class PersonProducerTests {
         Person p = eateries.people.get(0);
         assert(p instanceof LimitedTimePerson);
         p = eateries.people.get(1);
-        System.out.println(p.getClass());
+
         assert(p instanceof SpecialNeedsPerson);
         neededTicks += (int) Gauss.get(0.4729310851145204, 20);
         pp.event(neededTicks);

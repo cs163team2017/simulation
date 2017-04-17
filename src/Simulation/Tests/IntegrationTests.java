@@ -74,10 +74,7 @@ public class IntegrationTests {
                                        cashiers.getLeft() + 
                                        cashiers.getLost();
             
-            System.out.println("total through eateries on run: " + 
-                               i + " = " + totalThroughEateries);
-            System.out.println("total through cashiers on run: " + 
-                               i + " = " + totalThroughCashiers);
+            
             assert(totalThroughEateries > totalThroughCashiers);
             assert(totalThroughEateries > totalThroughMainQ);
             /** due to the random starting value, and the large number 

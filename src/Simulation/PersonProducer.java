@@ -90,7 +90,6 @@ public class PersonProducer implements ClockListener {
         // you can get the class with "X instance of Y" comparison 
         // or X.getClass() method
         int next = r.nextInt(special + limited + regular);
-        System.out.println("next: " + next);
         randCount++;
         if (next < special) {
             return new SpecialNeedsPerson();
@@ -122,7 +121,6 @@ public class PersonProducer implements ClockListener {
             randCount++;
             // enqueue the person to a random eatery's queue 
             eateries.enQ(person);
-            System.out.println("rand count: " + randCount);
         }
     }
     

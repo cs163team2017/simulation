@@ -64,7 +64,6 @@ public class MainQTests {
         q.event(10);
         assert(5 == c.haveEmptyCalled);
         assert(p3 == c.l.get(2));
-        System.out.println(c.givenTick);
         assert(10 == c.givenTick);
         q.event(15);
         assert(5 == c.haveEmptyCalled);
@@ -72,7 +71,6 @@ public class MainQTests {
         assert(10 == c.givenTick);
         assert(1 == q.getLost());
         q.event(16);
-        System.out.println(c.haveEmptyCalled);
         assert(5 == c.haveEmptyCalled);
         assert(3 == c.l.size());
         assert(10 == c.givenTick);
