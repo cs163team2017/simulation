@@ -55,5 +55,11 @@ public class CashierMock implements ICashier {
     public int getLost() {
         return 0;
     }
+
+	@Override
+	public Person peek() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

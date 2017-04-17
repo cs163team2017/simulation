@@ -1,6 +1,7 @@
 package Simulation.Tests;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import Simulation.ICashiers;
 import Simulation.IMainQ;
@@ -60,5 +61,11 @@ public class MainQMock implements IMainQ {
         enQCalled++;
         list.add(value);
     }
+
+	@Override
+	public Iterator<Person> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
