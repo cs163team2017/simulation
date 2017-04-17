@@ -3,6 +3,8 @@
  */
 package Simulation;
 
+
+import java.util.Arrays;
 /**********************************************************************
  * @author   Roger Ferguson
  **********************************************************************/
@@ -32,7 +34,7 @@ public class Clock {
 			if (myListeners[j] instanceof Eateries){		
 				int i = 0;
 				for (IEatery E: (IEateries) myListeners[j]){
-					Stats.pplAtEatery[i] = E.getLeft();
+					Stats.pplAtEatery.set(i, E.getLeft());
 					i++;
 				}
 			}	
@@ -42,7 +44,7 @@ public class Clock {
 			if (myListeners[j] instanceof Cashiers){		
 				int i = 0;
 				for (ICashier C: (ICashiers) myListeners[j]){
-					Stats.pplAtCheckout[i] = C.getLeft();
+					Stats.pplAtCheckout.set(i, C.getLeft());
 					i++;
 				}
 			}
@@ -82,7 +84,8 @@ public class Clock {
 	public void clear() {
 	    currTick = 0;
 	    numListeners = 0;
-            myListeners = new ClockListener[MAX];
+        Arrays.fill(myListeners, null);
+        
 	}
 
 }

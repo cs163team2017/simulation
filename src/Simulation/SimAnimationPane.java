@@ -1,5 +1,7 @@
 package Simulation;
 
+import java.util.ArrayList;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -12,47 +14,86 @@ import javafx.scene.layout.VBox;
  ***************************************************************************/
 public class SimAnimationPane extends HBox {
 	
-	private Label[] mainQLbl;
-	private Label[] eaterLbl; 
-	private Label[] checkoutLbl;
+	private VBox leftPn;
+	private VBox centerPn;
+	private VBox rightPn;
+	
+	private ArrayList<Label> mainQLbl;
+	private ArrayList<Label> eateryLbl; 
+	private ArrayList<Label> checkoutLbl;
 
 	/***********************************************************************
 	 * Constructor that adds all the pieces to the Pane
 	 ***********************************************************************/
 	public SimAnimationPane(){
-		mainQLbl = new Label[1];
-		eaterLbl = new Label[Stats.numEaterys]; 
-		checkoutLbl = new Label[Stats.numCheckouts];
-		
+		mainQLbl = new ArrayList<Label>();
+		eateryLbl = new ArrayList<Label>();
+		checkoutLbl = new ArrayList<Label>();
+        
+		leftPn = new VBox(25); 
+		centerPn = new VBox(25);
+		rightPn = new VBox(25);
+        
 		setSpacing(25);
-		VBox leftPn = new VBox(25);
-		VBox centerPn = new VBox(25);
-		VBox rightPn = new VBox(25);
+		setAlignment(Pos.CENTER);
+		repaint();
+		update();
+	}
+	
+	public void repaint(){
+		//Clear the Arrays for the board
+		eateryLbl.clear();
+		checkoutLbl.clear();
 		
+		leftPn.getChildren().clear();
+		centerPn.getChildren().clear();
+		rightPn.getChildren().clear();
+		this.getChildren().clear();
+		
+		//Make the Left, Center, and Right Column Labels
 		for (int i = 0; i < Stats.numEaterys; i++)
 			leftPn.getChildren().add(makeEateryRow(i));
+	
+		centerPn.getChildren().add(makeMainQRow(0));
 		
 		for (int i = 0; i < Stats.numCheckouts; i++)
 			rightPn.getChildren().add(makeCheckoutRow(i));
 		
-		centerPn.getChildren().add(makeMainQRow(0));
-		
-		setAlignment(Pos.CENTER);
+		//Align Panes
 		leftPn.setAlignment(Pos.CENTER);
 		centerPn.setAlignment(Pos.CENTER);
 		rightPn.setAlignment(Pos.CENTER);
-		getChildren().addAll(leftPn, centerPn, rightPn); 
-		repaint();
+		this.getChildren().addAll(leftPn, centerPn, rightPn);
 	}
 	
-	public void repaint(){
-		for (int i = 0; i < Stats.numEaterys; i++)
-			eaterLbl[i].setText("Num people at eatery " + (i+1) + " : " + Stats.pplAtEatery[i]);
+	public void update(){
+		//Fill the Labels with information		
+		for (int i = 0; i < Stats.numEaterys; i++){
+			try{
+				eateryLbl.get(i).setText("Num people at eatery " + (i+1) + 
+						" : " + Stats.pplAtEatery.get(i));
+			}
+			catch(IndexOutOfBoundsException e){
+				Stats.pplAtEatery.add(i,0);
+				eateryLbl.get(i).setText("Num people at eatery " + (i+1) + 
+						" : " + Stats.pplAtEatery.get(i));
+			}
+			
+		}
 		
-		for (int i = 0; i < Stats.numCheckouts; i++)
-			checkoutLbl[i].setText("Num people at checkout " + (i+1) + " : " + Stats.pplAtCheckout[i]);
+		mainQLbl.get(0).setText("Num people at MainQ: " +  Stats.pplAtMainQ);
 		
-		mainQLbl[0].setText("Num people at MainQ: " +  Stats.pplAtMainQ);
+		for (int i = 0; i < Stats.numCheckouts; i++){
+			try{
+				checkoutLbl.get(i).setText("Num people at checkout " + (i+1) + 
+						" : " + Stats.pplAtCheckout.get(i));
+			}
+			catch(IndexOutOfBoundsException e){
+				Stats.pplAtCheckout.add(i,0);
+				checkoutLbl.get(i).setText("Num people at checkout " + (i+1) + 
+						" : " + Stats.pplAtCheckout.get(i));
+			}
+		}
 	}
 
 	/***********************************************************************
@@ -62,10 +103,8 @@ public class SimAnimationPane extends HBox {
 	 ***********************************************************************/
 	private HBox makeEateryRow(int n){
 		HBox row = new HBox(25);
-
-		eaterLbl[n] = new Label("Num people at Eatery " + (n+1) + " :");
-		row.getChildren().add(eaterLbl[n]);
-		
+		eateryLbl.add(new Label("Num people at Eatery " + (n+1) + " :"));
+		row.getChildren().add(eateryLbl.get(n));
 		return row;
 	}
 	
@@ -76,8 +115,8 @@ public class SimAnimationPane extends HBox {
 	 ***********************************************************************/
 	private HBox makeCheckoutRow(int n){
 		HBox row = new HBox(25);
-		checkoutLbl[n] = new Label();
-		row.getChildren().add(checkoutLbl[n]);
+		checkoutLbl.add(new Label("Num people at Checkout " + (n+1) + " :"));
+		row.getChildren().add(checkoutLbl.get(n));
 		return row;
 	}
 	
@@ -88,8 +127,8 @@ public class SimAnimationPane extends HBox {
 	 ***********************************************************************/
 	private HBox makeMainQRow (int n){
 		HBox row = new HBox(25);
-		mainQLbl[n] = new Label();
-		row.getChildren().add(mainQLbl[n]);
+		mainQLbl.add(new Label());
+		row.getChildren().add(mainQLbl.get(n));
 		return row;
 	}
 }
