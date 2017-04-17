@@ -12,8 +12,11 @@ import javafx.scene.layout.VBox;
  ***************************************************************************/
 public class SimButtonPane extends VBox {
 	
+	/**Button that starts and restarts the simulation**/
 	private Button startBtn;
+	/**Button that pauses and resumes the simulation**/
 	private Button stopBtn;
+	/**Button that moves the simulation one tick forward**/
 	private Button stepBtn;
 	
 	
@@ -33,29 +36,27 @@ public class SimButtonPane extends VBox {
 		getChildren().addAll(startBtn, stopBtn, stepBtn);	
 	}	
 
-
 	/***********************************************************************
+	 * Getter
 	 * @return the startBtn
 	 ***********************************************************************/
 	public Button getStartBtn() {
 		return startBtn;
 	}
 
-
 	/***********************************************************************
+	 * Getter
 	 * @return the stopBtn
 	 ***********************************************************************/
 	public Button getStopBtn() {
 		return stopBtn;
 	}
 
-
 	/***********************************************************************
+	 * Getter
 	 * @return the stepBtn
 	 **********************************************************************/
 	public Button getStepBtn() {
 		return stepBtn;
 	}
-
-
 }

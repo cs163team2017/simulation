@@ -21,6 +21,8 @@ public class SimAnimationPane extends HBox {
 	private ArrayList<Label> mainQLbl;
 	private ArrayList<Label> eateryLbl; 
 	private ArrayList<Label> checkoutLbl;
+	private Label storeLbl;
+	private Label registerLbl;
 
 	/***********************************************************************
 	 * Constructor that adds all the pieces to the Pane
@@ -95,6 +97,7 @@ public class SimAnimationPane extends HBox {
 			}
 		}
 	}
+	
 
 	/***********************************************************************
 	 * Makes a row of an Eatery based on the parameter 
@@ -103,8 +106,17 @@ public class SimAnimationPane extends HBox {
 	 ***********************************************************************/
 	private HBox makeEateryRow(int n){
 		HBox row = new HBox(25);
+		row.setAlignment(Pos.CENTER_LEFT);
+		
+		storeLbl = new Label();///FIXME put me up top
+		storeLbl.setPrefSize(25, 75);
+		storeLbl.setStyle("-fx-border-color: black;");
+
+		
 		eateryLbl.add(new Label("Num people at Eatery " + (n+1) + " :"));
-		row.getChildren().add(eateryLbl.get(n));
+		
+		
+		row.getChildren().addAll(storeLbl, eateryLbl.get(n));
 		return row;
 	}
 	
@@ -114,9 +126,15 @@ public class SimAnimationPane extends HBox {
 	 * @return HBox Returns an HBox of Labels
 	 ***********************************************************************/
 	private HBox makeCheckoutRow(int n){
-		HBox row = new HBox(25);
+		HBox row = new HBox(5);
+		row.setAlignment(Pos.CENTER_RIGHT);
+		
+		registerLbl = new Label();
+		registerLbl.setPrefSize(25, 25);
+		registerLbl.setStyle("-fx-border-color: black;");
+		
 		checkoutLbl.add(new Label("Num people at Checkout " + (n+1) + " :"));
-		row.getChildren().add(checkoutLbl.get(n));
+		row.getChildren().addAll(checkoutLbl.get(n), registerLbl);
 		return row;
 	}
 	
@@ -128,6 +146,7 @@ public class SimAnimationPane extends HBox {
 	private HBox makeMainQRow (int n){
 		HBox row = new HBox(25);
 		mainQLbl.add(new Label());
+		mainQLbl.get(n).setStyle("-fx-border-color: black;");
 		row.getChildren().add(mainQLbl.get(n));
 		return row;
 	}
