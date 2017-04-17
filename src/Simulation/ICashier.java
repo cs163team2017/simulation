@@ -16,6 +16,12 @@ public interface ICashier extends ClockListener, QueuePerformance {
      * completes)
      ******************************************************************/
     void enQ(Person value, int tick);
+    
+    /**
+     * View the person currently at the register, or null if empty
+     * @return person being served
+     */
+    Person peek();
 
     int getLeft();
 
