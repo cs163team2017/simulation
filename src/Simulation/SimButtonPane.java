@@ -27,7 +27,7 @@ public class SimButtonPane extends VBox {
 		setAlignment(Pos.CENTER_RIGHT);
 		
 		startBtn = new Button("Start");
-		stopBtn = new Button("Stop");
+		stopBtn = new Button("Pause");
 		stepBtn = new Button("Step");
 		
 		getChildren().addAll(startBtn, stopBtn, stepBtn);	

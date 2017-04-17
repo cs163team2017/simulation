@@ -48,6 +48,7 @@ public class SimAnimationPane extends HBox {
 		leftPn.getChildren().clear();
 		centerPn.getChildren().clear();
 		rightPn.getChildren().clear();
+		this.getChildren().clear();
 		
 		//Make the Left, Center, and Right Column Labels
 		for (int i = 0; i < Stats.numEaterys; i++)
@@ -67,15 +68,32 @@ public class SimAnimationPane extends HBox {
 	
 	public void update(){
 		//Fill the Labels with information		
-		for (int i = 0; i < Stats.numEaterys; i++)
-			eateryLbl.get(i).setText("Num people at eatery " + (i+1) + 
-					" : " + Stats.pplAtEatery[i]);
+		for (int i = 0; i < Stats.numEaterys; i++){
+			try{
+				eateryLbl.get(i).setText("Num people at eatery " + (i+1) + 
+						" : " + Stats.pplAtEatery.get(i));
+			}
+			catch(IndexOutOfBoundsException e){
+				Stats.pplAtEatery.add(i,0);
+				eateryLbl.get(i).setText("Num people at eatery " + (i+1) + 
+						" : " + Stats.pplAtEatery.get(i));
+			}
+			
+		}
 		
 		mainQLbl.get(0).setText("Num people at MainQ: " +  Stats.pplAtMainQ);
 		
-		for (int i = 0; i < Stats.numCheckouts; i++)
-			checkoutLbl.get(i).setText("Num people at checkout " + (i+1) + 
-					" : " + Stats.pplAtCheckout[i]);
+		for (int i = 0; i < Stats.numCheckouts; i++){
+			try{
+				checkoutLbl.get(i).setText("Num people at checkout " + (i+1) + 
+						" : " + Stats.pplAtCheckout.get(i));
+			}
+			catch(IndexOutOfBoundsException e){
+				Stats.pplAtCheckout.add(i,0);
+				checkoutLbl.get(i).setText("Num people at checkout " + (i+1) + 
+						" : " + Stats.pplAtCheckout.get(i));
+			}
+		}
 	}
 
 	/***********************************************************************

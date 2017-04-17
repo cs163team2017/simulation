@@ -43,7 +43,6 @@ public class SimMainStage extends Application {
 		MenuBar menuBar = new MenuBar();
 		Menu fileMenu = new Menu("File");
 		MenuItem newItm = new MenuItem("New");
-		newItm.setOnAction(e -> settings.display());
 		
 	    fileMenu.getItems().add(newItm);
 	    menuBar.getMenus().add(fileMenu);
@@ -58,7 +57,8 @@ public class SimMainStage extends Application {
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
 		
-		Controller c = new Controller(buttonPn, animePn, statsPn, settings);
+		Controller c = new Controller(buttonPn, animePn, statsPn, 
+									  settings, newItm);
 		c.setupSim();
 		
 		

@@ -1,5 +1,7 @@
 package Simulation;
 
+import java.util.ArrayList;
+
 /***************************************************************************
  * Class that holds a plethora of stats
  * @author Richard Critchlow
@@ -15,6 +17,12 @@ public class Stats {
 	public static int runtime = 300;
 	public static int quitTime = 50;
     public static int pplAtMainQ;
-    public static int[] pplAtEatery = new int [numEaterys];
-    public static int[] pplAtCheckout = new int[numCheckouts];
+    public static  ArrayList<Integer> pplAtEatery = new ArrayList<Integer>();
+    public static  ArrayList<Integer> pplAtCheckout = new ArrayList<Integer>();
+  
+    public static void clear(){
+    	pplAtEatery.clear();
+    	pplAtCheckout.clear();
+    	currTime = 0;
+    }
 }

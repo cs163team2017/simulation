@@ -39,13 +39,7 @@ public class SimSettings {
 	
 	private Stage window;
 	
-
-	
-	/***********************************************************************
-	 * Displays the current Pane an does not allow the user to access other
-	 * windows.
-	 ***********************************************************************/
-	public void display(){
+	public SimSettings(){
 		window = new Stage();
 		
 		//Only Focus this window
@@ -63,12 +57,20 @@ public class SimSettings {
 		HBox horizontal = new HBox(10);
 		horizontal.setAlignment(Pos.CENTER);
 		horizontal.getChildren().addAll(col1, col2);
-		
-		//listen();//XXX
+
 		Scene settingScene = new Scene(horizontal);
 		window.setScene(settingScene);
+		window.hide();	
+	}
+	
+
+	
+	/***********************************************************************
+	 * Displays the current Pane an does not allow the user to access other
+	 * windows.
+	 ***********************************************************************/
+	public void display(){
 		window.showAndWait();
-		
 	}
 	
 	/***********************************************************************
@@ -166,7 +168,7 @@ public class SimSettings {
 	}
 
 	public void closeWindow(){
-		window.close();
+		window.hide();
 	}
 	
 	/**
