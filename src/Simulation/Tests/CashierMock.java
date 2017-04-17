@@ -60,5 +60,6 @@ public class CashierMock implements ICashier {
     public Person peek() {
         return null;
     }
+
     
 }

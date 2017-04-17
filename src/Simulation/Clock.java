@@ -49,9 +49,15 @@ public class Clock {
             myListeners[j].event(currTick);
             if (myListeners[j] instanceof Eateries){		
                 int i = 0;
-                for (IEatery E: (IEateries) myListeners[j]){
-                    Stats.pplAtEatery[i] = E.getLeft();
-                    i++;
+                try{
+                	for (IEatery E: (IEateries) myListeners[j]){
+                			Stats.pplAtEatery.set(i, E.getLeft());
+                			i++;
+                	}
+                }
+                catch(IndexOutOfBoundsException e){
+                	for (Integer I: Stats.pplAtEatery)
+                		I = 0;
                 }
             }	
             if (myListeners[j] instanceof MainQ){		
@@ -59,9 +65,15 @@ public class Clock {
             }
             if (myListeners[j] instanceof Cashiers){		
                 int i = 0;
-                for (ICashier C: (ICashiers) myListeners[j]){
-                    Stats.pplAtCheckout[i] = C.getLeft();
-                    i++;
+                try{
+                	for (ICashier C: (ICashiers) myListeners[j]){
+                		Stats.pplAtCheckout.set(i,C.getLeft());
+                		i++;
+                	}
+                }
+                catch(IndexOutOfBoundsException e){
+                	for (Integer I: Stats.pplAtCheckout)
+                		I = 0;
                 }
             }
         }
@@ -135,7 +147,7 @@ public class Clock {
      *****************************************************************/
     public ArrayList<ArrayList<Person>> getEateryPeople() {
         if (myListeners[1] == null) {
-            throw new RuntimeException("no eateries at index 1");
+           throw new RuntimeException("no eateries at index 1");
         }
         ArrayList<ArrayList<Person>> output = 
                                     new ArrayList<ArrayList<Person>>();
