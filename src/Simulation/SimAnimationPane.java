@@ -2,7 +2,7 @@ package Simulation;
 
 import java.util.ArrayList;
 
-import com.sun.xml.internal.bind.v2.runtime.output.IndentingUTF8XmlOutput;
+// import com.sun.xml.internal.bind.v2.runtime.output.IndentingUTF8XmlOutput;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -137,15 +137,15 @@ public class SimAnimationPane extends HBox {
 				String str = "";
 				for( Person p : pplWaiting){
 					if (p instanceof LimitedTimePerson){
-						str += "L ";
+						str = "L " + str;
 						mainQLbl.get(i).setText(str);
 					}
 					else if (p instanceof SpecialNeedsPerson){
-						str += "S ";
+						str = "S " + str;
 						mainQLbl.get(i).setText(str);
 					}
 					else {
-						str += "R ";
+						str = "R " + str;
 						mainQLbl.get(i).setText(str);
 					}
 				}
@@ -156,31 +156,39 @@ public class SimAnimationPane extends HBox {
 		
 		//Updates the checkout lines
 		i=0;
-		if(pplPaying.isEmpty())
+		if(areAllNulls(pplPaying)) {
 			for (Label L : checkoutLbl)
 				L.setText("Empty");
-		else
+		} else {
 			try{
 				String str = "";
 				for( Person p : pplPaying){
-					if (p instanceof LimitedTimePerson){
-						str += "L ";
-						checkoutLbl.get(i).setText(str);
+				        if (p == null) {
+				            str = "Empty";
+				            checkoutLbl.get(i)
+				                       .setText(str);
+				        }
+				        else if (p instanceof LimitedTimePerson){
+						str = "L ";
+						checkoutLbl.get(i)
+						           .setText(str);
 					}
 					else if (p instanceof SpecialNeedsPerson){
-						str += "S ";
-						checkoutLbl.get(i).setText(str);
+						str = "S ";
+						checkoutLbl.get(i)
+						           .setText(str);
 					}
 					else {
-						str += "R ";
+						str = "R ";
 						checkoutLbl.get(i).setText(str);
 					}
-				i++;
+					i++;
 				}				
 			}
 			catch(IndexOutOfBoundsException e){
 				mainQLbl.get(0).setText("Empty");
 			}
+		}
 			
 	//}there is one bracket below	//FIXME delete line <---
 			
@@ -212,6 +220,17 @@ public class SimAnimationPane extends HBox {
 //						" : " + Stats.pplAtCheckout.get(i));
 //			}
 //		}
+	}
+	
+	/************************************************************************
+	 * helper method to check if a collection contains only nulls
+	 * @param array the collection to iterate
+	 * @return whether there are one or more non-null values
+	 ***********************************************************************/
+	public boolean areAllNulls(Iterable<?> array) {
+	    for (Object element : array)
+	        if (element != null) return false;
+	    return true;
 	}
 	
 
@@ -264,4 +283,6 @@ public class SimAnimationPane extends HBox {
 		row.getChildren().add(mainQLbl.get(n));
 		return row;
 	}
+
+
 }
