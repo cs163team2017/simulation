@@ -85,12 +85,18 @@ public class Stats {
     
     
     public static void calcAverageTimeToSucceed() {
-    	avgTimeToSucceed = (cashiersThru + 0.0) / currTime;
+    	if (currTime == 0)
+    		avgTimeToSucceed = 0;
+    	else
+    		avgTimeToSucceed = (cashiersThru + 0.0) / currTime;
     }
     
     public static void calcSuccessRate() {
-        successRate = (cashiersThru + 0.0) / 
-        		(totalLostAtEatery + totalLostAtMainQ);
+    	if (totalLostAtEatery == 0 && totalLostAtMainQ == 0)
+    		successRate = 0;
+    	else
+    		successRate = (cashiersThru + 0.0) / 
+    				(totalLostAtEatery + totalLostAtMainQ);
     }
   
 
