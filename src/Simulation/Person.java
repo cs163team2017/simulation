@@ -18,8 +18,10 @@ public class Person {
     /** the tick the person was instantiated */
     protected int creationTime;
     
-    public Person() {
-        
+    /******************************************************************
+     * Default constructor for tests
+     ******************************************************************/
+    public Person() {   
     }
     
     public Person(double eateryTime, 
