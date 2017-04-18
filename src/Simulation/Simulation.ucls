@@ -293,135 +293,127 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="44">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="45" name="holdingNode"/>      
-      <multiplicity id="46" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="47">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="48" name="eateryList"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
+      <attribute id="45" name="eateryList"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="17" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="50">    
+  <nesting id="47">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="10"/>  
   </nesting>  
-  <association id="51">    
+  <association id="48">    
     <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="52" name="atDesk"/>      
-      <multiplicity id="53" minimum="0" maximum="1"/>    
+      <attribute id="49" name="atDesk"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="18" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="54">    
+  <association id="51">    
     <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="55" name="tail"/>      
-      <multiplicity id="56" minimum="0" maximum="1"/>    
+      <attribute id="52" name="tail"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="57">    
+  <association id="54">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="58" name="clk"/>      
-      <multiplicity id="59" minimum="0" maximum="1"/>    
+      <attribute id="55" name="clk"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="60">    
+  <association id="57">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="61" name="next"/>      
-      <multiplicity id="62" minimum="0" maximum="1"/>    
+      <attribute id="58" name="next"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="63">    
+  <association id="60">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="64" name="p"/>      
-      <multiplicity id="65" minimum="0" maximum="1"/>    
+      <attribute id="61" name="p"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="18" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="66">    
+  <association id="63">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="67" name="statsPn"/>      
-      <multiplicity id="68" minimum="0" maximum="1"/>    
+      <attribute id="64" name="statsPn"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="27" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="69">    
+  <association id="66">    
     <bendpoint x="1231" y="186"/>    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="70" name="q"/>      
-      <multiplicity id="71" minimum="0" maximum="1"/>    
+      <attribute id="67" name="q"/>      
+      <multiplicity id="68" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="72">    
+  <association id="69">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="73" name="cashiers"/>      
-      <multiplicity id="74" minimum="0" maximum="1"/>    
+      <attribute id="70" name="cashiers"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="75">    
+  <generalization id="72">    
     <end type="SOURCE" refId="21"/>    
     <end type="TARGET" refId="18"/>  
   </generalization>  
-  <association id="76">    
+  <association id="73">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="77" name="prev"/>      
-      <multiplicity id="78" minimum="0" maximum="1"/>    
+      <attribute id="74" name="prev"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="79">    
+  <nesting id="76">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="12"/>  
   </nesting>  
-  <nesting id="80">    
+  <nesting id="77">    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="6"/>  
   </nesting>  
-  <association id="81">    
+  <association id="78">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="82" name="mainQ"/>      
-      <multiplicity id="83" minimum="0" maximum="1"/>    
+      <attribute id="79" name="mainQ"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="84">    
+  <nesting id="81">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="3"/>  
   </nesting>  
-  <association id="85">    
+  <association id="82">    
     <bendpoint x="911" y="251"/>    
     <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="86" name="Q"/>      
-      <multiplicity id="87" minimum="0" maximum="1"/>    
+      <attribute id="83" name="Q"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="88">    
+  <association id="85">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="89" name="cashiersList"/>      
-      <multiplicity id="90" minimum="0" maximum="1"/>    
+      <attribute id="86" name="cashiersList"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="17" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
