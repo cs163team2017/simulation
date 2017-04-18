@@ -41,16 +41,22 @@ public class Clock {
         }
     }
     	
-    /**
-     * run a single tick and increment the clock by one
-     */
+    /******************************************************************
+     * Run a single tick and increment the clock by one
+     * (For every tick there is a tock)
+     ******************************************************************/
     public void tock(){
         for (int j = 0; j < numListeners; j++){
             myListeners[j].event(currTick);
-            if (myListeners[j] instanceof Eateries){		
+            if (myListeners[j] instanceof Eateries){
+            	IEateries eateries = (IEateries)myListeners[j];
+            	Stats.eateriesThru = eateries.getThroughput();
+            	Stats.totalLostAtEatery = eateries.getLost();
+            	Stats.maxEateryLine = eateries.getMaxQueueLength();
+            	Stats.inEateryLines = eateries.getLeft();
                 int i = 0;
                 try{
-                	for (IEatery E: (IEateries) myListeners[j]){
+                	for (IEatery E: eateries){
                 			Stats.pplAtEatery.set(i, E.getLeft());
                 			i++;
                 	}
@@ -60,13 +66,20 @@ public class Clock {
                 		I = 0;
                 }
             }	
-            if (myListeners[j] instanceof MainQ){		
-                Stats.pplAtMainQ = ((MainQ) myListeners[j]).getLeft();
+            if (myListeners[j] instanceof MainQ){
+            	IMainQ mainQ = (IMainQ) myListeners[j];
+            	Stats.mainQThru = mainQ.getThroughput();
+                Stats.pplAtMainQ = mainQ.getLeft();
+                Stats.totalLostAtMainQ = mainQ.getLost();
+                Stats.maxMainQLine = mainQ.getMaxQueueLength();
             }
             if (myListeners[j] instanceof Cashiers){		
-                int i = 0;
+                ICashiers cashiers = (ICashiers) myListeners[j];
+                Stats.cashiersThru = cashiers.getThroughput();
+                Stats.inCashierLines = cashiers.getLeft();
+            	int i = 0;
                 try{
-                	for (ICashier C: (ICashiers) myListeners[j]){
+                	for (ICashier C: cashiers){
                 		Stats.pplAtCheckout.set(i,C.getLeft());
                 		i++;
                 	}
@@ -79,6 +92,7 @@ public class Clock {
         }
         currTick++;
         Stats.currTime = currTick;
+        
     }
     
     /******************************************************************

@@ -7,7 +7,6 @@ import javafx.util.Duration;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
@@ -242,7 +241,6 @@ public class Controller {
 		
 		//Save Button (In Settings Menu)
 		settings.getSaveBtn().setOnAction(e -> {
-			settings.saveSettings();
 			if (settings.isValidInput()){	
 				if (timer != null)
 					timer.stop();
@@ -256,7 +254,7 @@ public class Controller {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Input Error");
 				alert.setHeaderText(null);
-				alert.setContentText("Enter positive values");
+				alert.setContentText("Enter positive integer values");
 				alert.showAndWait();
 			}
 		});

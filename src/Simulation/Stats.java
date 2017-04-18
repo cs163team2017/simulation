@@ -1,6 +1,5 @@
 package Simulation;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /***************************************************************************
@@ -43,8 +42,6 @@ public class Stats {
     /**Number of people that are in lines at all the Eateries**/
     public static int inEateryLines = 0;//
     /**Number of people that are in line at the Main Queue**/
-    public static int inMainQLines = 0;
-    /**Number of people that are in line at all the Cashiers**/
     public static int inCashierLines = 0;
     /**Longest length that the mainQ ever was**/
     public static int maxMainQLine = 0;
@@ -65,18 +62,7 @@ public class Stats {
      * Updates all the dependent statistics
      ***********************************************************************/
     public static void updateAll(){
-    	calcInEaterLines();
-    	calcInMainQLine();
-    	calcInCashierLines();
-    	calcTotalLostAtEatery();
-    	calcTotalLostAtMainQ();
     	calcTotalLost();
-    	calcEateriesThru();
-    	calcMainQThru();
-    	calcCashierThru();
-    	calcTotalThru();
-    	calcMaxEateryLine();
-    	calcMaxMainQLine();
     	calcAverageTimeToSucceed();
     	calcSuccessRate();
     }
@@ -89,62 +75,22 @@ public class Stats {
     	successRate = 0.0;
     } 
     
-    public static void calcEateriesThru(){
-    	
-    }
-    
-    public static void calcMainQThru(){
-    	
-    }
-    
-    public static void calcCashierThru(){
-    	
-    }
-    
-    public static void calcInEaterLines(){
-    	
-    }
-    
-    public static void calcInMainQLine(){
-    	
-    }
-    
-    public static void calcInCashierLines(){
-    	
-    }
+    /***********************************************************************
+     * Calculates the number of people that went through all the eateries
+     ***********************************************************************/
     
     public static void calcTotalLost(){
-    	
-    }
-    
-    public static void calcTotalLostAtEatery(){
-    	
-    }
-    
-    public static void calcTotalLostAtMainQ(){
-    	
-    }
-    
-    public static void calcTotalThru(){
-    	
-    }
-    
-    public static void calcMaxMainQLine(){
-    	
-    }
-    
-    public static void calcMaxEateryLine(){
-    	
+    	totalLost = totalLostAtEatery + totalLostAtMainQ;
     }
     
     
     public static void calcAverageTimeToSucceed() {
-    	//avgTimeToSucceed = (cashiersThru + 0.0) / currTime;
+    	avgTimeToSucceed = (cashiersThru + 0.0) / currTime;
     }
     
     public static void calcSuccessRate() {
-        //successRate = (cashiersThru + 0.0) / 
-        	//	(totalLostAtEatery + totalLostAtMainQ);
+        successRate = (cashiersThru + 0.0) / 
+        		(totalLostAtEatery + totalLostAtMainQ);
     }
   
 
