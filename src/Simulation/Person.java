@@ -17,8 +17,20 @@ public class Person {
     protected double cashierTime;
     /** the tick the person was instantiated */
     protected int creationTime;
-    /** the list node that currently holds this person */
-    protected ListNode<Person> holdingNode;
+    
+    public Person() {
+        
+    }
+    
+    public Person(double eateryTime, 
+                  double leaveTime, 
+                  double cashierTime,
+                  int creationTime) {
+        this.eateryTime = eateryTime;
+        this.leaveTime = leaveTime;
+        this.cashierTime = cashierTime;
+        this.creationTime = creationTime;
+    }
     	
     /******************************************************************
      * fetches the time the person will remain at the eatery counter
