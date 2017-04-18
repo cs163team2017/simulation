@@ -1,5 +1,6 @@
 package Simulation;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /***************************************************************************
@@ -19,6 +20,29 @@ public class Stats {
     public static int pplAtMainQ;
     public static  ArrayList<Integer> pplAtEatery = new ArrayList<Integer>();
     public static  ArrayList<Integer> pplAtCheckout = new ArrayList<Integer>();
+    // collect:
+    // total throughput for system and each 3 components
+    // average time per person for system to current tick
+    // people remaining at each 3 components
+    // total people lost
+    public static int eateriesThru = 0;
+    public static int mainQThru = 0;
+    public static int cashiersThru = 0;
+    public static int eateriesLeft = 0;
+    public static int mainQLeft = 0;
+    public static int cashiersLeft = 0;
+    public static int eateriesLost = 0;
+    public static int mainQLost = 0;
+    
+    public static String averageTimePerTotalSuccess() {
+        double r = (cashiersThru + 0.0) / currTime;
+        return new DecimalFormat("#.##").format(r);
+    }
+    
+    public static String successesOverFailures() {
+        double r = (cashiersThru + 0.0) / (eateriesLost + mainQLost);
+        return new DecimalFormat("#.##").format(r);
+    }
   
     public static void clear(){
     	pplAtEatery.clear();
