@@ -189,37 +189,6 @@ public class SimAnimationPane extends HBox {
 				mainQLbl.get(0).setText("Empty");
 			}
 		}
-			
-	//}there is one bracket below	//FIXME delete line <---
-			
-			
-				
-//FIXME the old number GUI - delete me after above works
-				//Fill the Labels with information		
-//		for (int i = 0; i < Stats.numEaterys; i++){
-//			try{
-//				eateryLbl.get(i).setText("Num people at eatery " + (i+1) + 
-//						" : " + Stats.pplAtEatery.get(i));
-//			}
-//			catch(IndexOutOfBoundsException e){
-//				Stats.pplAtEatery.add(i,0);
-//				eateryLbl.get(i).setText("Num people at eatery " + (i+1) + 
-//						" : " + Stats.pplAtEatery.get(i));
-//			}
-//		}
-//			mainQLbl.get(0).setText("Num people at MainQ: " +  Stats.pplAtMainQ);
-//		}
-//		for (int i = 0; i < Stats.numCheckouts; i++){
-//			try{
-//				checkoutLbl.get(i).setText("Num people at checkout " + (i+1) + 
-//						" : " + Stats.pplAtCheckout.get(i));
-//			}
-//			catch(IndexOutOfBoundsException e){
-//				Stats.pplAtCheckout.add(i,0);
-//				checkoutLbl.get(i).setText("Num people at checkout " + (i+1) + 
-//						" : " + Stats.pplAtCheckout.get(i));
-//			}
-//		}
 	}
 	
 	/************************************************************************
@@ -243,7 +212,7 @@ public class SimAnimationPane extends HBox {
 		HBox row = new HBox(25);
 		row.setAlignment(Pos.CENTER_LEFT);
 		
-		storeLbl = new Label();///FIXME put me up top
+		storeLbl = new Label();
 		storeLbl.setPrefSize(25, 75);
 		storeLbl.setStyle("-fx-border-color: black;");
 
