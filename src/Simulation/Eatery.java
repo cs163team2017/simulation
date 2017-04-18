@@ -21,9 +21,9 @@ public class Eatery implements IEatery {
     /** number of people who leave the queue due to low speed */
     private int lost;
     /** the main queue for the simulation */
-    IMainQ mainQ;
+    private IMainQ mainQ;
     /** the person currently being served by this eatery */
-    Person atDesk;
+    private Person atDesk;
 
     /****************************************************************** 
      * Instantiate a new empty eatery 

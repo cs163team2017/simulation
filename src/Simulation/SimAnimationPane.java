@@ -222,6 +222,17 @@ public class SimAnimationPane extends HBox {
 //		}
 	}
 	
+	/************************************************************************
+	 * helper method to check if a collection contains only nulls
+	 * @param array the collection to iterate
+	 * @return whether there are one or more non-null values
+	 ***********************************************************************/
+	public boolean areAllNulls(Iterable<?> array) {
+	    for (Object element : array)
+	        if (element != null) return false;
+	    return true;
+	}
+	
 
 	/***********************************************************************
 	 * Makes a row of an Eatery based on the parameter 
@@ -273,14 +284,5 @@ public class SimAnimationPane extends HBox {
 		return row;
 	}
 
-	/**
-	 * helper method to check if a collection contains only nulls
-	 * @param array the collection to iterate
-	 * @return whether there are one or more non-null values
-	 */
-	public boolean areAllNulls(Iterable<?> array) {
-	    for (Object element : array)
-	        if (element != null) return false;
-	    return true;
-	}
+
 }

@@ -46,7 +46,7 @@ public class Controller {
 	private PersonProducer producer;
 	
 	/**The speed of the simulation (1 tick/SIM_SPEED (in seconds))**/
-	private final double SIM_SPEED = 0.10;
+	private final double SIM_SPEED = 0.20;
     
 	/**Average number of ticks to produce a person**/
 	private int numTicks2Person; 
