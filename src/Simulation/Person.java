@@ -18,6 +18,10 @@ public class Person {
     /** the tick the person was instantiated */
     protected int creationTime;
     
+    public Person() {
+        
+    }
+    
     public Person(double eateryTime, 
                   double leaveTime, 
                   double cashierTime,

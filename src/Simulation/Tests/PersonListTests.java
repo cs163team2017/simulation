@@ -43,7 +43,6 @@ public class PersonListTests {
     public void PersonListLeaversWorksGivenValidInput() {
         assert(3 == l.size());
         int n = l.checkLeavers(1); // [1,2,3]
-        System.out.println(n);
         assert(3 == l.size());
         assert(p1 == l.peek());
         n = l.checkLeavers(18); // [1,2]

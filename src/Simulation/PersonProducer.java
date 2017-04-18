@@ -29,7 +29,6 @@ public class PersonProducer implements ClockListener {
     private int special;
     /** weight of limited person type */
     private int limited;
-    int randCount = 0;
     	
     /****************************************************************** 
      * instantiate a new person producer
@@ -86,42 +85,51 @@ public class PersonProducer implements ClockListener {
      * the default, or custom weights set in the class constructor
      * @return the new person 
      *****************************************************************/
-    public Person randomPerson() {
+    public Person randomPerson(double eateryTime, 
+                               double leaveTime, 
+                               double cashierTime,
+                               int creationTime) {
         // you can get the class with "X instance of Y" comparison 
         // or X.getClass() method
         int next = r.nextInt(special + limited + regular);
-        randCount++;
+
         if (next < special) {
-            return new SpecialNeedsPerson();
+            return new SpecialNeedsPerson(eateryTime, 
+                                          leaveTime, 
+                                          cashierTime, 
+                                          creationTime);
         }
         if (next < (special + limited)) {
-            return new LimitedTimePerson();
+            return new LimitedTimePerson(eateryTime, 
+                                         leaveTime, 
+                                         cashierTime, 
+                                         creationTime);
         }
-        return new RegularPerson();
+        return new RegularPerson(eateryTime, 
+                                 leaveTime, 
+                                 cashierTime, 
+                                 creationTime);
     }
     	
+    /*
+     * (non-Javadoc)
+     * @see Simulation.ClockListener#event(int)
+     */
     @Override
     public void event(int tick) {
         if (tick >= ticksToNextPerson) {
             ticksToNextPerson = tick + 
                                 Gauss.get(r, avgNumOfTicksToNextPerson);
-            randCount++;
-            Person person = randomPerson();
-            
-            // record the current moment of instantiation 
-            person.setCreationTime(tick);
-            person.setCashierTime(Gauss.get(r, avgCashierTime));
-            randCount++;
             // set how long the person will remain 
-            // at the counter of the eatery 
-            // when he reaches it
-            person.setEateryTime(Gauss.get(r, avgEateryTime));
-            randCount++;
-            person.setLeaveTime(Gauss.get(r, avgLeaveTime));
-            randCount++;
+            // at the counter of the eatery, or cashier, 
+            // when he reaches it, or stay in the system
+            Person person = randomPerson(Gauss.get(r, avgEateryTime), 
+                                         Gauss.get(r, avgLeaveTime), 
+                                         Gauss.get(r, avgCashierTime), 
+                                         tick);
+            
             // enqueue the person to a random eatery's queue 
             eateries.enQ(person);
         }
     }
-    
 }
