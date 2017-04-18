@@ -97,9 +97,11 @@ public class SimSettings {
 	}
 	
 	/***********************************************************************
-	 * Saves the users settings into the Stats class or warns the user
-	 ***********************************************************************/
-	public void saveSettings(){
+	 * Ensures the user placed valid inputs within the Pane
+	 * @return True if all TextFields are greater than 0 and an integer
+	 **********************************************************************/
+	public boolean isValidInput(){
+		boolean valid = true;
 		try{
 			Stats.inflow = Integer.parseInt(inflowTF.getText());
 			Stats.cashierTime = Integer.parseInt(cashierTimeTF.getText());
@@ -110,16 +112,8 @@ public class SimSettings {
 			Stats.runtime = Integer.parseInt(runtimeTF.getText());
 		}
 		catch(Exception ex){
-			System.out.println("This is parse int Error");//FIXME
+			valid = false;
 		}
-	}
-	
-	/***********************************************************************
-	 * Ensures the user placed valid inputs within the Pane
-	 * @return True if all TextFields are greater than 0 
-	 **********************************************************************/
-	public boolean isValidInput(){
-		boolean valid = true;
 		if(		Stats.inflow <= 0 		||
 				Stats.cashierTime <= 0	||
 				Stats.avgEateryTime <=0 ||

@@ -33,7 +33,7 @@ public class SimButtonPane extends VBox {
 		stopBtn = new Button("Pause");
 		stepBtn = new Button("Step");
 		
-		getChildren().addAll(startBtn, stopBtn, stepBtn);	
+		getChildren().addAll(startBtn, stopBtn);	
 	}	
 
 	/***********************************************************************

@@ -122,7 +122,7 @@ public class SimStatsPane extends FlowPane{
 		inEaterLinesLbl.setText("Current Number of people at Eateries: " +
 				Stats.inEateryLines);
 		inMainQLineLbl.setText("Current Number of people at Main Queue: " +
-				Stats.inMainQLines);
+				Stats.pplAtMainQ);
 		inCashierLineLbl.setText("Current Number of people at Cashiers: " +
 				Stats.inCashierLines);
 		totalLostLbl.setText("Total number of people Lost: " + 
