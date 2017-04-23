@@ -2,9 +2,13 @@ package Simulation.Tests;
 
 import org.junit.Before;
 import org.junit.Test;
+import java.util.Random;
 
+import Simulation.Eateries;
 import Simulation.Eatery;
+import Simulation.IEatery;
 import Simulation.Person;
+import Simulation.PersonProducer;
 
 /**********************************************************************
  * Tests for the eatery class
@@ -15,11 +19,15 @@ public class EateryTests {
     MainQMock mQ;
     Person p1,p2,p3,p4,p5;
     Eatery e;
-    
+    Eateries es;
+    Random r;
     @Before
     public void setUp() {
+        r = new Random(1);
         mQ = new MainQMock();
         e = new Eatery();
+        es = new Eateries(r, mQ);
+        es.add(e);
         p1 = new Person();
         p1.setEateryTime(1);
         p1.setLeaveTime(30);
@@ -68,4 +76,46 @@ public class EateryTests {
         
     }
 
+    @Test
+    public void LeaversWorks() {
+        // ticksToNextP, aveCashier, aveEat, aveLeave
+        PersonProducer pp = new PersonProducer(new Random(1), 
+                                es,
+                                1, 2, 2, 10
+                                );
+        pp.event(0);
+        System.out.println(es.getLeft());
+
+        pp.event(10);
+        System.out.println(es.getLeft());
+        pp.event(20);
+        System.out.println(es.getLeft());
+        pp.event(30);
+        System.out.println(es.getLeft());
+        pp.event(40);
+        System.out.println(es.getLeft());
+        pp.event(50);
+        System.out.println(es.getLeft());
+        for (IEatery e : es) {
+            for (Person p : e) {
+                System.out.println("curr person leave: " + p.getLeaveTime());
+
+            }
+        }
+        es.event(6);
+        System.out.println("left: " + es.getLeft());
+        System.out.println("lost: " + es.getLost());
+        assert(5 == es.getLeft());
+        assert(1 == es.getLost());
+        es.event(13);
+        System.out.println("left: " + es.getLeft());
+        System.out.println("lost: " + es.getLost());
+        assert(4 == es.getLeft());
+        assert(2 == es.getLost());
+        es.event(54);
+        System.out.println("left: " + es.getLeft());
+        System.out.println("lost: " + es.getLost());
+        assert(1 == es.getLeft());
+        assert(5 == es.getLost());
+    }
 }

@@ -46,15 +46,6 @@ public class Controller {
 	
 	/**The speed of the simulation (1 tick/SIM_SPEED (in seconds))**/
 	private final double SIM_SPEED = 0.20;
-    
-	/**Average number of ticks to produce a person**/
-	private int numTicks2Person; 
-	/**Average number of ticks a person is at an eatery**/
-	private int aveEateryTime;
-	/**Average number of ticks a person is at a checkout**/
-	private int aveCashierTime;
-	/**Average number of ticks before a person leaves**/
-	private int aveLeaveTime;
 	
 	/**True if the simulation is currently running**/
 	private boolean isRunning;
@@ -78,10 +69,6 @@ public class Controller {
 		this.settings = settings;
 		this.newItm = newItm;
 		
-		numTicks2Person = Stats.inflow; 
-	    aveEateryTime = Stats.avgEateryTime;
-	    aveCashierTime = Stats.cashierTime;
-	    aveLeaveTime = Stats.quitTime;
 	    isRunning = false;
 	    
 		clk = new Clock();
@@ -98,10 +85,10 @@ public class Controller {
 		cashiers = new Cashiers();
 		producer = new PersonProducer(	rand, 
 										eateries, 
-										numTicks2Person, 
-										aveCashierTime,
-										aveEateryTime,
-										aveLeaveTime);	
+										Stats.inflow, 
+										Stats.cashierTime,
+										Stats.avgEateryTime,									
+										Stats.quitTime);
 		//clear the clock
 		clk.clear();
 		//fill the clock
