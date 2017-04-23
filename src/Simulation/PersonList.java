@@ -14,7 +14,12 @@ public class PersonList extends DList<Person> {
         ListNode<Person> curr = head;
         
         while (curr != null) {
-            if (tick >= curr.getValue().getLeaveTime()) {
+            System.out.println("in leavers, tick: " + tick);
+            double lv = curr.getValue().getLeaveTime();
+            System.out.println("curr creation: " + curr.getValue().creationTime);
+            System.out.println("in leavers, curr leaveTime: " + lv);
+            if (tick >= lv) {
+                System.out.println("In remove leavers");
                 numLeft++;
                 count--;
                 ListNode<Person> next = curr.nextNode();
