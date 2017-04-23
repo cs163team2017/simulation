@@ -186,7 +186,6 @@ public class Controller {
 			if (buttonPn.getStartBtn().getText().equals("Start")){
 				startSim();
 				buttonPn.getStartBtn().setText("Restart");
-				System.out.println(Stats.pplAtEatery);
 			}
 			else{
 				timer.stop();
@@ -202,8 +201,6 @@ public class Controller {
 			if (buttonPn.getStopBtn().getText().equals("Pause")){
 				stopSim();
 				buttonPn.getStopBtn().setText("Resume");
-				System.out.println(Stats.pplAtEatery);
-				System.out.println("" + Stats.pplAtEatery.size());
 			}
 			else{
 				resumeSim();

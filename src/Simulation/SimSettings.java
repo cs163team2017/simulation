@@ -155,7 +155,7 @@ public class SimSettings {
 	private void titleLabels(){
 		inflowLbl = new Label("Average time until next person:");
 		cashierTimeLbl = new Label("Average time per cashier:");
-		avgEateryTimeLbl = new Label("Average time until next person:");
+		avgEateryTimeLbl = new Label("Average time at Eatery:");
 		quitTimeLbl = new Label("Time until a person leaves:");
 		numEaterysLbl = new Label("Number of Eaterys:");
 		numCheckoutsLbl = new Label("Number of Checkout locations:");
