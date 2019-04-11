@@ -49,9 +49,9 @@ public class SimMainStage extends Application {
 		//Setting up the menu bar
 	    fileMenu.getItems().add(newItm);
 	    menuBar.getMenus().add(fileMenu);
-		mainPn.setTop(menuBar);
-	
+		
 		//Setting up the Main Pane
+		mainPn.setTop(menuBar);
 		mainPn.setRight(buttonPn);
 		mainPn.setBottom(statsPn);
 		mainPn.setCenter(animePn);
